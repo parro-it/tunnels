@@ -1,0 +1,35 @@
+.actions {
+  float: right;
+}
+
+.tunnel .actions {
+  float: right;
+  display: none;
+}
+
+.tunnel {
+  padding: 0;
+  height: 34px;
+}
+
+.tunnel:hover .actions {
+  display: block;
+}
+
+.tunnel .name {
+  padding-left: 10px;
+  vertical-align: -webkit-baseline-middle;
+  display: inline-block;
+}
+
+.tunnel .actions button {
+  height: 100%;
+  top: -1px;
+  left: 1px;
+}
+
+.navbar ,
+.navbar .actions,
+.navbar .actions button {
+  height: 50px;
+}

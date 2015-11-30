@@ -1,0 +1,31 @@
+<ul class="list-group">
+  {% for t in tunnels %}
+  <li class="list-group-item tunnel">
+    <span class="name">{{ t.tunnelName }}</span>
+    <div class="btn-group actions" role="group" aria-label="...">
+      <button data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-default edit">
+        <i class="fa fa-pencil-square-o"></i> Edit
+      </button>
+      <button data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-default toggle-state">
+        <i class="fa fa-toggle-off"></i> Connect
+      </button>
+      <button  data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-default delete">
+        <i class="fa fa-times"></i> Delete
+      </button>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="btn-group actions" role="group" aria-label="...">
+    <button type="button" class="btn btn-lg btn-primary new-tunnel">
+      <i class="fa fa-lg fa-plus-circle"></i> Add
+    </button>
+
+    <button type="button" class="btn btn-lg btn-danger exit">
+      <i class="fa fa-lg fa-power-off"></i> Exit
+    </button>
+
+  </div>
+</nav>
