@@ -15,6 +15,7 @@ const openTunnel = require('./ssh');
 
 function getTunnel() {
   const tunnelName = document.querySelector('#tunnelName').value;
+  const tunnelPassword = document.querySelector('#tunnelPassword').value;
   const tunnelUserName = document.querySelector('#tunnelUserName').value;
   const tunnelLocalPort = document.querySelector('#tunnelLocalPort').value;
   const tunnelRemotePort = document.querySelector('#tunnelRemotePort').value;
@@ -29,7 +30,8 @@ function getTunnel() {
     tunnelKeyFile,
     tunnelLocalPort,
     tunnelRemotePort,
-    tunnelHostAddress
+    tunnelHostAddress,
+    tunnelPassword
   };
 }
 
@@ -62,7 +64,7 @@ function setup() {
   delegate.on('click', '.save', () => {
     saveTunnel();
     ipc.send('saved');
-    ipc.send('close');
+    window.close();
   });
 
   delegate.on('click', '.test', () => {
@@ -77,7 +79,7 @@ function setup() {
 
   });
 
-  delegate.on('click', '.cancel', () => ipc.send('close'));
+  delegate.on('click', '.cancel', () => window.close());
 }
 
 setup();

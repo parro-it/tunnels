@@ -27,6 +27,7 @@ exports.createTunnel = function createTunnel() {
   const tunnelRemotePort = 8080;
   const tunnelHostAddress = 'localhost';
   const tunnelUserName = 'root';
+  const tunnelPassword = '';
 
   const tunnel = {
     tunnelId,
@@ -34,7 +35,8 @@ exports.createTunnel = function createTunnel() {
     tunnelLocalPort,
     tunnelRemotePort,
     tunnelHostAddress,
-    tunnelUserName
+    tunnelUserName,
+    tunnelPassword
   };
 
   exports.saveTunnel(tunnel);

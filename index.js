@@ -43,11 +43,6 @@ ipc.on('edit-tunnel', (ev, tunnelId) => {
     editWindow = null;
   });
 
-  ipc.once('close', () => {
-    editWindow.close();
-    editWindow = null;
-  });
-
   ipc.once('saved', () => {
     mb.window.webContents.send('tunnel-saved');
   });
