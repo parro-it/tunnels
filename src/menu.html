@@ -4,13 +4,13 @@
     <span class="name">{{ t.tunnelName }}</span>
     <div class="btn-group actions" role="group" aria-label="...">
       <button data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-default edit">
-        <i class="fa fa-pencil-square-o"></i> Edit
+        <span class="icon icon-pencil"></span>
       </button>
-      <button data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-default toggle-state">
-        <i class="fa fa-toggle-off"></i> Connect
+      <button data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-primary toggle-state">
+        <span class="icon icon-signal"></span>
       </button>
-      <button  data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-default delete">
-        <i class="fa fa-times"></i> Delete
+      <button  data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-negative delete">
+        <span class="icon icon-trash"></span>
       </button>
     </div>
   </li>
@@ -19,12 +19,12 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
   <div class="btn-group actions" role="group" aria-label="...">
-    <button type="button" class="btn btn-lg btn-primary new-tunnel">
-      <i class="fa fa-lg fa-plus-circle"></i> Add
+    <button type="button" class="btn btn-large btn-primary new-tunnel">
+      <span class="icon icon-plus"></span>
     </button>
 
-    <button type="button" class="btn btn-lg btn-danger exit">
-      <i class="fa fa-lg fa-power-off"></i> Exit
+    <button type="button" class="btn btn-large btn-negative exit">
+      <span class="icon icon-logout"></span>
     </button>
 
   </div>

@@ -6,7 +6,6 @@ const window = require('electron-window');
 const path = require('path');
 const menubar = require('menubar');
 const electronDebug = require('electron-debug');
-
 electronDebug();
 
 const mb = menubar({
@@ -23,6 +22,8 @@ mb.on('ready', () => {
     }])
   );
   mb.window.webContents.executeJavaScript('require("./app.js");');
+
+
 });
 
 let editWindow;
