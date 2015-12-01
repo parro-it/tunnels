@@ -12,10 +12,20 @@ electronDebug();
 
 const mb = menubar({
   dir: __dirname + '/src/',
-  preloadWindow: true
+  preloadWindow: true,
+  'window-position': 'trayBottomLeft'
 });
 
 mb.on('ready', () => {
+  mb.tray.setContextMenu(
+    electron.Menu.buildFromTemplate([{
+      label: 'Edit tunnels',
+      click: () => mb.showWindow()
+    }])
+  );
+});
+
+mb.on('after-create-window', () => {
   mb.window.webContents.executeJavaScript('require("./app.js");');
 });
 
