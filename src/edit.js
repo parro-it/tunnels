@@ -1,14 +1,17 @@
 'use strict';
 
 const join = require('path').join;
-const ipc = require('electron').ipcRenderer;
+const electron = require('electron');
+const ipc = electron.ipcRenderer;
 const nunjucks = require('nunjucks');
 const domDelegate = require('dom-delegate');
 const model = require('./model');
-const remote = require('electron').remote;
+const remote = electron.remote;
 const dirname = require('path').dirname;
 const dialog = remote.require('dialog');
 const app = remote.require('app');
+const openTunnel = require('./ssh');
+
 
 function getTunnel() {
   const tunnelName = document.querySelector('#tunnelName').value;
@@ -63,7 +66,15 @@ function setup() {
   });
 
   delegate.on('click', '.test', () => {
-    ipc.send('test-tunnel', getTunnel());
+    openTunnel(getTunnel()).then(result => {
+      dialog.showMessageBox({
+        buttons: ['Ok'],
+        type: 'info',
+        title: 'Connection status',
+        message: result.response
+      });
+    });
+
   });
 
   delegate.on('click', '.cancel', () => ipc.send('close'));

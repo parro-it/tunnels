@@ -6,7 +6,6 @@ const window = require('electron-window');
 const path = require('path');
 const menubar = require('menubar');
 const electronDebug = require('electron-debug');
-const openTunnel = require('./src/ssh');
 
 electronDebug();
 
@@ -23,25 +22,7 @@ mb.on('ready', () => {
       click: () => mb.showWindow()
     }])
   );
-});
-
-
-ipc.once('exit', () => {
-  electron.app.quit();
-});
-
-ipc.on('confirm-delete', (e, tunnelName) => {
-  e.returnValue = electron.dialog.showMessageBox({
-    buttons: ['Yes', 'No'],
-    type: 'question',
-    title: 'confirm deletion',
-    message: `Delete tunnel ${tunnelName}?`
-
-  }) === 0;
-});
-
-ipc.on('test-tunnel', (ev, t) => {
-  openTunnel(t);
+  mb.window.webContents.executeJavaScript('require("./app.js");');
 });
 
 let editWindow;

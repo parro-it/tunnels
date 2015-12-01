@@ -25,5 +25,9 @@ module.exports = function openTunnel(t) {
     .then(server => {
       server.response = `Tunnel ${t.tunnelName} opened successfully.`;
       return server;
+    })
+    .catch(err => {
+      err.response = err.message;
+      return err;
     });
 };

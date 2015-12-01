@@ -3,7 +3,8 @@
 const join = require('path').join;
 const nunjucks = require('nunjucks');
 const domDelegate = require('dom-delegate');
-const ipc = require('electron').ipcRenderer;
+const electron = require('electron');
+const ipc = electron.ipcRenderer;
 const model = require('./model');
 
 
@@ -35,13 +36,18 @@ function setup() {
   });
 
   delegate.on('click', '.exit', () => {
-    ipc.send('exit');
+    window.close();
   });
 
   delegate.on('click', '.delete', (e, target) => {
     const tunnelId = target.dataset.tunnelId;
     const tunnelName = model.getTunnel(tunnelId).tunnelName;
-    const confirmed = ipc.sendSync('confirm-delete', tunnelName);
+    const confirmed = electron.remote.dialog.showMessageBox({
+      buttons: ['Yes', 'No'],
+      type: 'question',
+      title: 'confirm deletion',
+      message: `Delete tunnel ${tunnelName}?`
+    }) === 0;
 
     if (confirmed) {
       model.removeTunnel(tunnelId);
