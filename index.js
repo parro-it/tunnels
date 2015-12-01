@@ -25,9 +25,6 @@ mb.on('ready', () => {
   );
 });
 
-mb.on('after-create-window', () => {
-  mb.window.webContents.executeJavaScript('require("./app.js");');
-});
 
 ipc.once('exit', () => {
   electron.app.quit();
