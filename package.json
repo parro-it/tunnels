@@ -8,7 +8,6 @@
     "electron-debug": "^0.2.0",
     "electron-window": "^0.6.0",
     "insert-css": "^0.2.0",
-    "keytar": "^2.1.0",
     "menubar": "^2.2.0",
     "node-uuid": "^1.4.3",
     "nunjucks": "^2.0.0",
