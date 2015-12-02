@@ -12,20 +12,26 @@
 
 ![image](media/edit-window.png)
 
-
 ### Tunnels list window
 
 ![image](media/list.png)
-
-
-
-
 
 ## Installation
 
 ```bash
 npm install -g electron-tunnels
 ```
+
+> By now, [Electron](http://electron.atom.io/) is not bundled with the app,
+
+> you have to install it globally. This will change soon as we package tunnels
+
+> for the various platform.
+
+```bash
+npm install -g electron-prebuilt
+```
+
 
 ## Usage
 

@@ -3,10 +3,19 @@
   "version": "1.0.0",
   "description": "Electron app to manage your ssh tunnels",
   "repository": "parro-it/tunnels",
-  "keywords": ["electron", "ssh", "tunnel", "port", "forwarding"],
+  "author": "andrea@parro.it",
+  "keywords": [
+    "electron",
+    "ssh",
+    "tunnel",
+    "port",
+    "forwarding"
+  ],
   "dependencies": {
+    "co": "^4.6.0",
     "dom-delegate": "^2.0.3",
     "electron-debug": "^0.5.1",
+    "electron-detach": "^0.3.0",
     "electron-window": "^0.6.0",
     "insert-css": "^0.2.0",
     "menubar": "^2.3.0",
@@ -14,10 +23,8 @@
     "nunjucks": "^2.0.0",
     "open-ssh-tunnel": "^0.1.0",
     "photon": "github:connors/photon",
-    "co": "^4.6.0",
     "store": "^1.3.17"
   },
-  "author": "andrea@parro.it",
   "scripts": {
     "test": "node test | faucet",
     "relib": "electron-rebuild",
@@ -28,6 +35,9 @@
     "index.js",
     "src"
   ],
+  "bin": {
+    "tunnels": "index.js"
+  },
   "eslintConfig": {
     "extends": "js"
   },
