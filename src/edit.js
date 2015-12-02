@@ -9,7 +9,7 @@ const model = require('./model');
 const remote = electron.remote;
 const dialog = remote.require('dialog');
 const openTunnel = require('./ssh');
-
+const co = require('co');
 
 function tunnelForm() {
   const tunnel = new window.JSONFormData(document.querySelector('form')).formData;
@@ -20,6 +20,16 @@ function tunnelForm() {
 
 function saveTunnel() {
   model.saveTunnel(tunnelForm());
+}
+
+function showTestMessage(type, message) {
+  remote.getCurrentWindow().setAlwaysOnTop(false);
+  dialog.showMessageBox({
+    buttons: ['Ok'],
+    type,
+    title: 'Connection status',
+    message: message
+  }, () => remote.getCurrentWindow().setAlwaysOnTop(true));
 }
 
 function setup() {
@@ -40,29 +50,15 @@ function setup() {
     window.close();
   });
 
-  delegate.on('click', '.test', () => {
-    openTunnel(tunnelForm())
-      .then(server => {
-        remote.getCurrentWindow().setAlwaysOnTop(false);
-        dialog.showMessageBox({
-          buttons: ['Ok'],
-          type: 'info',
-          title: 'Connection status',
-          message: server.response
-        }, () => remote.getCurrentWindow().setAlwaysOnTop(true));
-        server.close();
-      })
-      .catch(err => {
-        remote.getCurrentWindow().setAlwaysOnTop(false);
-        dialog.showMessageBox({
-          buttons: ['Ok'],
-          type: 'error',
-          title: 'Connection status',
-          message: err.message
-        }, () => remote.getCurrentWindow().setAlwaysOnTop(true));
-      });
-
-  });
+  delegate.on('click', '.test', co.wrap( function * () {
+    try {
+      const server = yield openTunnel(tunnelForm());
+      showTestMessage('info', server.response);
+      server.close();
+    } catch (err) {
+      showTestMessage('error', err.message);
+    }
+  }));
 
   delegate.on('click', '.cancel', () => window.close());
 }

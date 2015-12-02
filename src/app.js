@@ -8,6 +8,7 @@ const model = require('./model');
 const path = require('path');
 const electronWindow = electron.remote.require('electron-window');
 const tunnelsState = require('./tunnels-state');
+const co = require('co');
 
 let editWindow;
 
@@ -46,12 +47,27 @@ function editTunnel(tunnelId) {
   });
 }
 
+function * openTunnels() {
+  const openAtStartup = model.toOpenOnStartup();
 
-function setup() {
+  try {
+    yield openAtStartup.map(tunnel =>
+      tunnelsState.toggleState(tunnel.tunnelId)
+        .catch(err => {
+          err.message = `Cannot open tunnel ${tunnel.tunnelName}:\n${err.message}`;
+          throw err;
+        })
+    );
+  } catch (err) {
+    electron.remote.dialog.showErrorBox(
+      'Cannot open tunnel.',
+      err.message
+    );
+  }
+}
+
+function * setup() {
   const delegate = domDelegate(document.body);
-
-  refreshList();
-
 
   delegate.on('click', '.new-tunnel', () => {
     const tunnel = model.createTunnel();
@@ -63,17 +79,18 @@ function setup() {
     editTunnel(tunnelId);
   });
 
-  delegate.on('click', '.toggle-state', (e, target) => {
+  delegate.on('click', '.toggle-state', co.wrap( function *(e, target) {
     const tunnelId = target.dataset.tunnelId;
-    tunnelsState.toggleState(tunnelId)
-      .then(() => {
-        return refreshList();
-      })
-      .catch(err =>  electron.remote.dialog.showErrorBox(
+    try {
+      yield tunnelsState.toggleState(tunnelId);
+      refreshList();
+    } catch (err) {
+      electron.remote.dialog.showErrorBox(
         'Cannot open tunnel.',
         err.message
-      ));
-  });
+      );
+    }
+  }));
 
   delegate.on('click', '.delete', (e, target) => {
     const tunnelId = target.dataset.tunnelId;
@@ -91,27 +108,10 @@ function setup() {
     }
   });
 
-  const openAtStartup = model.toOpenOnStartup();
-  const openings = Promise.all(
-    openAtStartup.map(tunnel =>
-      tunnelsState.toggleState(tunnel.tunnelId)
-        .catch(err => {
-          err.message = `Cannot open tunnel ${tunnel.tunnelName}:\n${err.message}`;
-          throw err;
-        })
-    )
-  );
+  yield openTunnels();
 
-  openings
-    .then(() => {
-      refreshList();
-    })
-    .catch(err =>  electron.remote.dialog.showErrorBox(
-      'Cannot open tunnel.',
-      err.message
-    ));
-
+  refreshList();
 
 }
 
-setup();
+co(setup());

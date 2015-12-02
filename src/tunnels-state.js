@@ -2,26 +2,23 @@
 
 const openTunnel = require('./ssh');
 const model = require('./model');
+const co = require('co');
 
 const state = {};
 
 module.exports = {
-
-
-  toggleState(tunnelId) {
+  toggleState: co.wrap(function * (tunnelId) {
     if (!!state[tunnelId]) {
       state[tunnelId].close();
       delete state[tunnelId];
-      return Promise.resolve(true);
+      return true;
     }
 
     const tunnel = model.getTunnel(tunnelId);
-    return openTunnel(tunnel)
-      .then(server => {
-        state[tunnelId] = server;
-        return true;
-      });
-  },
+    const server = yield openTunnel(tunnel);
+    state[tunnelId] = server;
+    return true;
+  }),
 
   isOpen(tunnelId) {
     return !!state[tunnelId];
