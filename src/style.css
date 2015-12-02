@@ -15,3 +15,6 @@ input[type=checkbox] {
   margin-left: 20px;
 }
 
+body {
+  background-color: #eee;
+}
