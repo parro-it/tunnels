@@ -14,7 +14,8 @@ const openTunnel = require('./ssh');
 
 
 function tunnelForm() {
-  return new window.JSONFormData(document.querySelector('form')).formData;
+  const tunnel = new window.JSONFormData(document.querySelector('form')).formData;
+  return tunnel;
 }
 
 function saveTunnel() {
@@ -32,16 +33,6 @@ function setup() {
   );
 
   document.body.innerHTML = template;
-
-  delegate.on('click', '.choose-key', () => {
-    const elm = document.querySelector('#tunnelKeyFile');
-    const filePath = (elm.value && dirname(elm.value)) || app.getPath('home');
-    const newFilePath = dialog.showOpenDialog({
-      title: 'Choose private key file',
-      defaultPath: filePath
-    });
-    elm.value = newFilePath || '';
-  });
 
   delegate.on('click', '.save', () => {
     saveTunnel();
