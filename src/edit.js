@@ -7,14 +7,13 @@ const nunjucks = require('nunjucks');
 const domDelegate = require('dom-delegate');
 const model = require('./model');
 const remote = electron.remote;
-const dirname = require('path').dirname;
 const dialog = remote.require('dialog');
-const app = remote.require('app');
 const openTunnel = require('./ssh');
 
 
 function tunnelForm() {
   const tunnel = new window.JSONFormData(document.querySelector('form')).formData;
+  tunnel.tunnelId = document.querySelector('[name=tunnelId]').value;
   return tunnel;
 }
 
@@ -41,13 +40,14 @@ function setup() {
   });
 
   delegate.on('click', '.test', () => {
-    openTunnel(tunnelForm()).then(result => {
+    openTunnel(tunnelForm()).then(server => {
       dialog.showMessageBox({
         buttons: ['Ok'],
         type: 'info',
         title: 'Connection status',
-        message: result.response
+        message: server.response
       });
+      server.close();
     });
 
   });

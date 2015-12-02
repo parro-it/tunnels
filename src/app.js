@@ -8,6 +8,7 @@ const ipc = electron.ipcRenderer;
 const model = require('./model');
 const path = require('path');
 const electronWindow = electron.remote.require('electron-window');
+const tunnelsState = require('./tunnels-state');
 
 let editWindow;
 
@@ -15,14 +16,14 @@ function refreshList() {
   const tunnels = model.allTunnels();
   const template = nunjucks.render(
     join(__dirname, 'menu.html'),
-    { tunnels }
+    { tunnels, isOpen: tunnelsState.isOpen }
   );
 
   document.body.innerHTML = template;
 }
 
 
-function editTunnel(ev, tunnelId) {
+function editTunnel(tunnelId) {
   if (editWindow) {
     editWindow.focus();
     return;
@@ -64,6 +65,16 @@ function setup() {
 
   delegate.on('click', '.exit', () => {
     window.close();
+  });
+
+
+  delegate.on('click', '.toggle-state', (e, target) => {
+    const tunnelId = target.dataset.tunnelId;
+    tunnelsState.toggleState(tunnelId)
+      .then(() => {
+        return refreshList();
+      })
+      .catch(err => alert(err.message));
   });
 
   delegate.on('click', '.delete', (e, target) => {
