@@ -4,7 +4,6 @@ const join = require('path').join;
 const nunjucks = require('nunjucks');
 const domDelegate = require('dom-delegate');
 const electron = require('electron');
-const ipc = electron.ipcRenderer;
 const model = require('./model');
 const path = require('path');
 const electronWindow = electron.remote.require('electron-window');
@@ -29,19 +28,20 @@ function editTunnel(tunnelId) {
     return;
   }
   editWindow = electronWindow.createWindow({
-    width: 300, height: 660, frame: false
+    width: 300,
+    height: 660,
+    frame: false,
+    alwaysOnTop: true,
+    skipTaskbar: true,
+    resizable: false
   });
   const indexPath = path.resolve(__dirname, 'index.html');
   editWindow.showUrl(indexPath, { tunnelId }, () => {
     editWindow.webContents.executeJavaScript('require("./edit.js");');
   });
 
-
   editWindow.once('closed', () => {
     editWindow = null;
-  });
-
-  ipc.once('saved', () => {
     refreshList();
   });
 }

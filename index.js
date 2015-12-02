@@ -21,6 +21,7 @@ mb.on('ready', () => {
       click: () => electron.app.quit()
     }])
   );
+  mb.window.setSkipTaskbar(true);
   mb.window.webContents.executeJavaScript('require("./app.js");');
 });
 

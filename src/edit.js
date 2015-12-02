@@ -43,16 +43,23 @@ function setup() {
   delegate.on('click', '.test', () => {
     openTunnel(tunnelForm())
       .then(server => {
+        remote.getCurrentWindow().setAlwaysOnTop(false);
         dialog.showMessageBox({
           buttons: ['Ok'],
           type: 'info',
           title: 'Connection status',
           message: server.response
-        });
+        }, () => remote.getCurrentWindow().setAlwaysOnTop(true));
         server.close();
       })
       .catch(err => {
-        dialog.showErrorBox('Connection status', err.message);
+        remote.getCurrentWindow().setAlwaysOnTop(false);
+        dialog.showMessageBox({
+          buttons: ['Ok'],
+          type: 'error',
+          title: 'Connection status',
+          message: err.message
+        }, () => remote.getCurrentWindow().setAlwaysOnTop(true));
       });
 
   });
