@@ -1,37 +1,11 @@
-/*
-.actions {
-  float: right;
+.btn.btn-primary .icon,
+.btn.btn-positive .icon,
+.btn.btn-negative .icon {
+  color: #eee;
 }
 
-.tunnel .actions {
-  float: right;
-  display: none;
+.btn.btn-primary,
+.btn.btn-positive,
+.btn.btn-negative {
+  color: #eee;
 }
-
-.tunnel {
-  padding: 0;
-  height: 34px;
-}
-
-.tunnel:hover .actions {
-  display: block;
-}
-
-.tunnel .name {
-  padding-left: 10px;
-  vertical-align: -webkit-baseline-middle;
-  display: inline-block;
-}
-
-.tunnel .actions button {
-  height: 100%;
-  top: -1px;
-  left: 1px;
-}
-
-.navbar ,
-.navbar .actions,
-.navbar .actions button {
-  height: 50px;
-}
-*/

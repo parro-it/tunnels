@@ -33,7 +33,9 @@ ipc.on('edit-tunnel', (ev, tunnelId) => {
     editWindow.focus();
     return;
   }
-  editWindow = window.createWindow({width: 300, height: 600});
+  editWindow = window.createWindow({
+    width: 300, height: 600, frame: false
+  });
   const indexPath = path.resolve(__dirname, 'src/index.html');
   editWindow.showUrl(indexPath, { tunnelId }, () => {
     editWindow.webContents.executeJavaScript('require("./edit.js");');

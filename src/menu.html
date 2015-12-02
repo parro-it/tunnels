@@ -1,31 +1,34 @@
-<ul class="list-group">
-  {% for t in tunnels %}
-  <li class="list-group-item tunnel">
-    <span class="name">{{ t.tunnelName }}</span>
-    <div class="btn-group actions" role="group" aria-label="...">
-      <button data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-default edit">
-        <span class="icon icon-pencil"></span>
+<div class="window-content">
+
+  <ul class="list-group">
+    {% for t in tunnels %}
+    <li class="list-group-item tunnel">
+      <span class="name">{{ t.tunnelName }}</span>
+      <div class="btn-group pull-right actions">
+        <button data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-default edit">
+          <span class="icon icon-pencil"></span>
+        </button>
+        <button data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-primary toggle-state">
+          <span class="icon icon-signal"></span>
+        </button>
+        <button  data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-negative delete">
+          <span class="icon icon-trash"></span>
+        </button>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<footer class="toolbar toolbar-footer draggable">
+    <div class="pull-right toolbar-actions not-draggable">
+      <button type="button" class="btn btn-large btn-primary new-tunnel">
+        <span class="icon icon-plus"></span> Add
       </button>
-      <button data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-primary toggle-state">
-        <span class="icon icon-signal"></span>
+
+      <button type="button" class="btn btn-large btn-negative exit">
+        <span class="icon icon-logout"></span> Exit
       </button>
-      <button  data-tunnel-id="{{t.tunnelId}}" type="button" class="btn btn-negative delete">
-        <span class="icon icon-trash"></span>
-      </button>
+
     </div>
-  </li>
-  {% endfor %}
-</ul>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="btn-group actions" role="group" aria-label="...">
-    <button type="button" class="btn btn-large btn-primary new-tunnel">
-      <span class="icon icon-plus"></span>
-    </button>
-
-    <button type="button" class="btn btn-large btn-negative exit">
-      <span class="icon icon-logout"></span>
-    </button>
-
-  </div>
-</nav>
+  </footer>
