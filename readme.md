@@ -1,28 +1,43 @@
 # tunnels
 
+Awesome [Electron](http://electron.atom.io/) app to manage your ssh tunnels.
+Keep a list of ssh tunnel to your remotes and open them all at once.
 
 [![Travis Build Status](https://img.shields.io/travis/parro-it/tunnels.svg)](http://travis-ci.org/parro-it/tunnels)
 [![NPM module](https://img.shields.io/npm/v/tunnels.svg)](https://npmjs.org/package/tunnels)
 [![NPM downloads](https://img.shields.io/npm/dt/tunnels.svg)](https://npmjs.org/package/open-ssh-tunnel)
 
+### Tunnels list window
+
+![image](media/list.png)
+
+
+### Tunnel edit window
+
+![image](media/edit-window.png)
+
+
 
 ## Installation
 
 ```bash
-npm install --save tunnels
+npm install -g tunnels
 ```
-
-## How it works
 
 ## Usage
 
-```javascript
-  import tunnels from 'tunnels'
+```bash
+  $ tunnels
 ```
 
-## Credits
+## Todo
+
+* [] Package the app for Linux, OSX, Windows
+* [] Make the app autolunch at startup
+* [] Provide visual feedback when tunnels are opening
 
 ## License
+
 The MIT License (MIT)
 
 Copyright (c) 2015 Andrea Parodi

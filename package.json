@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Electron app to manage your ssh tunnels",
   "repository": "parro-it/tunnels",
+  "keywords": ["electron", "ssh", "tunnel", "port", "forwarding"],
   "dependencies": {
     "dom-delegate": "^2.0.3",
     "electron-debug": "^0.5.1",
