@@ -9,3 +9,9 @@
 .btn.btn-negative {
   color: #eee;
 }
+
+input[type=checkbox] {
+  width: 20px;
+  margin-left: 20px;
+}
+
