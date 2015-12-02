@@ -33,9 +33,15 @@ npm install -g tunnels
 
 ## Todo
 
-* [] Package the app for Linux, OSX, Windows
-* [] Make the app autolunch at startup
-* [] Provide visual feedback when tunnels are opening
+* [ ] Package the app for Linux, OSX, Windows
+* [ ] Make the app autolunch at startup
+* [ ] Provide visual feedback when tunnels are opening
+
+
+## Related
+
+* [open-ssh-tunnel](https://github.com/parro-it/open-ssh-tunnel) - Tunneling module at the core of this app
+
 
 ## License
 
