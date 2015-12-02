@@ -8,6 +8,10 @@ exports.allTunnels = function allTunnels() {
   return tunnels;
 };
 
+exports.toOpenOnStartup = function toOpenOnStartup() {
+  return exports.allTunnels().filter(t => t.tunnelOpenOnStart);
+};
+
 exports.getTunnel = function getTunnel(id) {
   return store.get(id);
 };
@@ -21,22 +25,15 @@ exports.saveTunnel = function saveTunnel(tunnel) {
 };
 
 exports.createTunnel = function createTunnel() {
-  const tunnelId = uuid.v4();
-  const tunnelName = '<no name>';
-  const tunnelLocalPort = 80;
-  const tunnelRemotePort = 8080;
-  const tunnelHostAddress = 'localhost';
-  const tunnelUserName = 'root';
-  const tunnelPassword = '';
-
   const tunnel = {
-    tunnelId,
-    tunnelName,
-    tunnelLocalPort,
-    tunnelRemotePort,
-    tunnelHostAddress,
-    tunnelUserName,
-    tunnelPassword
+    tunnelId: uuid.v4(),
+    tunnelName: '<no name>',
+    tunnelLocalPort: 80,
+    tunnelRemotePort: 8080,
+    tunnelHostAddress: 'localhost',
+    tunnelUserName: 'root',
+    tunnelPassword: '',
+    tunnelOpenOnStart: false
   };
 
   exports.saveTunnel(tunnel);

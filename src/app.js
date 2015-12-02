@@ -67,14 +67,13 @@ function setup() {
     window.close();
   });
 
-
   delegate.on('click', '.toggle-state', (e, target) => {
     const tunnelId = target.dataset.tunnelId;
     tunnelsState.toggleState(tunnelId)
       .then(() => {
         return refreshList();
       })
-      .catch(err => alert(err.message));
+      .catch(err =>  electron.remote.dialog.showErrorBox('Cannot open tunnel.', err.message));
   });
 
   delegate.on('click', '.delete', (e, target) => {
@@ -92,6 +91,19 @@ function setup() {
       target.parentElement.parentElement.remove();
     }
   });
+
+  const openAtStartup = model.toOpenOnStartup();
+  const openings = Promise.all(
+    openAtStartup.map(tunnel => tunnelsState.toggleState(tunnel.tunnelId))
+  );
+
+  openings
+    .then(() => {
+      refreshList();
+    })
+    .catch(err =>  electron.remote.dialog.showErrorBox('Cannot open tunnel.', err.message));
+
+
 }
 
 setup();

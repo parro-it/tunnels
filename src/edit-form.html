@@ -6,35 +6,40 @@
   <form class="padded" enctype='application/json'>
 
     <div class="form-group">
-      <label for="tunnelName">Name</label>
+      <label>Name</label>
       <input value="{{tunnel.tunnelName}}" type="text" class="form-control" name="tunnelName">
     </div>
     <div class="form-group">
-      <label for="tunnelLocalPort">Local Port</label>
+      <label>Local Port</label>
       <input value="{{tunnel.tunnelLocalPort}}" type="number" class="form-control" name="tunnelLocalPort">
     </div>
     <div class="form-group">
-      <label for="tunnelRemotePort">Remote Port</label>
+      <label>Remote Port</label>
       <input value="{{tunnel.tunnelRemotePort}}" type="number" class="form-control" name="tunnelRemotePort">
     </div>
     <div class="form-group">
-      <label for="tunnelHostAddress">Host Address</label>
+      <label>Host Address</label>
       <input value="{{tunnel.tunnelHostAddress}}" type="text" class="form-control" name="tunnelHostAddress">
     </div>
 
     <div class="form-group">
-      <label for="tunnelUserName">User Name</label>
+      <label>User Name</label>
       <input value="{{tunnel.tunnelUserName}}" type="text" class="form-control" name="tunnelUserName">
     </div>
 
     <div class="form-group">
-      <label for="tunnelPassword">Password</label>
+      <label>Password</label>
       <input value="{{tunnel.tunnelPassword}}" type="password" class="form-control" name="tunnelPassword">
     </div>
 
     <div class="form-group">
-      <label for="tunnelKeyFile">Key file</label>
+      <label>Key file</label>
       <input value="{{tunnel.tunnelKeyFile}}" type="file" class="form-control" name="tunnelKeyFile">
+    </div>
+
+    <div class="form-group">
+      <label>Open on start</label>
+      <input {% if tunnel.tunnelOpenOnStart %}checked{% endif %} type="checkbox" class="form-control" name="tunnelOpenOnStart">
     </div>
 
     <input name="tunnelId" value="{{tunnel.tunnelId}}" type="hidden">

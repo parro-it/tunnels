@@ -14,6 +14,7 @@ const openTunnel = require('./ssh');
 function tunnelForm() {
   const tunnel = new window.JSONFormData(document.querySelector('form')).formData;
   tunnel.tunnelId = document.querySelector('[name=tunnelId]').value;
+  tunnel.tunnelOpenOnStart = document.querySelector('[name=tunnelOpenOnStart]').checked;
   return tunnel;
 }
 
