@@ -44,6 +44,7 @@ npm install -g electron-prebuilt
 * [ ] Package the app for Linux, OSX, Windows
 * [ ] Make the app autolunch at startup
 * [ ] Provide visual feedback when tunnels are opening
+* [ ] Save tunnel passwords in system keychain
 
 
 ## Related
