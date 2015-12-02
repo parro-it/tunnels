@@ -10,7 +10,7 @@ test('can open an ssh tunnel', co.wrap(function *(t) {
     tunnelPassword: process.env.UNIXSSH_PWD,
     tunnelUserName: 'parroit',
     tunnelRemotePort: 3306,
-    tunnelLocalPort: 3306,
+    tunnelLocalPort: 3309,
     tunnelName: 'test-tunnel'
   });
 
