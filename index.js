@@ -19,7 +19,5 @@ mb.on('ready', () => {
     }])
   );
   mb.window.webContents.executeJavaScript('require("./app.js");');
-
-
 });
 

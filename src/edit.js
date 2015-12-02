@@ -13,30 +13,12 @@ const app = remote.require('app');
 const openTunnel = require('./ssh');
 
 
-function getTunnel() {
-  const tunnelName = document.querySelector('#tunnelName').value;
-  const tunnelPassword = document.querySelector('#tunnelPassword').value;
-  const tunnelUserName = document.querySelector('#tunnelUserName').value;
-  const tunnelLocalPort = document.querySelector('#tunnelLocalPort').value;
-  const tunnelRemotePort = document.querySelector('#tunnelRemotePort').value;
-  const tunnelHostAddress = document.querySelector('#tunnelHostAddress').value;
-  const tunnelId = document.querySelector('#tunnelId').value;
-  const tunnelKeyFile = document.querySelector('#tunnelKeyFile').value;
-
-  return {
-    tunnelUserName,
-    tunnelId,
-    tunnelName,
-    tunnelKeyFile,
-    tunnelLocalPort,
-    tunnelRemotePort,
-    tunnelHostAddress,
-    tunnelPassword
-  };
+function tunnelForm() {
+  return new window.JSONFormData(document.querySelector('form')).formData;
 }
 
 function saveTunnel() {
-  model.saveTunnel(getTunnel());
+  model.saveTunnel(tunnelForm());
 }
 
 function setup() {
@@ -68,7 +50,7 @@ function setup() {
   });
 
   delegate.on('click', '.test', () => {
-    openTunnel(getTunnel()).then(result => {
+    openTunnel(tunnelForm()).then(result => {
       dialog.showMessageBox({
         buttons: ['Ok'],
         type: 'info',
