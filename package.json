@@ -1,6 +1,6 @@
 {
   "name": "electron-tunnels",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Electron app to manage your ssh tunnels",
   "repository": "parro-it/tunnels",
   "author": "andrea@parro.it",
