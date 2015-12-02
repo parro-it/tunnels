@@ -29,7 +29,7 @@ function editTunnel(tunnelId) {
     return;
   }
   editWindow = electronWindow.createWindow({
-    width: 300, height: 600, frame: false
+    width: 300, height: 660, frame: false
   });
   const indexPath = path.resolve(__dirname, 'index.html');
   editWindow.showUrl(indexPath, { tunnelId }, () => {
