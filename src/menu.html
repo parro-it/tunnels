@@ -1,5 +1,10 @@
-<div class="window-content">
+<div class="toolbar-actions not-draggable">
+  <button type="button" class="btn btn-large btn-primary new-tunnel">
+    <span class="icon icon-plus"></span> Add
+  </button>
+</div>
 
+<div class="window-content">
   <ul class="list-group">
     {% for t in tunnels %}
     <li class="list-group-item tunnel">
@@ -25,16 +30,3 @@
     {% endfor %}
   </ul>
 </div>
-
-<footer class="toolbar toolbar-footer draggable">
-    <div class="pull-right toolbar-actions not-draggable">
-      <button type="button" class="btn btn-large btn-primary new-tunnel">
-        <span class="icon icon-plus"></span> Add
-      </button>
-
-      <button type="button" class="btn btn-large btn-negative exit">
-        <span class="icon icon-logout"></span> Exit
-      </button>
-
-    </div>
-  </footer>

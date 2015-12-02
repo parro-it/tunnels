@@ -63,17 +63,16 @@ function setup() {
     editTunnel(tunnelId);
   });
 
-  delegate.on('click', '.exit', () => {
-    window.close();
-  });
-
   delegate.on('click', '.toggle-state', (e, target) => {
     const tunnelId = target.dataset.tunnelId;
     tunnelsState.toggleState(tunnelId)
       .then(() => {
         return refreshList();
       })
-      .catch(err =>  electron.remote.dialog.showErrorBox('Cannot open tunnel.', err.message));
+      .catch(err =>  electron.remote.dialog.showErrorBox(
+        'Cannot open tunnel.',
+        err.message
+      ));
   });
 
   delegate.on('click', '.delete', (e, target) => {
@@ -94,14 +93,23 @@ function setup() {
 
   const openAtStartup = model.toOpenOnStartup();
   const openings = Promise.all(
-    openAtStartup.map(tunnel => tunnelsState.toggleState(tunnel.tunnelId))
+    openAtStartup.map(tunnel =>
+      tunnelsState.toggleState(tunnel.tunnelId)
+        .catch(err => {
+          err.message = `Cannot open tunnel ${tunnel.tunnelName}:\n${err.message}`;
+          throw err;
+        })
+    )
   );
 
   openings
     .then(() => {
       refreshList();
     })
-    .catch(err =>  electron.remote.dialog.showErrorBox('Cannot open tunnel.', err.message));
+    .catch(err =>  electron.remote.dialog.showErrorBox(
+      'Cannot open tunnel.',
+      err.message
+    ));
 
 
 }

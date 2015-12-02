@@ -16,6 +16,9 @@ mb.on('ready', () => {
     electron.Menu.buildFromTemplate([{
       label: 'Edit tunnels',
       click: () => mb.showWindow()
+    }, {
+      label: 'Exit',
+      click: () => electron.app.quit()
     }])
   );
   mb.window.webContents.executeJavaScript('require("./app.js");');

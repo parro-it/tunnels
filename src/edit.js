@@ -41,15 +41,19 @@ function setup() {
   });
 
   delegate.on('click', '.test', () => {
-    openTunnel(tunnelForm()).then(server => {
-      dialog.showMessageBox({
-        buttons: ['Ok'],
-        type: 'info',
-        title: 'Connection status',
-        message: server.response
+    openTunnel(tunnelForm())
+      .then(server => {
+        dialog.showMessageBox({
+          buttons: ['Ok'],
+          type: 'info',
+          title: 'Connection status',
+          message: server.response
+        });
+        server.close();
+      })
+      .catch(err => {
+        dialog.showErrorBox('Connection status', err.message);
       });
-      server.close();
-    });
 
   });
 
