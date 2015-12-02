@@ -6,7 +6,10 @@ const domDelegate = require('dom-delegate');
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
 const model = require('./model');
+const path = require('path');
+const electronWindow = electron.remote.require('electron-window');
 
+let editWindow;
 
 function refreshList() {
   const tunnels = model.allTunnels();
@@ -18,21 +21,45 @@ function refreshList() {
   document.body.innerHTML = template;
 }
 
+
+function editTunnel(ev, tunnelId) {
+  if (editWindow) {
+    editWindow.focus();
+    return;
+  }
+  editWindow = electronWindow.createWindow({
+    width: 300, height: 600, frame: false
+  });
+  const indexPath = path.resolve(__dirname, 'index.html');
+  editWindow.showUrl(indexPath, { tunnelId }, () => {
+    editWindow.webContents.executeJavaScript('require("./edit.js");');
+  });
+
+
+  editWindow.once('closed', () => {
+    editWindow = null;
+  });
+
+  ipc.once('saved', () => {
+    refreshList();
+  });
+}
+
+
 function setup() {
   const delegate = domDelegate(document.body);
 
   refreshList();
 
-  ipc.on('tunnel-saved', refreshList);
 
   delegate.on('click', '.new-tunnel', () => {
     const tunnel = model.createTunnel();
-    ipc.send('edit-tunnel', tunnel.tunnelId);
+    editTunnel(tunnel.tunnelId);
   });
 
   delegate.on('click', '.edit', (e, target) => {
     const tunnelId = target.dataset.tunnelId;
-    ipc.send('edit-tunnel', tunnelId);
+    editTunnel(tunnelId);
   });
 
   delegate.on('click', '.exit', () => {
