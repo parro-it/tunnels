@@ -8,14 +8,16 @@
 [![NPM module](https://img.shields.io/npm/v/tunnels.svg)](https://npmjs.org/package/tunnels)
 [![NPM downloads](https://img.shields.io/npm/dt/tunnels.svg)](https://npmjs.org/package/open-ssh-tunnel)
 
+### Tunnel edit window
+
+![image](media/edit-window.png)
+
+
 ### Tunnels list window
 
 ![image](media/list.png)
 
 
-### Tunnel edit window
-
-![image](media/edit-window.png)
 
 
 
