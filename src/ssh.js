@@ -12,7 +12,9 @@ module.exports = function openTunnel(t) {
     srcAddr: '127.0.0.1',
     dstAddr: '127.0.0.1',
     readyTimeout: 5000,
-    forwardTimeout: 2000
+    forwardTimeout: 2000,
+    localPort: Number(t.tunnelLocalPort),
+    localAddr: '127.0.0.1'
   };
 
   if (t.tunnelKeyFile) {
