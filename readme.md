@@ -1,7 +1,8 @@
 # tunnels
 
-Awesome [Electron](http://electron.atom.io/) app to manage your ssh tunnels.
-Keep a list of ssh tunnel to your remotes and open them all at once.
+> Awesome [Electron](http://electron.atom.io/) app to manage your ssh tunnels.
+
+> Keep a list of ssh tunnel to your remotes and open them all at once.
 
 [![Travis Build Status](https://img.shields.io/travis/parro-it/tunnels.svg)](http://travis-ci.org/parro-it/tunnels)
 [![NPM module](https://img.shields.io/npm/v/tunnels.svg)](https://npmjs.org/package/tunnels)
