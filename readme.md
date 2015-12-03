@@ -16,17 +16,13 @@
 
 ![image](media/list.png)
 
-## Installation
+# Installation
 
-### OS X
-
-#### Manually
-
-[**Download**](https://github.com/parro-it/tunnels/releases/latest), unzip, and move `Tunnels.app` to the `/Applications` directory.
-
-### Linux
+## Linux
 
 [**Download**](https://github.com/parro-it/tunnels/releases/latest) and unzip to some location.
+
+To run the app, execute the `Tunnels` file.
 
 To add a shortcut to the app, create a file in `~/.local/share/applications` called `Tunnels.desktop` with the following contents:
 
@@ -39,11 +35,18 @@ Type=Application
 Icon=/full/path/to/folder/Tunnels/resources/app/media/IconTemplate.png
 ```
 
-### Windows
+## OS X **NOT TESTED**
+
+[**Download**](https://github.com/parro-it/tunnels/releases/latest), unzip, and move `Tunnels.app` to the `/Applications` directory.
+
+
+## Windows **NOT TESTED**
 
 [**Download**](https://github.com/parro-it/tunnels/releases/latest) and unzip to some location.
 
-### NPM
+To run the app, execute the `Tunnels` file.
+
+## NPM
 
 Install the module globally:
 
@@ -51,7 +54,7 @@ Install the module globally:
 npm install -g electron-tunnels
 ```
 
-to start the app:
+start the app from your terminal:
 
 ```bash
 tunnels
@@ -60,9 +63,9 @@ tunnels
 
 
 
-## Development
+# Development
 
-### Setup environment
+## Setup environment
 
 ```bash
 git clone https://github.com/parro-it/tunnels.git
@@ -72,13 +75,13 @@ npm run rebuild
 npm start
 ```
 
-### Lint your code
+## Lint your code
 
 ```bash
 npm run lint
 ```
 
-### Run tests
+## Run tests
 
 ```bash
 npm test
@@ -90,7 +93,7 @@ npm test
 > If these two env are not found, these tests are skipped.
 
 
-## Todo
+# Todo
 
 * [*] Package the app for Linux, OSX, Windows
 * [ ] Make the app autolunch at startup
@@ -99,17 +102,17 @@ npm test
 * [ ] Improve UI
 
 
-## Related modules
+# Related modules
 
 * [open-ssh-tunnel](https://github.com/parro-it/open-ssh-tunnel) - Tunneling module at the core of this app
 
 * [Caprine](https://github.com/sindresorhus/caprine) - Install instructions and scripts are copied from this app.
 
-## Credits
+# Credits
 
 * App icons come from [Entypo icon set](www.entypo.com) by [Daniel Bruce](http://www.danielbruce.se/)
 
-## License
+# License
 
 The MIT License (MIT)
 
