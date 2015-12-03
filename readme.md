@@ -18,8 +18,7 @@
 
 ### UI restyle coming in version 1.3.0
 
-![image](https://cloud.githubusercontent.com/assets/11197111/11577151/e9d876ac-9a1b-11e5-9ae3-07892a0b393f.png)
-
+![image](https://cloud.githubusercontent.com/assets/11197111/11577599/2e80475a-9a1f-11e5-9254-33b71ff00e12.png)
 
 # Installation
 
