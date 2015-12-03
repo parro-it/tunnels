@@ -33,11 +33,6 @@ npm run relib
 npm start
 ```
 
-## Usage
-
-```bash
-  $ tunnels
-```
 
 ## Todo
 
