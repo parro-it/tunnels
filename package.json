@@ -29,20 +29,23 @@
     "test": "node test | faucet",
     "relib": "electron-rebuild",
     "lint": "eslint .",
-    "start": "electron ."
+    "start": "electron .",
+    "package:osx": "electron-packager ./ Tunnels --platform=darwin --arch=x64 --version=0.35.2"
   },
   "files": [
     "index.js",
     "src"
   ],
   "bin": {
-    "tunnels": "index.js"
+    "tunnels": "cli.js"
   },
   "eslintConfig": {
     "extends": "js"
   },
   "license": "MIT",
   "devDependencies": {
+    "electron-packager": "^5.1.1",
+    "electron-prebuilt": "^0.35.2",
     "tape": "^4.2.2"
   }
 }

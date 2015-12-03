@@ -22,16 +22,16 @@
 npm install -g electron-tunnels
 ```
 
-> By now, [Electron](http://electron.atom.io/) is not bundled with the app,
-
-> you have to install it globally. This will change soon as we package tunnels
-
-> for the various platform.
+## Building
 
 ```bash
-npm install -g electron-prebuilt
+git clone git@github.com:parro-it/tunnels.git
+cd tunnels
+npm i
+npm run build:osx
+# or
+npm start
 ```
-
 
 ## Usage
 
