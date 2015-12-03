@@ -29,7 +29,7 @@ tunnels
 git clone https://github.com/parro-it/tunnels.git
 cd tunnels
 npm i
-npm run relib
+npm run rebuild
 npm start
 ```
 

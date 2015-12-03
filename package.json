@@ -27,10 +27,13 @@
   },
   "scripts": {
     "test": "node test | faucet",
-    "relib": "electron-rebuild",
+    "rebuild": "electron-rebuild",
     "lint": "eslint .",
     "start": "electron .",
-    "package:osx": "electron-packager ./ Tunnels --platform=darwin --arch=x64 --version=0.35.2"
+    "package:osx":  "electron-packager . Tunnels --platform=darwin --arch=x64 --version=0.35.2 --ignore='(media|test|private|node_modules/electron-packager|node_modules/electron-prebuilt)' --overwrite --out=setup",
+    "package:linux:64":  "electron-packager . Tunnels --platform=linux  --arch=x64 --version=0.35.2 --ignore='(media|test|private|node_modules/electron-packager|node_modules/electron-prebuilt)' --overwrite --out=setup",
+    "package:linux:32":  "electron-packager . Tunnels --platform=linux --arch=ia32 --version=0.35.2 --ignore='(media|test|private|node_modules/electron-packager|node_modules/electron-prebuilt)' --overwrite --out=setup"
+
   },
   "files": [
     "index.js",
