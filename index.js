@@ -1,4 +1,3 @@
-#!/usr/bin/env electron
 'use strict';
 const electron = require('electron');
 const menubar = require('menubar');

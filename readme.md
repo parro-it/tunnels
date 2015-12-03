@@ -20,16 +20,16 @@
 
 ```bash
 npm install -g electron-tunnels
+tunnels
 ```
 
-## Building
+## Development
 
 ```bash
-git clone git@github.com:parro-it/tunnels.git
+git clone https://github.com/parro-it/tunnels.git
 cd tunnels
 npm i
-npm run build:osx
-# or
+npm run relib
 npm start
 ```
 
