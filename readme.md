@@ -99,7 +99,7 @@ npm test
 
 # Todo
 
-* [*] Package the app for Linux, OSX, Windows
+* [X] Package the app for Linux, OSX, Windows
 * [ ] Make the app autolunch at startup
 * [ ] Provide visual feedback when tunnels are opening
 * [ ] Save tunnel passwords in system keychain
