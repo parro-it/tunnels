@@ -52,6 +52,7 @@
   "productName": "Tunnels",
   "license": "MIT",
   "devDependencies": {
+    "babel-eslint": "^4.1.6",
     "electron-packager": "^5.1.1",
     "electron-prebuilt": "^0.35.2",
     "electron-rebuild": "^1.0.2",
