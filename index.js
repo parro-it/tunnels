@@ -1,30 +1,23 @@
 'use strict';
 const electron = require('electron');
-const menubar = require('menubar');
 const electronDebug = require('electron-debug');
 const electronDetach = require('electron-detach');
+const window = require('electron-window');
 
 if (electronDetach({ requireCmdlineArg: false })) {
   electronDebug();
+  electron.app.on('ready', () => {
 
-  const mb = menubar({
-    dir: __dirname + '/src/',
-    preloadWindow: true,
-    'window-position': 'trayBottomLeft'
-  });
+    const listWindow = window.createWindow({
+      width: 300,
+      height: 400,
+      frame: false,
+      resizable: true,
+      icon: __dirname + '/src/IconTemplate.png'
+    });
 
-  mb.on('ready', () => {
-    mb.tray.setContextMenu(
-      electron.Menu.buildFromTemplate([{
-        label: 'Edit tunnels',
-        click: () => mb.showWindow()
-      }, {
-        label: 'Exit',
-        click: () => electron.app.quit()
-      }])
-    );
-    mb.window.setSkipTaskbar(true);
-    mb.window.webContents.executeJavaScript('require("./app.js");');
+    const indexPath = __dirname + '/src/index.html';
+    listWindow.showUrl(indexPath);
   });
 }
 

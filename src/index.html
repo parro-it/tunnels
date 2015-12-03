@@ -5,10 +5,44 @@
     <title>tunnels</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../node_modules/photon/dist/css/photon.css">
-    <script src="json-formdata.js"></script>
+
   </head>
   <body class="window">
+    <header class="toolbar toolbar-header draggable">
+      <h1 class="title">Tunnels</h1>
+      <div class="toolbar-actions not-draggable">
+        <button type="button" class="btn btn-default btn-large new-tunnel">
+          <span class="icon icon-plus"></span>
+        </button>
+
+        <button style="display:none" type="button" class="btn btn-primary btn-large test">
+            <span class="icon icon-check"></span> Check
+        </button>
+        <button style="display:none" type="button" class="btn btn-positive btn-large save">
+            <span class="icon icon-thumbs-up"></span> Save
+        </button>
+        <button style="display:none" type="button" class="btn btn-negative btn-large cancel">
+            <span class="icon icon-cancel"></span> Cancel
+        </button>
+
+      </div>
+    </header>
+
+    <div class="window-content">
+      <div class="pane-group">
+        <div class="pane pane-sm sidebar">
+        </div>
+        <main class="pane">
+        </main>
+      </div>
+    </div>
 
 
+    <footer class="toolbar toolbar-footer draggable">
+    <span class="pull-right" style="color:#fc605b">Remote port not reachable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </footer>
+
+    <script src="json-formdata.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

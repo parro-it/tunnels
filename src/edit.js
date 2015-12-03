@@ -32,17 +32,16 @@ function showTestMessage(type, message) {
   }, () => remote.getCurrentWindow().setAlwaysOnTop(true));
 }
 
-function setup() {
+function editTunnel(tunnelId) {
   const delegate = domDelegate(document.body);
 
-  const tunnelId = window.__args__.tunnelId;
   const tunnel = model.getTunnel(tunnelId);
   const template = nunjucks.render(
     join(__dirname, 'edit-form.html'),
     { tunnel }
   );
 
-  document.body.innerHTML = template;
+  document.querySelector('main.pane').innerHTML = template;
 
   delegate.on('click', '.save', () => {
     saveTunnel();
@@ -63,4 +62,4 @@ function setup() {
   delegate.on('click', '.cancel', () => window.close());
 }
 
-setup();
+module.exports = editTunnel;

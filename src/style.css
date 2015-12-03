@@ -15,6 +15,19 @@ input[type=checkbox] {
   margin-left: 20px;
 }
 
-body {
-  background-color: #eee;
+.form-group label {
+    width: 100px;
+    text-align: right;
+    vertical-align: bottom;
+}
+
+.form-control[type=text],
+.form-control[type=password],
+.form-control[type=file] {
+    width: 300px;
+}
+
+
+.form-control[type=number] {
+    width: 100px;
 }

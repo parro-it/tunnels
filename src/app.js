@@ -5,12 +5,9 @@ const nunjucks = require('nunjucks');
 const domDelegate = require('dom-delegate');
 const electron = require('electron');
 const model = require('./model');
-const path = require('path');
-const electronWindow = electron.remote.require('electron-window');
 const tunnelsState = require('./tunnels-state');
 const co = require('co');
-
-let editWindow;
+const editTunnel = require('./edit.js');
 
 function refreshList() {
   const tunnels = model.allTunnels();
@@ -19,32 +16,8 @@ function refreshList() {
     { tunnels, isOpen: tunnelsState.isOpen }
   );
 
-  document.body.innerHTML = template;
-}
-
-
-function editTunnel(tunnelId) {
-  if (editWindow) {
-    editWindow.focus();
-    return;
-  }
-  editWindow = electronWindow.createWindow({
-    width: 300,
-    height: 660,
-    frame: false,
-    alwaysOnTop: true,
-    skipTaskbar: true,
-    resizable: false
-  });
-  const indexPath = path.resolve(__dirname, 'index.html');
-  editWindow.showUrl(indexPath, { tunnelId }, () => {
-    editWindow.webContents.executeJavaScript('require("./edit.js");');
-  });
-
-  editWindow.once('closed', () => {
-    editWindow = null;
-    refreshList();
-  });
+  document.querySelector('.sidebar').innerHTML = template;
+  editTunnel(tunnels[0].tunnelId);
 }
 
 function * openTunnels() {
@@ -115,3 +88,5 @@ function * setup() {
 }
 
 co(setup());
+
+

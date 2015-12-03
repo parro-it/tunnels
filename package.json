@@ -18,7 +18,6 @@
     "electron-detach": "^0.3.0",
     "electron-window": "^0.6.0",
     "insert-css": "^0.2.0",
-    "menubar": "^2.3.0",
     "node-uuid": "^1.4.3",
     "nunjucks": "^2.0.0",
     "open-ssh-tunnel": "^0.1.0",
