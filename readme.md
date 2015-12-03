@@ -35,12 +35,12 @@ Type=Application
 Icon=/full/path/to/folder/Tunnels/resources/app/media/IconTemplate.png
 ```
 
-## OS X **NOT TESTED**
+## OS X `**PACKAGE NOT TESTED**`
 
 [**Download**](https://github.com/parro-it/tunnels/releases/latest), unzip, and move `Tunnels.app` to the `/Applications` directory.
 
 
-## Windows **NOT TESTED**
+## Windows `**PACKAGE NOT TESTED**`
 
 [**Download**](https://github.com/parro-it/tunnels/releases/latest) and unzip to some location.
 
