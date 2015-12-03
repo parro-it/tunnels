@@ -1,4 +1,4 @@
-# tunnels
+# Tunnels
 
 > Awesome [Electron](http://electron.atom.io/) app to manage your ssh tunnels.
 
@@ -18,12 +18,51 @@
 
 ## Installation
 
+### OS X
+
+#### Manually
+
+[**Download**](https://github.com/parro-it/tunnels/releases/latest), unzip, and move `Tunnels.app` to the `/Applications` directory.
+
+### Linux
+
+[**Download**](https://github.com/parro-it/tunnels/releases/latest) and unzip to some location.
+
+To add a shortcut to the app, create a file in `~/.local/share/applications` called `Tunnels.desktop` with the following contents:
+
+```
+[Desktop Entry]
+Name=Tunnels
+Exec=/full/path/to/folder/Tunnels
+Terminal=false
+Type=Application
+Icon=/full/path/to/folder/Tunnels/resources/app/media/IconTemplate.png
+```
+
+### Windows
+
+[**Download**](https://github.com/parro-it/tunnels/releases/latest) and unzip to some location.
+
+### NPM
+
+Install the module globally:
+
 ```bash
 npm install -g electron-tunnels
+```
+
+to start the app:
+
+```bash
 tunnels
 ```
 
+
+
+
 ## Development
+
+### Setup environment
 
 ```bash
 git clone https://github.com/parro-it/tunnels.git
@@ -33,19 +72,42 @@ npm run rebuild
 npm start
 ```
 
+### Lint your code
+
+```bash
+npm run lint
+```
+
+### Run tests
+
+```bash
+npm test
+```
+
+> some tests requires an account defined on freebsd.unixssh.com
+> to run them, setup an account there, and then define `UNIXSSH_USER`
+> and `UNIXSSH_PWD` environment variables before running tests.
+> If these two env are not found, these tests are skipped.
+
 
 ## Todo
 
-* [ ] Package the app for Linux, OSX, Windows
+* [*] Package the app for Linux, OSX, Windows
 * [ ] Make the app autolunch at startup
 * [ ] Provide visual feedback when tunnels are opening
 * [ ] Save tunnel passwords in system keychain
+* [ ] Improve UI
 
 
-## Related
+## Related modules
 
 * [open-ssh-tunnel](https://github.com/parro-it/open-ssh-tunnel) - Tunneling module at the core of this app
 
+* [Caprine](https://github.com/sindresorhus/caprine) - Install instructions and scripts are copied from this app.
+
+## Credits
+
+* App icons come from [Entypo icon set](www.entypo.com) by [Daniel Bruce](http://www.danielbruce.se/)
 
 ## License
 

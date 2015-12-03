@@ -1,5 +1,5 @@
 /* global JSONFormData, console */
-
+/* eslint-disable */
 /* Unofficial Draft: http://darobin.github.io/formic/specs/json/ */
 
 (function (window, undefined) {
