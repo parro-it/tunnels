@@ -16,6 +16,11 @@
 
 ![image](media/list.png)
 
+### UI restyle coming in version 1.3.0
+
+![image](https://cloud.githubusercontent.com/assets/11197111/11577151/e9d876ac-9a1b-11e5-9ae3-07892a0b393f.png)
+
+
 # Installation
 
 ## Linux
