@@ -1,9 +1,7 @@
 'use strict';
 
-const join = require('path').join;
 const electron = require('electron');
 const ipc = electron.ipcRenderer;
-const nunjucks = require('nunjucks');
 const domDelegate = require('dom-delegate');
 const model = require('./model');
 const remote = electron.remote;
@@ -36,12 +34,12 @@ function editTunnel(tunnelId) {
   const delegate = domDelegate(document.body);
 
   const tunnel = model.getTunnel(tunnelId);
-  const template = nunjucks.render(
-    join(__dirname, 'edit-form.html'),
-    { tunnel }
-  );
-
-  document.querySelector('main.pane').innerHTML = template;
+  const form = document.querySelector('main.pane form');
+  const fields = form.querySelectorAll('[name]');
+  Array.from(fields).forEach(f => {
+    const name = f.name;
+    f.value = tunnel[name];
+  });
 
   delegate.on('click', '.save', () => {
     saveTunnel();

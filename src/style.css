@@ -31,3 +31,32 @@ input[type=checkbox] {
 .form-control[type=number] {
     width: 100px;
 }
+
+.status.open {
+  color:#34c84a;
+}
+
+.status.closed {
+  color:#ccc;
+}
+
+.status.error {
+  color:#fc605b;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.nav-group-item .icon.pull-right {
+  float:right;
+}
+
+.nav-group-item .icon.menu-actions {
+  color: rgba(150, 150, 150, 0);
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-group-item:hover .icon.menu-actions {
+  color: rgba(150, 150, 150, 1);
+}

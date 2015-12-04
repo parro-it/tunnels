@@ -31,16 +31,83 @@
     <div class="window-content">
       <div class="pane-group">
         <div class="pane pane-sm sidebar">
+          <nav class="nav-group">
+            <h5 class="nav-group-title">Tunnels</h5>
+          </nav>
         </div>
         <main class="pane">
+          <form class="padded" enctype='application/json'>
+
+            <div class="form-group">
+              <label>Name</label>
+              <input  type="text" class="form-control" name="tunnelName">
+            </div>
+            <div class="form-group">
+              <label>Local Port</label>
+              <input  type="number" class="form-control" name="tunnelLocalPort">
+            </div>
+            <div class="form-group">
+              <label>Remote Port</label>
+              <input  type="number" class="form-control" name="tunnelRemotePort">
+            </div>
+            <div class="form-group">
+              <label>Host Address</label>
+              <input  type="text" class="form-control" name="tunnelHostAddress">
+            </div>
+
+            <div class="form-group">
+              <label>User Name</label>
+              <input  type="text" class="form-control" name="tunnelUserName">
+            </div>
+
+            <div class="form-group">
+              <label>Password</label>
+              <input  type="password" class="form-control" name="tunnelPassword">
+            </div>
+
+            <div class="form-group">
+              <label>Key file</label>
+              <input  type="file" class="form-control" name="tunnelKeyFile">
+            </div>
+
+            <div class="form-group">
+              <label>Open on start</label>
+              <input type="checkbox" class="form-control" name="tunnelOpenOnStart">
+            </div>
+
+            <input name="tunnelId"  type="hidden">
+          </form>
+
+        </div>
+
         </main>
       </div>
     </div>
 
 
     <footer class="toolbar toolbar-footer draggable">
-    <span class="pull-right" style="color:#fc605b">Remote port not reachable&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span class="pull-right"></span>
     </footer>
+
+    <template id="tunnel-item">
+      <span class="nav-group-item tunnel">
+        <span class="icon icon-record status"></span>
+        <span class="tunnelName"></span>
+        <span class="pull-right icon icon-dot-3 menu-actions"></span>
+
+        <div class="hidden btn-group pull-right actions">
+          <button type="button" class="btn btn-default edit">
+            <span class="icon icon-pencil"></span>
+          </button>
+          <button type="button" class="btn btn-positive toggle-state">
+            <span class="icon icon-signal"></span>
+          </button>
+          <button  type="button" class="btn btn-negative delete">
+            <span class="icon icon-trash"></span>
+          </button>
+        </div>
+      </span>
+    </template>
 
     <script src="json-formdata.js"></script>
     <script src="app.js"></script>

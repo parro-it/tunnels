@@ -1,7 +1,5 @@
 'use strict';
 
-const join = require('path').join;
-const nunjucks = require('nunjucks');
 const domDelegate = require('dom-delegate');
 const electron = require('electron');
 const model = require('./model');
@@ -11,12 +9,15 @@ const editTunnel = require('./edit.js');
 
 function refreshList() {
   const tunnels = model.allTunnels();
-  const template = nunjucks.render(
-    join(__dirname, 'menu.html'),
-    { tunnels, isOpen: tunnelsState.isOpen }
-  );
 
-  document.querySelector('.sidebar').innerHTML = template;
+  const itemTemplate = document.querySelector('#tunnel-item');
+  const nav = document.querySelector('.sidebar nav');
+  nav.innerHTML = '<h5 class="nav-group-title">Tunnels</h5>';
+  tunnels.forEach(t => {
+    const tmpl = document.importNode(itemTemplate.content, true);
+    tmpl.querySelector('.tunnelName').textContent = t.tunnelName;
+    nav.appendChild(tmpl);
+  });
   editTunnel(tunnels[0].tunnelId);
 }
 
