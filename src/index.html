@@ -15,14 +15,6 @@
           <span class="icon icon-plus"></span>
         </button>
 
-        <button style="display:none" type="button" class="btn btn-primary btn-large test">
-            <span class="icon icon-check"></span> Check
-        </button>
-        <button style="display:none" type="button" class="btn btn-positive btn-large save">
-            <span class="icon icon-thumbs-up"></span> Save
-        </button>
-
-
       </div>
     </header>
 
@@ -65,7 +57,7 @@
 
             <div class="form-group">
               <label>Key file</label>
-              <input  type="file" class="form-control" name="tunnelKeyFile">
+              <input  type="text" class="form-control" name="tunnelKeyFile">
             </div>
 
             <div class="form-group">
@@ -84,7 +76,7 @@
 
 
     <footer class="toolbar toolbar-footer draggable">
-      <span class="pull-right"></span>
+      <span class="status-bar"></span>
     </footer>
 
     <template id="tunnel-item">
@@ -95,7 +87,6 @@
       </span>
     </template>
 
-    <script src="json-formdata.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

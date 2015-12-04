@@ -1,15 +1,3 @@
-.btn.btn-primary .icon,
-.btn.btn-positive .icon,
-.btn.btn-negative .icon {
-  color: #eee;
-}
-
-.btn.btn-primary,
-.btn.btn-positive,
-.btn.btn-negative {
-  color: #eee;
-}
-
 input[type=checkbox] {
   width: 20px;
   margin-left: 20px;
@@ -32,15 +20,15 @@ input[type=checkbox] {
     width: 100px;
 }
 
-.status.open {
+.status-ok {
   color:#34c84a;
 }
 
-.status.closed {
+.status-normal {
   color:#ccc;
 }
 
-.status.error {
+.status-error {
   color:#fc605b;
 }
 
@@ -59,4 +47,9 @@ input[type=checkbox] {
 
 .nav-group-item:hover .icon.menu-actions {
   color: rgba(150, 150, 150, 1);
+}
+
+.status-bar {
+  float: right;
+  margin-right: 10px;
 }

@@ -9,10 +9,10 @@ if (electronDetach({ requireCmdlineArg: false })) {
   electron.app.on('ready', () => {
 
     const listWindow = window.createWindow({
-      width: 300,
-      height: 400,
+      width: 750,
+      height: 450,
       frame: false,
-      resizable: true,
+      resizable: false,
       icon: __dirname + '/src/IconTemplate.png'
     });
 
