@@ -16,6 +16,7 @@ if (electronDetach({ requireCmdlineArg: false })) {
       icon: __dirname + '/src/IconTemplate.png'
     });
 
+    listWindow.setMenu(null);
     const indexPath = __dirname + '/src/index.html';
     listWindow.showUrl(indexPath);
   });
