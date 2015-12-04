@@ -21,15 +21,12 @@ input[type=checkbox] {
 }
 
 .status-ok {
-  color:#34c84a;
+  color:#34c84a !important;
 }
 
-.status-normal {
-  color:#ccc;
-}
 
 .status-error {
-  color:#fc605b;
+  color:#fc605b !important;
 }
 
 .hidden {

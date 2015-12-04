@@ -7,6 +7,24 @@ const ssh = require('./ssh');
 const co = require('co');
 const zip = require('zipmap');
 
+let resetStatusBarTimeout = null;
+
+function log(message, status) {
+  const statusBar = document.querySelector('.status-bar');
+  statusBar.setAttribute('class', 'status-bar');
+  statusBar.classList.add(`status-${status}`);
+  statusBar.textContent = message;
+  if (resetStatusBarTimeout) {
+    clearTimeout(resetStatusBarTimeout);
+  }
+  resetStatusBarTimeout = setTimeout(()=> {
+    statusBar.class = '';
+    statusBar.textContent = '';
+    resetStatusBarTimeout = null;
+  }, 2000);
+}
+
+
 function tunnelForm() {
   const fields = Array.from(document.querySelectorAll('form [name]'));
   return zip(fields.map(field => [
@@ -42,25 +60,34 @@ function refreshList() {
   nav.innerHTML = '<h5 class="nav-group-title">Tunnels</h5>';
   tunnels.forEach(t => {
     const tmpl = document.importNode(itemTemplate.content, true);
+    if (ssh.isOpen(t.tunnelId)) {
+      tmpl.querySelector('.status').classList.add('status-ok');
+    }
+
+
     tmpl.querySelector('.tunnelName').textContent = t.tunnelName;
     tmpl.querySelector('.tunnel').dataset.tunnelId = t.tunnelId;
     tmpl.querySelector('.menu-actions').dataset.tunnelId = t.tunnelId;
 
     nav.appendChild(tmpl);
 
+
   });
   editTunnel(tunnels[0].tunnelId);
 }
 
 const toggleTunnelState = tunnelId => co.wrap( function *() {
+  const tunnelListStatus = document.querySelector(`[data-tunnel-id="${tunnelId}"] .status`);
+  tunnelListStatus.setAttribute('class', 'icon icon-record status');
   try {
     yield ssh.toggleState(tunnelId);
-    refreshList();
+    if (ssh.isOpen(tunnelId)) {
+      tunnelListStatus.classList.add('status-ok');
+    }
+
   } catch (err) {
-    electron.remote.dialog.showErrorBox(
-      'Cannot open tunnel.',
-      err.message
-    );
+    tunnelListStatus.classList.add('status-error');
+    log('Cannot open tunnel: ' + err.message, 'error');
   }
 });
 
@@ -111,23 +138,6 @@ function * openTunnels() {
       err.message
     );
   }
-}
-
-let resetStatusBarTimeout = null;
-
-function log(message, status) {
-  const statusBar = document.querySelector('.status-bar');
-  statusBar.setAttribute('class', 'status-bar');
-  statusBar.classList.add(`status-${status}`);
-  statusBar.textContent = message;
-  if (resetStatusBarTimeout) {
-    clearTimeout(resetStatusBarTimeout);
-  }
-  resetStatusBarTimeout = setTimeout(()=> {
-    statusBar.class = '';
-    statusBar.textContent = '';
-    resetStatusBarTimeout = null;
-  }, 2000);
 }
 
 function * setup() {
