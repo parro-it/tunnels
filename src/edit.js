@@ -1,13 +1,14 @@
 'use strict';
 
+const throttle = require('./throttle-override');
 const electron = require('electron');
-const ipc = electron.ipcRenderer;
+// const ipc = electron.ipcRenderer;
 const domDelegate = require('dom-delegate');
 const model = require('./model');
-const remote = electron.remote;
-const dialog = remote.require('dialog');
-const openTunnel = require('./ssh');
-const co = require('co');
+// const remote = electron.remote;
+// const dialog = remote.require('dialog');
+// const openTunnel = require('./ssh');
+// const co = require('co');
 
 function tunnelForm() {
   const tunnel = new window.JSONFormData(document.querySelector('form')).formData;
@@ -16,10 +17,7 @@ function tunnelForm() {
   return tunnel;
 }
 
-function saveTunnel() {
-  model.saveTunnel(tunnelForm());
-}
-
+/*
 function showTestMessage(type, message) {
   remote.getCurrentWindow().setAlwaysOnTop(false);
   dialog.showMessageBox({
@@ -29,7 +27,7 @@ function showTestMessage(type, message) {
     message: message
   }, () => remote.getCurrentWindow().setAlwaysOnTop(true));
 }
-
+*/
 function editTunnel(tunnelId) {
   const delegate = domDelegate(document.body);
   const currentlyActive = document.querySelector('.sidebar nav .active');
@@ -47,12 +45,17 @@ function editTunnel(tunnelId) {
     f.value = tunnel[name];
   });
 
-  delegate.on('click', '.save', () => {
-    saveTunnel();
-    ipc.send('saved');
-    window.close();
+  const save = throttle(() => {
+    model.saveTunnel(tunnelForm());
+    alert('saved');
+  }, 2000);
+
+  delegate.on('input', '[name]', ()=> {
+    save();
   });
 
+
+/*
   delegate.on('click', '.test', co.wrap( function * () {
     try {
       const server = yield openTunnel(tunnelForm());
@@ -62,8 +65,7 @@ function editTunnel(tunnelId) {
       showTestMessage('error', err.message);
     }
   }));
-
-  delegate.on('click', '.cancel', () => window.close());
+*/
 }
 
 module.exports = editTunnel;

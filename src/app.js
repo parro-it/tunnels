@@ -49,7 +49,8 @@ const deleteTunnel = tunnelId => () => {
 
   if (confirmed) {
     model.removeTunnel(tunnelId);
-    // target.parentElement.parentElement.remove();
+    document.querySelector(`[data-tunnel-id="${tunnelId}"`)
+      .remove();
   }
 };
 
@@ -97,9 +98,6 @@ function * setup() {
   delegate.on('click', '.tunnel', (e, target) => {
     const tunnelId = target.dataset.tunnelId;
     editTunnel(tunnelId);
-    const currentlyActive = document.querySelector('.sidebar nav .active');
-    currentlyActive.classList.remove('active');
-    target.classList.add('active');
   });
 
   delegate.on('click', '.menu-actions', (e, target) => {
