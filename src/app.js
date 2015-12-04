@@ -3,9 +3,8 @@
 const domDelegate = require('dom-delegate');
 const electron = require('electron');
 const model = require('./model');
-const tunnelsState = require('./tunnels-state');
+const ssh = require('./ssh');
 const co = require('co');
-const throttle = require('./throttle-override');
 const zip = require('zipmap');
 
 function tunnelForm() {
@@ -55,7 +54,7 @@ function refreshList() {
 
 const toggleTunnelState = tunnelId => co.wrap( function *() {
   try {
-    yield tunnelsState.toggleState(tunnelId);
+    yield ssh.toggleState(tunnelId);
     refreshList();
   } catch (err) {
     electron.remote.dialog.showErrorBox(
@@ -86,7 +85,7 @@ const actionsMenuTemplate = tunnelId => [
     label: 'Edit',
     click: () => editTunnel(tunnelId)
   }, {
-    label: tunnelsState.isOpen(tunnelId) ? 'Close' : 'Open',
+    label: ssh.isOpen(tunnelId) ? 'Close' : 'Open',
     click: toggleTunnelState(tunnelId)
   }, {
     label: 'Delete',
@@ -100,7 +99,7 @@ function * openTunnels() {
 
   try {
     yield openAtStartup.map(tunnel =>
-      tunnelsState.toggleState(tunnel.tunnelId)
+      ssh.toggleState(tunnel.tunnelId)
         .catch(err => {
           err.message = `Cannot open tunnel ${tunnel.tunnelName}:\n${err.message}`;
           throw err;
@@ -128,22 +127,24 @@ function log(message, status) {
     statusBar.class = '';
     statusBar.textContent = '';
     resetStatusBarTimeout = null;
-  }, 10000);
+  }, 2000);
 }
 
 function * setup() {
   const delegate = domDelegate(document.body);
 
-  const save = throttle(() => {
-    model.saveTunnel(tunnelForm());
+  model.on('saved', () => {
     log('Tunnel data saved', 'ok');
-  }, 2000);
+  });
 
-  delegate.on('input', '[name]', save);
+  delegate.on('input', '[name]', () => {
+    model.saveTunnel(tunnelForm());
+  });
 
   delegate.on('click', '.new-tunnel', () => {
     const tunnel = model.createTunnel();
     editTunnel(tunnel.tunnelId);
+    refreshList();
   });
 
   delegate.on('click', '.tunnel', (e, target) => {

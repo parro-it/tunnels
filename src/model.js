@@ -1,32 +1,45 @@
 'use strict';
 const store = require('store');
 const uuid = require('node-uuid');
+const throttle = require('./throttle-override');
+const tunnels = store.getAll();
+const EventEmitter = require('events').EventEmitter;
 
-exports.allTunnels = function allTunnels() {
-  const tunnelNames = store.getAll();
-  const tunnels = Object.keys(tunnelNames).map(n=>tunnelNames[n]);
-  return tunnels;
+const model = new EventEmitter();
+
+module.exports = model;
+
+const save = throttle(tunnel => {
+  store.set(tunnel.tunnelId, tunnel);
+  model.emit('saved');
+}, 1000);
+
+model.allTunnels = function allTunnels() {
+  return Object.keys(tunnels).map(n=>tunnels[n]);
 };
 
-exports.toOpenOnStartup = function toOpenOnStartup() {
-  return exports.allTunnels().filter(t => t.tunnelOpenOnStart);
+model.toOpenOnStartup = function toOpenOnStartup() {
+  return model.allTunnels().filter(t => t.tunnelOpenOnStart);
 };
 
-exports.getTunnel = function getTunnel(id) {
-  return store.get(id);
+model.getTunnel = function getTunnel(id) {
+  return tunnels[id];
 };
 
-exports.removeTunnel = function removeTunnel(id) {
+model.removeTunnel = function removeTunnel(id) {
+  delete tunnels[id];
   return store.remove(id);
 };
 
-exports.saveTunnel = function saveTunnel(tunnel) {
-  store.set(tunnel.tunnelId, tunnel);
+model.saveTunnel = function saveTunnel(tunnel) {
+  tunnels[tunnel.tunnelId] = tunnel;
+  save(tunnel);
 };
 
-exports.createTunnel = function createTunnel() {
+model.createTunnel = function createTunnel() {
+  const tunnelId = uuid.v4();
   const tunnel = {
-    tunnelId: uuid.v4(),
+    tunnelId,
     tunnelName: '<no name>',
     tunnelLocalPort: 80,
     tunnelRemotePort: 8080,
@@ -35,8 +48,8 @@ exports.createTunnel = function createTunnel() {
     tunnelPassword: '',
     tunnelOpenOnStart: false
   };
-
-  exports.saveTunnel(tunnel);
+  tunnels[tunnelId] = tunnel;
+  model.saveTunnel(tunnel);
 
   return tunnel;
 };
