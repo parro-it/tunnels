@@ -7,6 +7,7 @@ const tunnelsState = require('./tunnels-state');
 const co = require('co');
 const editTunnel = require('./edit.js');
 
+
 function refreshList() {
   const tunnels = model.allTunnels();
 
@@ -16,10 +17,55 @@ function refreshList() {
   tunnels.forEach(t => {
     const tmpl = document.importNode(itemTemplate.content, true);
     tmpl.querySelector('.tunnelName').textContent = t.tunnelName;
+    tmpl.querySelector('.tunnel').dataset.tunnelId = t.tunnelId;
+    tmpl.querySelector('.menu-actions').dataset.tunnelId = t.tunnelId;
+
     nav.appendChild(tmpl);
+
   });
   editTunnel(tunnels[0].tunnelId);
 }
+
+const toggleTunnelState = tunnelId => co.wrap( function *() {
+  try {
+    yield tunnelsState.toggleState(tunnelId);
+    refreshList();
+  } catch (err) {
+    electron.remote.dialog.showErrorBox(
+      'Cannot open tunnel.',
+      err.message
+    );
+  }
+});
+
+const deleteTunnel = tunnelId => () => {
+  const tunnelName = model.getTunnel(tunnelId).tunnelName;
+  const confirmed = electron.remote.dialog.showMessageBox({
+    buttons: ['Yes', 'No'],
+    type: 'question',
+    title: 'confirm deletion',
+    message: `Delete tunnel ${tunnelName}?`
+  }) === 0;
+
+  if (confirmed) {
+    model.removeTunnel(tunnelId);
+    // target.parentElement.parentElement.remove();
+  }
+};
+
+const actionsMenuTemplate = tunnelId => [
+  {
+    label: 'Edit',
+    click: () => editTunnel(tunnelId)
+  }, {
+    label: tunnelsState.isOpen(tunnelId) ? 'Close' : 'Open',
+    click: toggleTunnelState(tunnelId)
+  }, {
+    label: 'Delete',
+    click: deleteTunnel(tunnelId)
+  }
+];
+
 
 function * openTunnels() {
   const openAtStartup = model.toOpenOnStartup();
@@ -48,38 +94,18 @@ function * setup() {
     editTunnel(tunnel.tunnelId);
   });
 
-  delegate.on('click', '.edit', (e, target) => {
+  delegate.on('click', '.tunnel', (e, target) => {
     const tunnelId = target.dataset.tunnelId;
     editTunnel(tunnelId);
+    const currentlyActive = document.querySelector('.sidebar nav .active');
+    currentlyActive.classList.remove('active');
+    target.classList.add('active');
   });
 
-  delegate.on('click', '.toggle-state', co.wrap( function *(e, target) {
+  delegate.on('click', '.menu-actions', (e, target) => {
     const tunnelId = target.dataset.tunnelId;
-    try {
-      yield tunnelsState.toggleState(tunnelId);
-      refreshList();
-    } catch (err) {
-      electron.remote.dialog.showErrorBox(
-        'Cannot open tunnel.',
-        err.message
-      );
-    }
-  }));
-
-  delegate.on('click', '.delete', (e, target) => {
-    const tunnelId = target.dataset.tunnelId;
-    const tunnelName = model.getTunnel(tunnelId).tunnelName;
-    const confirmed = electron.remote.dialog.showMessageBox({
-      buttons: ['Yes', 'No'],
-      type: 'question',
-      title: 'confirm deletion',
-      message: `Delete tunnel ${tunnelName}?`
-    }) === 0;
-
-    if (confirmed) {
-      model.removeTunnel(tunnelId);
-      target.parentElement.parentElement.remove();
-    }
+    const menu = actionsMenuTemplate(tunnelId);
+    electron.remote.Menu.buildFromTemplate(menu).popup();
   });
 
   yield openTunnels();

@@ -32,6 +32,12 @@ function showTestMessage(type, message) {
 
 function editTunnel(tunnelId) {
   const delegate = domDelegate(document.body);
+  const currentlyActive = document.querySelector('.sidebar nav .active');
+  if (currentlyActive) {
+    currentlyActive.classList.remove('active');
+  }
+  document.querySelector(`[data-tunnel-id="${tunnelId}"`)
+    .classList.add('active');
 
   const tunnel = model.getTunnel(tunnelId);
   const form = document.querySelector('main.pane form');
