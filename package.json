@@ -39,15 +39,19 @@
   },
   "files": [
     "index.js",
-    "src"
+    "src",
+    "clis.js"
   ],
   "bin": {
     "tunnels": "cli.js"
   },
   "eslintConfig": {
-    "extends": "js"
+    "extends": ["js", "features"]
   },
-  "electronVersion": "0.35.2",
+  "engines": {
+    "node": "^5.0.0"
+  },
+  "electronVersion": "0.36.7",
   "productName": "Tunnels",
   "license": "MIT",
   "devDependencies": {
@@ -55,6 +59,7 @@
     "electron-prebuilt": "^0.36.7",
     "electron-rebuild": "^1.0.2",
     "eslint": "^1.10.3",
+    "eslint-config-features": "^1.1.5",
     "eslint-config-js": "^3.1.0",
     "faucet": "0.0.1",
     "tape": "^4.2.2"
