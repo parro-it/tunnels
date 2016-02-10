@@ -6,6 +6,7 @@ const model = require('./model');
 const ssh = require('./ssh');
 const co = require('co');
 const zip = require('zipmap');
+const debug = require('debug')('tunnels');
 
 let resetStatusBarTimeout = null;
 
@@ -48,7 +49,11 @@ function editTunnel(tunnelId) {
   const fields = form.querySelectorAll('[name]');
   Array.from(fields).forEach(f => {
     const name = f.name;
-    f.value = tunnel[name];
+    if (f.type === 'checkbox') {
+      f.checked = tunnel[name];
+    } else {
+      f.value = tunnel[name];
+    }
   });
 }
 
@@ -128,6 +133,7 @@ const actionsMenuTemplate = tunnelId => [
 
 function * openTunnels() {
   const openAtStartup = model.toOpenOnStartup();
+  debug('openAtStartup', openAtStartup);
 
   try {
     yield openAtStartup.map(tunnel =>

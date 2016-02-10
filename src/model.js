@@ -4,7 +4,6 @@ const uuid = require('node-uuid');
 const throttle = require('./throttle-override');
 const tunnels = store.getAll();
 const EventEmitter = require('events').EventEmitter;
-
 const model = new EventEmitter();
 
 module.exports = model;

@@ -11,7 +11,7 @@ if (electronDetach({ requireCmdlineArg: false })) {
 
     const listWindow = window.createWindow({
       width: 750,
-      height: 450,
+      height: 530,
       titleBarStyle: 'hidden',
       resizable: false,
       icon: __dirname + '/src/IconTemplate.png'

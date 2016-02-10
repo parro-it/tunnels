@@ -13,6 +13,7 @@
   ],
   "dependencies": {
     "co": "^4.6.0",
+    "debug": "^2.2.0",
     "dom-delegate": "^2.0.3",
     "electron-debug": "^0.5.1",
     "electron-detach": "^0.3.0",
@@ -46,7 +47,10 @@
     "tunnels": "cli.js"
   },
   "eslintConfig": {
-    "extends": ["js", "features"]
+    "extends": [
+      "js",
+      "features"
+    ]
   },
   "engines": {
     "node": "^5.0.0"

@@ -9,11 +9,8 @@ input[type=checkbox] {
     vertical-align: bottom;
 }
 
-.form-control[type=text],
-.form-control[type=password],
-.form-control[type=file] {
-    width: 300px;
-}
+
+
 
 
 .form-control[type=number] {
@@ -49,4 +46,55 @@ input[type=checkbox] {
 .status-bar {
   float: right;
   margin-right: 10px;
+}
+
+
+.form-control[name=tunnelRemotePort],
+.form-control[name=tunnelLocalPort] {
+    width: 90px;
+}
+
+.form-control[name=tunnelHostAddress] {
+    width: 130px;
+}
+
+.pane h1 {
+    font-size: 24px;
+    color: #555;
+}
+
+.open-on-start {
+    position: fixed;
+    right: 30px;
+    top: 110px;
+}
+
+.open-on-start input {
+  height: 22px;
+}
+
+.form-control[name=tunnelUserName] {
+    width: 200px;
+}
+
+.user-name label {
+    width: 70px;
+}
+
+.auth-methods {
+    width: 45%;
+    margin: 10px;
+    display: inline-block !important;
+}
+
+.auth-methods input[type=radio] {
+  float: left;
+}
+
+
+.auth-methods label {
+  width: 100%;
+  text-align: left;
+  vertical-align: bottom;
+  padding: 0 10px;
 }
