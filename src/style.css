@@ -65,8 +65,8 @@ input[type=checkbox] {
 
 .open-on-start {
     position: fixed;
-    right: 30px;
-    top: 110px;
+    right: 7px;
+    top: 95px;
 }
 
 .open-on-start input {
@@ -78,17 +78,21 @@ input[type=checkbox] {
 }
 
 .user-name label {
-    width: 70px;
+    width: 48px;
+    text-align: left;
 }
 
 .auth-methods {
-    width: 45%;
-    margin: 10px;
+    width: 252px;
+    margin: 10px 0;
     display: inline-block !important;
 }
 
 .auth-methods input[type=radio] {
-  float: left;
+    margin-left: 3px !important;
+    margin-bottom: 8px;
+    margin-right: 5px;
+    position: inherit !important;
 }
 
 
@@ -96,5 +100,5 @@ input[type=checkbox] {
   width: 100%;
   text-align: left;
   vertical-align: bottom;
-  padding: 0 10px;
+  padding: 0 !important;
 }
