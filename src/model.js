@@ -46,7 +46,8 @@ model.createTunnel = function createTunnel() {
     tunnelHostAddress: 'localhost',
     tunnelUserName: 'root',
     tunnelPassword: '',
-    tunnelOpenOnStart: false
+    tunnelOpenOnStart: false,
+    tunnelKeyFile: ''
   };
   tunnels[tunnelId] = tunnel;
   model.saveTunnel(tunnel);
