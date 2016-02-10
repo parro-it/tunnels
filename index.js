@@ -6,12 +6,13 @@ const window = require('electron-window');
 
 if (electronDetach({ requireCmdlineArg: false })) {
   electronDebug();
+
   electron.app.on('ready', () => {
 
     const listWindow = window.createWindow({
       width: 750,
       height: 450,
-      frame: false,
+      titleBarStyle: 'hidden',
       resizable: false,
       icon: __dirname + '/src/IconTemplate.png'
     });
