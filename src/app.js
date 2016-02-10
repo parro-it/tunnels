@@ -73,7 +73,12 @@ function refreshList() {
 
 
   });
-  editTunnel(tunnels[0].tunnelId);
+  if (tunnels.length) {
+    editTunnel(tunnels[0].tunnelId);
+  } else {
+    const tunnel = model.createTunnel();
+    editTunnel(tunnel.tunnelId);
+  }
 }
 
 const toggleTunnelState = tunnelId => co.wrap( function *() {
