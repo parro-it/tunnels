@@ -34,8 +34,10 @@ if (electronDetach({ requireCmdlineArg: false })) {
     listWindow = window.createWindow({
       width: 750,
       height: 530,
-      titleBarStyle: 'hidden',
+      minimizable: false,
+      maximizable: false,
       resizable: false,
+      fullscreenable: false,
       icon: __dirname + '/src/IconTemplate.png'
     });
 
