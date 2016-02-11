@@ -102,3 +102,23 @@ input[type=checkbox] {
   vertical-align: bottom;
   padding: 0 !important;
 }
+
+
+
+
+/* PLATFORM */
+
+.visible-darwin,
+.visible-linux,
+.visible-windows {
+  display: none;
+}
+
+body.platform-linux .visible-linux,
+body.platform-darwin .visible-darwin,
+body.platform-window .visible-window {
+  display: inherit;
+}
+
+
+

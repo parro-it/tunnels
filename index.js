@@ -36,6 +36,7 @@ if (electronDetach({ requireCmdlineArg: false })) {
       height: 530,
       minimizable: false,
       maximizable: false,
+      titleBarStyle: process.platform === 'darwin' ? 'hidden' : undefined,
       resizable: false,
       fullscreenable: false,
       icon: __dirname + '/src/IconTemplate.png'
