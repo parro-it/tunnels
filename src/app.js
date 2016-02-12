@@ -154,6 +154,11 @@ function * openTunnels() {
 function * setup() {
   const delegate = domDelegate(document.body);
 
+
+  document.body.classList.add(
+    'platform-' + process.platform
+  );
+
   model.on('saved', () => {
     log('Tunnel data saved', 'ok');
   });

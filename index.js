@@ -4,32 +4,36 @@ const electronDebug = require('electron-debug');
 const electronDetach = require('electron-detach');
 const window = require('electron-window');
 const debug = require('debug')('tunnels');
+const Menu = electron.Menu;
+const Tray = electron.Tray;
 
 
 if (electronDetach({ requireCmdlineArg: false })) {
   let listWindow;
   let closingApp = false;
 
-  const focusMainWindow = () => {
-    debug('focusMainWindow - listWindow is null:', listWindow === null);
+  const preventMainWindowClose = e => {
+    if (closingApp) {
+      return;
+    }
+    debug('preventing window close');
+    e.preventDefault();
+    listWindow.hide();
+  };
 
+  const closeWindow = () => {
     if (listWindow) {
-      listWindow.show();
+      debug('closeWindow');
+      closingApp = true;
+      listWindow.close();
+      listWindow = null;
+    } else {
+      debug('closeWindow skipped: listWindow===null');
     }
   };
 
-  if (electron.app.makeSingleInstance(focusMainWindow)) {
-    debug('second app instance called. Exit');
-    electron.app.exit(0);
-    return;
-  }
-
-  electronDebug();
-
-  electron.app.on('activate', focusMainWindow);
-
-  electron.app.on('ready', () => {
-    debug('app ready');
+  const openMainWindow = () => {
+    debug('openMainWindow');
 
     listWindow = window.createWindow({
       width: 750,
@@ -42,26 +46,63 @@ if (electronDetach({ requireCmdlineArg: false })) {
       icon: __dirname + '/src/IconTemplate.png'
     });
 
-    electron.app.on('before-quit', () => {
-      debug('app before-quit');
-      closingApp = true;
-      listWindow.close();
-    });
+    debug('listWindow created');
 
-    listWindow.on('close', e => {
-      if (closingApp) {
-        return;
-      }
-      debug('preventing window close');
-      e.preventDefault();
-      listWindow.hide();
-    });
-
+    electron.app.on('before-quit', closeWindow);
+    listWindow.on('close', preventMainWindowClose);
     listWindow.setMenu(null);
     const indexPath = __dirname + '/src/index.html';
     listWindow.showUrl(indexPath);
-  });
+    debug('showUrl ' + indexPath);
+  };
 
+  const focusMainWindow = () => {
+    debug('focusMainWindow - listWindow is null:', listWindow === null);
+
+    if (listWindow) {
+      listWindow.show();
+    }
+  };
+
+  const makeSingleInstanceApp = () => {
+    if (electron.app.makeSingleInstance(focusMainWindow)) {
+      debug('second app instance called. Exit');
+      electron.app.exit(0);
+      return;
+    }
+  };
+
+  const setupTray = () => {
+    const appIcon = new Tray(__dirname + '/src/IconTemplate.png');
+    const contextMenu = Menu.buildFromTemplate(
+      [{
+        label: 'Exit',
+        click: () => electron.app.quit(0)
+      }, {
+        label: 'Configure',
+        click: focusMainWindow
+      }]
+    );
+    appIcon.setToolTip('This is my application.');
+    appIcon.setContextMenu(contextMenu);
+  };
+
+  electronDebug();
+  makeSingleInstanceApp();
+
+  electron.app.on('activate', focusMainWindow);
+  electron.app.on('ready', () => {
+    try {
+      openMainWindow();
+      setupTray();
+    } catch (err) {
+      electron.dialog.showErrorBox(
+        'Unexpected error during ui setup',
+        err.stack
+      );
+    }
+
+  });
 
 }
 
