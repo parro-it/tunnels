@@ -7,6 +7,8 @@ const ssh = require('./ssh');
 const co = require('co');
 const zip = require('zipmap');
 const debug = require('debug')('tunnels');
+const debugMenu = require('debug-menu');
+
 
 let resetStatusBarTimeout = null;
 
@@ -153,7 +155,7 @@ function * openTunnels() {
 
 function * setup() {
   const delegate = domDelegate(document.body);
-
+  debugMenu.install();
 
   document.body.classList.add(
     'platform-' + process.platform

@@ -1,17 +1,9 @@
-input[type=checkbox] {
-  width: 20px;
-  margin-left: 20px;
-}
 
 .form-group label {
     width: 100px;
     text-align: right;
     vertical-align: bottom;
 }
-
-
-
-
 
 .form-control[type=number] {
     width: 100px;
@@ -63,14 +55,16 @@ input[type=checkbox] {
     color: #555;
 }
 
+input[type=checkbox] {
+  height: 22px;
+  width: 20px;
+  margin-left: 20px;
+}
+
 .open-on-start {
     position: fixed;
     right: 7px;
     top: 95px;
-}
-
-.open-on-start input {
-  height: 22px;
 }
 
 .form-control[name=tunnelUserName] {
@@ -95,7 +89,6 @@ input[type=checkbox] {
     position: inherit !important;
 }
 
-
 .auth-methods label {
   width: 100%;
   text-align: left;
@@ -104,7 +97,20 @@ input[type=checkbox] {
 }
 
 
+body.platform-window .open-on-start {
+  top: 70px;
+}
 
+body.platform-linux .open-on-start {
+  margin-left: 20px;
+  top: 70px;
+  right: 10px;
+}
+
+body.platform-linux .open-on-start input {
+  position: relative;
+  top: 5px;
+}
 
 /* PLATFORM */
 
