@@ -88,8 +88,18 @@ if (electronDetach({ requireCmdlineArg: false })) {
     appIcon.setContextMenu(contextMenu);
   };
 
-  electronDebug();
-  makeSingleInstanceApp();
+  const handleError = err =>
+    electron.dialog.showErrorBox(
+      'Unexpected error during ui setup',
+      err.stack
+    );
+
+  try {
+    electronDebug();
+    makeSingleInstanceApp();
+  } catch (err) {
+    return handleError(err);
+  }
 
   electron.app.on('activate', focusMainWindow);
   electron.app.on('ready', () => {
@@ -97,12 +107,8 @@ if (electronDetach({ requireCmdlineArg: false })) {
       openMainWindow();
       setupTray();
     } catch (err) {
-      electron.dialog.showErrorBox(
-        'Unexpected error during ui setup',
-        err.stack
-      );
+      handleError(err);
     }
-
   });
 
 }
