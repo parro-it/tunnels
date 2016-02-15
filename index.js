@@ -44,6 +44,7 @@ if (electronDetach({ requireCmdlineArg: false })) {
       titleBarStyle: process.platform === 'darwin' ? 'hidden' : undefined,
       resizable: false,
       fullscreenable: false,
+      skipTaskbar: true,
       icon: __dirname + '/src/IconTemplate.png'
     });
 
@@ -105,6 +106,10 @@ if (electronDetach({ requireCmdlineArg: false })) {
   electron.app.on('activate', focusMainWindow);
   electron.app.on('ready', () => {
     try {
+      if (process.platform === 'darwin') {
+        electron.app.dock.hide();
+      }
+
       openMainWindow();
       setupTray();
     } catch (err) {
