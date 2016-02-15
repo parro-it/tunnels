@@ -4,7 +4,7 @@ const electronDebug = require('electron-debug');
 const electronDetach = require('electron-detach');
 const window = require('electron-window');
 const debug = require('debug')('tunnels');
-const debugMenu = require('debug-menu');
+// const debugMenu = require('debug-menu');
 const Menu = electron.Menu;
 const Tray = electron.Tray;
 
@@ -51,7 +51,8 @@ if (electronDetach({ requireCmdlineArg: false })) {
 
     electron.app.on('before-quit', closeWindow);
     listWindow.on('close', preventMainWindowClose);
-    listWindow.setMenu(debugMenu.windowDebugMenu(listWindow));
+    // listWindow.setMenu(debugMenu.windowDebugMenu(listWindow));
+    listWindow.setMenu(null);
     const indexPath = __dirname + '/src/index.html';
     listWindow.showUrl(indexPath);
     debug('showUrl ' + indexPath);
