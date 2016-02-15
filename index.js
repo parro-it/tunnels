@@ -52,6 +52,7 @@ if (electronDetach({ requireCmdlineArg: false })) {
       resizable: false,
       fullscreenable: false,
       skipTaskbar: true,
+      type: process.platform === 'linux' ? 'toolbar' : undefined,
       icon: __dirname + '/src/IconTemplate.png'
     });
 
@@ -92,7 +93,6 @@ if (electronDetach({ requireCmdlineArg: false })) {
         click: focusMainWindow
       }]
     );
-    appIcon.setToolTip('This is my application.');
     appIcon.setContextMenu(contextMenu);
   };
 
