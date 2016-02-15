@@ -24,6 +24,7 @@
     "photon": "github:connors/photon",
     "store": "^1.3.17",
     "throttle-function": "^0.1.0",
+    "throttle-override": "^1.0.1",
     "zipmap": "^1.1.1"
   },
   "scripts": {

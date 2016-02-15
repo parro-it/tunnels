@@ -1,7 +1,7 @@
 'use strict';
 const store = require('store');
 const uuid = require('node-uuid');
-const throttle = require('./throttle-override');
+const throttle = require('throttle-override');
 const tunnels = store.getAll();
 const EventEmitter = require('events').EventEmitter;
 const model = new EventEmitter();
