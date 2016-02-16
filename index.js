@@ -60,7 +60,13 @@ if (electronDetach({ requireCmdlineArg: false })) {
 
     electron.app.on('before-quit', closeWindow);
     listWindow.on('close', preventMainWindowClose);
-    listWindow.setMenu(buildMenu());
+
+    if (process.platform !== 'darwin') {
+      listWindow.setMenu(buildMenu());
+    } else {
+      Menu.setApplicationMenu(buildMenu());
+    }
+
     const indexPath = __dirname + '/src/index.html';
     listWindow.showUrl(indexPath);
     debug('showUrl ' + indexPath);
