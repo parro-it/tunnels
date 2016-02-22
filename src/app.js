@@ -3,7 +3,6 @@
 const domDelegate = require('dom-delegate');
 const electron = require('electron');
 const model = require('./model');
-const ssh = require('./ssh');
 const co = require('co');
 const zip = require('zipmap');
 const debug = require('debug')('tunnels');
@@ -27,7 +26,7 @@ function log(message, status) {
   }, 2000);
 }
 
-
+/*
 function tunnelForm() {
   const fields = Array.from(document.querySelectorAll('form [name]'));
   return zip(fields.map(field => [
@@ -58,7 +57,7 @@ function editTunnel(tunnelId) {
     }
   });
 }
-
+*/
 function refreshList() {
   const tunnels = model.allTunnels();
 
@@ -119,18 +118,6 @@ const deleteTunnel = tunnelId => () => {
   }
 };
 
-const actionsMenuTemplate = tunnelId => [
-  {
-    label: 'Edit',
-    click: () => editTunnel(tunnelId)
-  }, {
-    label: ssh.isOpen(tunnelId) ? 'Close' : 'Open',
-    click: toggleTunnelState(tunnelId)
-  }, {
-    label: 'Delete',
-    click: deleteTunnel(tunnelId)
-  }
-];
 
 
 function * openTunnels() {
@@ -188,11 +175,6 @@ function * setup() {
     }
   });
 
-  delegate.on('click', '.menu-actions', (e, target) => {
-    const tunnelId = target.dataset.tunnelId;
-    const menu = actionsMenuTemplate(tunnelId);
-    electron.remote.Menu.buildFromTemplate(menu).popup();
-  });
 
   yield openTunnels();
 
