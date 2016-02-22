@@ -4,29 +4,6 @@
   "description": "Electron app to manage your ssh tunnels",
   "repository": "parro-it/tunnels",
   "author": "andrea@parro.it",
-  "keywords": [
-    "electron",
-    "ssh",
-    "tunnel",
-    "port",
-    "forwarding"
-  ],
-  "dependencies": {
-    "co": "^4.6.0",
-    "debug": "^2.2.0",
-    "debug-menu": "^0.2.1",
-    "dom-delegate": "^2.0.3",
-    "electron-debug": "^0.5.1",
-    "electron-detach": "^0.3.0",
-    "electron-window": "^0.6.0",
-    "node-uuid": "^1.4.3",
-    "open-ssh-tunnel": "^0.2.0",
-    "photon": "github:connors/photon",
-    "store": "^1.3.17",
-    "throttle-function": "^0.1.0",
-    "throttle-override": "^1.0.1",
-    "zipmap": "^1.1.1"
-  },
   "scripts": {
     "test": "eslint . && node test | faucet",
     "rebuild": "electron-rebuild",
@@ -40,32 +17,91 @@
     "package:win32:ia32": "platform=win32 arch=ia32 npm run package",
     "package:all": "npm run package:darwin && npm run package:linux:x64 && npm run package:linux:ia32 && npm run package:win32:x64 && npm run package:win32:ia32"
   },
+
   "files": [
     "index.js",
     "src",
-    "clis.js"
+    "cli.js"
   ],
   "bin": {
     "tunnels": "cli.js"
   },
-  "eslintConfig": {
-    "extends": [
-      "js",
-      "features"
-    ]
-  },
-  "engines": {
-    "node": "^5.0.0"
-  },
-  "electronVersion": "0.36.7",
+  "electronVersion": "0.36.8",
   "productName": "Tunnels",
   "license": "MIT",
+
+  "babel": {
+    "presets": [
+      "node5",
+      "react"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "js"
+    ],
+    "env": {
+      "es6": true
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 6,
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": [
+      "react"
+    ],
+    "rules": {
+      "react/jsx-uses-react": 1,
+      "react/jsx-uses-vars": 1
+    }
+  },
+  "keywords": [
+    "electron",
+    "ssh",
+    "tunnel",
+    "port",
+    "forwarding"
+  ],
+  "dependencies": {
+    "babel-preset-node5": "^10.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-register": "^6.5.2",
+    "electron-localshortcut": "^0.6.0",
+    "electron-window": "^0.6.2",
+    "co": "^4.6.0",
+    "debug": "^2.2.0",
+    "debug-menu": "^0.2.1",
+    "dom-delegate": "^2.0.3",
+    "electron-debug": "^0.5.1",
+    "electron-detach": "^0.3.0",
+    "electron-window": "^0.6.0",
+    "node-uuid": "^1.4.3",
+    "open-ssh-tunnel": "^0.2.0",
+    "photon": "github:connors/photon",
+    "store": "^1.3.17",
+    "throttle-function": "^0.1.0",
+    "throttle-override": "^1.0.1",
+    "zipmap": "^1.1.1",
+    "photon": "github:connors/photon",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.2.1",
+    "redux": "^3.2.1",
+    "redux-form": "^4.2.0",
+    "redux-submitform-onchange": "0.0.1"
+  },
+
   "devDependencies": {
+    "babel-eslint": "^5.0.0",
+    "eslint": "^2.1.0",
     "electron-packager": "^5.1.1",
-    "electron-prebuilt": "^0.36.7",
-    "electron-rebuild": "^1.0.2",
+    "electron-prebuilt": "^0.36.8",
     "eslint": "^1.10.3",
-    "eslint-config-features": "^1.1.5",
+    "eslint-plugin-react": "^3.16.1",
     "eslint-config-js": "^3.1.0",
     "faucet": "0.0.1",
     "tape": "^4.2.2"
