@@ -28,6 +28,15 @@ export function editTunnel(id) {
   };
 }
 
+
+export function deleteTunnel(id) {
+  return {
+    type: 'DELETE_TUNNEL',
+    id
+  };
+}
+
+
 export function saveTunnel(tunnel) {
   return {
     type: 'SAVE_TUNNEL',

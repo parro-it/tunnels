@@ -29,7 +29,7 @@ export default ({ list, wholeState, onEditTunnel, onSaveTunnel, onAddTunnel }) =
         </div>
         <main className="pane">
           <EditTunnel onSaveTunnel = { onSaveTunnel } />
-          <pre> { JSON.stringify(wholeState, null, 4) } </pre>
+
         </main>
       </div>
     </div>

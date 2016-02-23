@@ -49,7 +49,7 @@ if (electronDetach({ requireCmdlineArg: false })) {
       minimizable: false,
       maximizable: false,
       titleBarStyle: process.platform === 'darwin' ? 'hidden' : undefined,
-      resizable: false,
+      resizable: true,
       fullscreenable: false,
       skipTaskbar: true,
       type: process.platform === 'linux' ? 'toolbar' : undefined,
