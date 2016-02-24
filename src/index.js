@@ -6,6 +6,7 @@ import AppContainer from './containers/App';
 import app from './reducers/app';
 import debugMenu from 'debug-menu';
 import loadStore from './action-creators/load-store';
+import middlewares from './middlewares';
 
 function startApp() {
   debugMenu.install();
@@ -14,7 +15,7 @@ function startApp() {
     'platform-' + process.platform
   );
 
-  const store = createStore(app);
+  const store = createStore(app, middlewares);
   store.dispatch(loadStore());
 
   const main = document.createElement('div');

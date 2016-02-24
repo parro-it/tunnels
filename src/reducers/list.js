@@ -11,6 +11,7 @@ export default function list(state = [], action) {
         }
         return t;
       });
+
     case 'LOAD_STORE':
       return action.tunnels;
 
