@@ -8,7 +8,7 @@ const actionsMenuTemplate = (props, tunnelId) => [
     click: () => props.onEditTunnel(tunnelId)
   }, {
     label: ssh.isOpen(tunnelId) ? 'Close' : 'Open',
-    click: () => props.onToggleConnection(tunnelId)
+    click: () => props.onToggleTunnelState(tunnelId)
   }, {
     label: 'Delete',
     click: () => props.onDeleteTunnel(tunnelId)

@@ -89,6 +89,7 @@
     "redux": "^3.2.1",
     "redux-form": "^4.2.0",
     "redux-promise-middleware": "^2.3.3",
+    "redux-simple-promise": "^2.0.2",
     "redux-submitform-onchange": "0.0.1",
     "store": "^1.3.17",
     "throttle-function": "^0.1.0",

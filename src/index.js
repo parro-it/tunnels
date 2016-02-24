@@ -16,7 +16,9 @@ function startApp() {
   );
 
   const store = createStore(app, middlewares);
-  store.dispatch(loadStore());
+  setImmediate(() => {
+    store.dispatch(loadStore());
+  });
 
   const main = document.createElement('div');
   document.body.appendChild(main);

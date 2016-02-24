@@ -3,7 +3,6 @@ import map from 'map-obj';
 import values from 'object-values';
 
 function loadAndConvertStore() {
-  debugger
   const storeVersion = store.get('version');
   if (!storeVersion) {
     const tunnels = store.getAll();

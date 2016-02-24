@@ -18,7 +18,12 @@ export default function list(state = [], action) {
     case 'DELETE_TUNNEL':
       return state.filter(t => t.id !== action.id);
 
+    case 'TOGGLE_TUNNEL_STATE':
+      console.log(action);
+      return state;
+
     default:
+      console.log(action);
       return state;
   }
 }

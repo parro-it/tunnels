@@ -26,38 +26,6 @@ function log(message, status) {
   }, 2000);
 }
 
-/*
-function tunnelForm() {
-  const fields = Array.from(document.querySelectorAll('form [name]'));
-  return zip(fields.map(field => [
-    field.name,
-    field.type === 'checkbox' ? field.checked : field.value
-  ]));
-}
-
-function editTunnel(tunnelId) {
-  const currentlyActive = document.querySelector('.sidebar nav .active');
-  if (currentlyActive) {
-    currentlyActive.classList.remove('active');
-  }
-  const tunnelListItem = document.querySelector(`[data-tunnel-id="${tunnelId}"`);
-  if (tunnelListItem) {
-    tunnelListItem.classList.add('active');
-  }
-
-  const tunnel = model.getTunnel(tunnelId);
-  const form = document.querySelector('main.pane form');
-  const fields = form.querySelectorAll('[name]');
-  Array.from(fields).forEach(f => {
-    const name = f.name;
-    if (f.type === 'checkbox') {
-      f.checked = tunnel[name];
-    } else {
-      f.value = tunnel[name];
-    }
-  });
-}
-*/
 function refreshList() {
   const tunnels = model.allTunnels();
 

@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import App from '../components/App';
 import {
-  addTunnel, editTunnel, saveTunnel, deleteTunnel
+  addTunnel, editTunnel, saveTunnel, deleteTunnel, toggleTunnelState
 } from '../action-creators';
+
 
 const mapStateToProps = state => {
   return {
@@ -17,10 +18,8 @@ const mapDispatchToProps = dispatch => {
     onAddTunnel: () => dispatch(addTunnel()),
     onSaveTunnel: tunnel => dispatch(saveTunnel(tunnel)),
     onDeleteTunnel: id => dispatch(deleteTunnel(id)),
-
-    onEditTunnel: id => () => {
-      dispatch(editTunnel(id));
-    }
+    onToggleTunnelState: id => dispatch(toggleTunnelState(id)),
+    onEditTunnel: id => () => dispatch(editTunnel(id))
   };
 };
 

@@ -1,4 +1,5 @@
 import uuid from 'node-uuid';
+export {default as toggleTunnelState} from './toggle-tunnel-state';
 
 function newTunnel() {
   return {
