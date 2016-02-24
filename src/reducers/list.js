@@ -11,6 +11,10 @@ export default function list(state = [], action) {
         }
         return t;
       });
+
+    case 'DELETE_TUNNEL':
+      return state.filter(t => t.id !== action.id);
+
     default:
       return state;
   }

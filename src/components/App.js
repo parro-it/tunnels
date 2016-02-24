@@ -2,7 +2,7 @@ import React from 'react';
 import EditTunnel from './EditTunnel';
 import TunnelList from './TunnelList';
 
-export default ({ list, wholeState, onEditTunnel, onSaveTunnel, onAddTunnel }) => (
+export default ({ list, onEditTunnel, onSaveTunnel, onAddTunnel, onDeleteTunnel }) => (
   <main className="window">
     <header className="toolbar toolbar-header draggable">
       <h1 className="title visible-darwin">Tunnels</h1>
@@ -25,6 +25,7 @@ export default ({ list, wholeState, onEditTunnel, onSaveTunnel, onAddTunnel }) =
           <TunnelList
             list = { list }
             onEditTunnel = { onEditTunnel }
+            onDeleteTunnel = { onDeleteTunnel }
           />
         </div>
         <main className="pane">
