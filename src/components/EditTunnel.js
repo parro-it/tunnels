@@ -100,6 +100,7 @@ class EditTunnel extends Component {
           <input
             type="password"
             className="form-control"
+            disabled={f.authType.value !== 'password'}
             { ...f.password }
             onChange = { onChange(f.password) }
           />
@@ -116,9 +117,10 @@ class EditTunnel extends Component {
             Key file
           </label>
           <input
-            disabled
             type="text"
-            className="form-control" { ...f.keyFile }
+            disabled={f.authType.value !== 'keyfile'}
+            className="form-control"
+            { ...f.keyFile }
             onChange = { onChange(f.keyFile) }
           />
 

@@ -9,7 +9,7 @@ const mapStateToProps = state => {
   return {
     list: state.list,
     form: state.form,
-    wholeState: state
+    statusBar: state.statusBar
   };
 };
 
