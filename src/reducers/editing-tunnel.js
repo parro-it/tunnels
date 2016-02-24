@@ -9,6 +9,10 @@ export default function editingTunnel(state = {id: null}, action) {
       return {
         id: action.tunnel.id
       };
+    case 'DELETE_TUNNEL':
+
+      return {id: null};
+
     default:
       return state;
   }

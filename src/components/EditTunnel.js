@@ -137,7 +137,7 @@ function mapStateToProps(state) {
       return editing;
     }
 
-    if (t.id === state.editingTunnel.id) {
+    if (t.id === state.editingTunnel.id || state.editingTunnel.id === null) {
       return t;
     }
 
