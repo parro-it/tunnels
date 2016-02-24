@@ -11,6 +11,8 @@ export default function list(state = [], action) {
         }
         return t;
       });
+    case 'LOAD_STORE':
+      return action.tunnels;
 
     case 'DELETE_TUNNEL':
       return state.filter(t => t.id !== action.id);

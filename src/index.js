@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import AppContainer from './containers/App';
 import app from './reducers/app';
 import debugMenu from 'debug-menu';
-
+import loadStore from './action-creators/load-store';
 
 function startApp() {
   debugMenu.install();
@@ -15,6 +15,8 @@ function startApp() {
   );
 
   const store = createStore(app);
+  store.dispatch(loadStore());
+
   const main = document.createElement('div');
   document.body.appendChild(main);
   render(
