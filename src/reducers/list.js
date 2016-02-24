@@ -1,3 +1,12 @@
+function changeTunnelState(tunnels, status, id) {
+  return tunnels.map(t => {
+    if (t.id === id) {
+      return { ...t, status };
+    }
+    return t;
+  });
+}
+
 
 export default function list(state = [], action) {
   switch (action.type) {
@@ -19,11 +28,16 @@ export default function list(state = [], action) {
       return state.filter(t => t.id !== action.id);
 
     case 'TOGGLE_TUNNEL_STATE':
-      console.log(action);
-      return state;
+
+      return changeTunnelState(state, 'opening', action.payload.tunnelId);
+    case 'TOGGLE_TUNNEL_STATE_RESOLVED':
+
+      return changeTunnelState(state, 'open', action.meta.tunnelId);
+    case 'TOGGLE_TUNNEL_STATE_REJECTED':
+
+      return changeTunnelState(state, 'open-failed', action.meta.tunnelId);
 
     default:
-      console.log(action);
       return state;
   }
 }

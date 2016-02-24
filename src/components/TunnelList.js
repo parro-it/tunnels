@@ -15,6 +15,25 @@ const actionsMenuTemplate = (props, tunnelId) => [
   }
 ];
 
+function StatusIcon({status}) {
+  let iconName;
+  switch (status) {
+    case 'opening':
+      iconName = 'icon-arrows-ccw';
+      break;
+    case 'open':
+      iconName = 'icon-record status status-ok';
+      break;
+    case 'open-failed':
+      iconName = 'icon-record status status-error';
+      break;
+    default:
+      iconName = 'icon-record status';
+  }
+
+  return <span className={'icon ' + iconName} ></span>;
+}
+
 export default (props) => (
 
   <nav className="nav-group">
@@ -26,7 +45,7 @@ export default (props) => (
         onClick = { props.onEditTunnel(t.id) }
       >
 
-        <span className="icon icon-record status"></span>
+        <StatusIcon status = {t.status} />
         <span className="tunnelName"> { t.name } </span>
         <span
           className="pull-right icon icon-dot-3"
