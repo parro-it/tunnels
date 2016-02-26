@@ -1,24 +1,7 @@
 import React, { Component } from 'react';
-import {reduxForm} from 'redux-form';
-import validate from '../model/validate-tunnel';
 import submitOnChange from 'redux-submitform-onchange';
 
-
-const fields = [
-  'name',
-  'openOnStart',
-  'hostAddress',
-  'remotePort',
-  'localPort',
-  'userName',
-  'password',
-  'keyFile',
-  'id',
-  'authType'
-];
-
-
-class EditTunnel extends Component {
+export default class EditTunnel extends Component {
   render() {
     const f = this.props.fields;
     const onChange = submitOnChange(this.props, {
@@ -132,27 +115,3 @@ class EditTunnel extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  const initialValues = state.list.reduce((editing, t) => {
-    if (editing) {
-      return editing;
-    }
-
-    if (t.id === state.editingTunnel.id || state.editingTunnel.id === null) {
-      return t;
-    }
-
-    return null;
-  }, null);
-
-  return {
-    initialValues
-  };
-}
-
-export default reduxForm({
-  form: 'tunnel',
-  fields,
-  validate
-}, mapStateToProps )(EditTunnel);

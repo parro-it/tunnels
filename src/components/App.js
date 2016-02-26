@@ -1,5 +1,5 @@
 import React from 'react';
-import EditTunnel from './EditTunnel';
+import EditTunnel from '../containers/EditTunnel';
 import TunnelList from './TunnelList';
 
 export default ({
