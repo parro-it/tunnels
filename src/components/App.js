@@ -1,6 +1,7 @@
 import React from 'react';
 import EditTunnel from '../containers/EditTunnel';
 import TunnelList from './TunnelList';
+import StatusBar from './StatusBar';
 
 export default ({
     list,
@@ -12,6 +13,7 @@ export default ({
     onToggleTunnelState
   }) => (
   <main className="window">
+
     <header className="toolbar toolbar-header draggable">
       <h1 className="title visible-darwin">Tunnels</h1>
       <div className="toolbar-actions not-draggable">
@@ -46,9 +48,8 @@ export default ({
 
 
     <footer className="toolbar toolbar-footer draggable">
-      <span className="status-bar">{ statusBar }</span>
+      <StatusBar statusBar={statusBar}/>
     </footer>
-
 
   </main>
 );
