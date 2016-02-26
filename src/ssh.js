@@ -1,13 +1,8 @@
 'use strict';
-const openSSHTunnel = require('open-ssh-tunnel');
-const readFileSync = require('fs').readFileSync;
-const co = require('co');
+import openSSHTunnel  from 'open-ssh-tunnel';
+import { readFileSync }  from 'fs';
 
-import store from 'store';
-const state = {};
-
-
-function openTunnel(t) {
+export default function openTunnel(t) {
   const opts = {
     host: t.hostAddress,
     username: t.userName,
@@ -33,25 +28,3 @@ function openTunnel(t) {
       return server;
     });
 }
-
-module.exports = {
-  toggleState: co.wrap(function * (tunnelId) {
-    if (!!state[tunnelId]) {
-      state[tunnelId].close();
-      delete state[tunnelId];
-      return true;
-    }
-
-    const tunnel = store.get('tunnels').reduce(
-      (found, t) => t.id === tunnelId ? t : found,
-      null
-    );
-    const server = yield openTunnel(tunnel);
-    state[tunnelId] = server;
-    return true;
-  }),
-
-  isOpen(tunnelId) {
-    return !!state[tunnelId];
-  }
-};

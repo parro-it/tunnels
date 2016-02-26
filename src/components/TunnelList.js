@@ -1,17 +1,16 @@
 import React from 'react';
-import ssh from '../ssh';
 import electron from 'electron';
 
-const actionsMenuTemplate = (props, tunnelId) => [
+const actionsMenuTemplate = (props, tunnel) => [
   {
     label: 'Edit',
-    click: () => props.onEditTunnel(tunnelId)
+    click: () => props.onEditTunnel(tunnel.id)
   }, {
-    label: ssh.isOpen(tunnelId) ? 'Close' : 'Open',
-    click: () => props.onToggleTunnelState(tunnelId)
+    label: tunnel.status === 'open' ? 'Close' : 'Open',
+    click: () => props.onToggleTunnelState(tunnel)
   }, {
     label: 'Delete',
-    click: () => props.onDeleteTunnel(tunnelId)
+    click: () => props.onDeleteTunnel(tunnel.id)
   }
 ];
 
@@ -50,7 +49,7 @@ export default (props) => (
         <span
           className="pull-right icon icon-dot-3"
           onClick = { () => {
-            const menu = actionsMenuTemplate(props, t.id);
+            const menu = actionsMenuTemplate(props, t);
             electron.remote.Menu.buildFromTemplate(menu).popup();
           } }
         ></span>

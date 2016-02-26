@@ -1,13 +1,13 @@
-function changeTunnelState(tunnels, actionStatus, id) {
-  const status = {
+function changeTunnelState(tunnels, {status, tunnelId, actually}) {
+  const newStatus = {
     running: 'opening',
     error: 'open-failed',
-    success: 'open'
-  }[actionStatus];
+    success: actually
+  }[status];
 
   return tunnels.map(t => {
-    if (t.id === id) {
-      return { ...t, status };
+    if (t.id === tunnelId) {
+      return { ...t, status: newStatus };
     }
     return t;
   });
@@ -37,8 +37,7 @@ export default function list(state = [], action) {
 
       return changeTunnelState(
         state,
-        action.payload.status,
-        action.payload.tunnelId
+        action.payload
       );
 
     default:

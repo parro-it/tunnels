@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => {
     onAddTunnel: () => dispatch(addTunnel()),
     onSaveTunnel: tunnel => dispatch(saveTunnel(tunnel)),
     onDeleteTunnel: id => dispatch(deleteTunnel(id)),
-    onToggleTunnelState: id => dispatch(toggleTunnelState(id)),
+    onToggleTunnelState: tunnel => dispatch(toggleTunnelState(tunnel)),
     onEditTunnel: id => () => dispatch(editTunnel(id))
   };
 };

@@ -1,37 +1,69 @@
-import { toggleState } from '../ssh';
+import openTunnel from '../ssh';
 
-function toggleTunnelStateSuccess(tunnelId) {
+function openSuccess(tunnelId) {
   return {
     type: 'TOGGLE_TUNNEL_STATE',
-    payload: { status: 'success', tunnelId }
+    payload: { status: 'success', tunnelId, actually: 'open' }
   };
 }
 
+function closeSuccess(tunnelId) {
+  return {
+    type: 'TOGGLE_TUNNEL_STATE',
+    payload: { status: 'success', tunnelId, actually: 'closed' }
+  };
+}
 
-function toggleTunnelStateRunning(tunnelId) {
+function openRunning(tunnelId) {
   return {
     type: 'TOGGLE_TUNNEL_STATE',
     payload: { status: 'running', tunnelId }
   };
 }
 
-function toggleTunnelStateFailure(tunnelId, error) {
+
+function closeRunning(tunnelId) {
+  return {
+    type: 'TOGGLE_TUNNEL_STATE',
+    payload: { status: 'running', tunnelId, actually: 'closed' }
+  };
+}
+
+function openFailure(tunnelId, error) {
   return {
     type: 'TOGGLE_TUNNEL_STATE',
     payload: { status: 'error', tunnelId, error }
   };
 }
 
-export const toggleTunnelState = tunnelId => dispatch => {
-  dispatch(toggleTunnelStateRunning(tunnelId));
+const openTunnels = {};
 
-  return toggleState(tunnelId)
+export const toggleTunnelState = tunnel => dispatch => {
+  if (openTunnels[tunnel.id]) {
+    dispatch(closeRunning(tunnel.id));
 
-    .then(() => dispatch(
-      toggleTunnelStateSuccess(tunnelId)
-    ))
+    openTunnels[tunnel.id].close();
+    delete openTunnels[tunnel.id];
+
+    dispatch(closeSuccess(tunnel.id));
+
+    return Promise.resolve(false);
+  }
+
+  dispatch(openRunning(tunnel.id));
+
+  return openTunnel(tunnel)
+
+    .then(server => {
+      openTunnels[tunnel.id] = server;
+      dispatch(
+        openSuccess(tunnel.id)
+      );
+      return true;
+    })
 
     .catch( error => dispatch(
-      toggleTunnelStateFailure(tunnelId, error)
+      openFailure(tunnel.id, error)
     ));
+
 };
