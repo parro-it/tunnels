@@ -10,15 +10,17 @@ export default function statusBar(state = 'tunnels ver 1.0.0', action) {
       return 'Tunnel deleted';
 
     case 'TOGGLE_TUNNEL_STATE':
-      return 'Tunnel is opening';
-
-    case 'TOGGLE_TUNNEL_STATE_RESOLVED':
-
-      return 'Tunnel opened successfully';
-
-    case 'TOGGLE_TUNNEL_STATE_REJECTED':
-      console.error(action.payload); // eslint-disable-line no-console
-      return `Error: ${action.payload.message} Meta:${JSON.stringify(action.meta)}`;
+      switch (action.payload.status) {
+        case 'running':
+          return 'Tunnel is opening';
+        case 'error':
+          console.error(action.payload); // eslint-disable-line no-console
+          return `Error: ${action.payload.error.message}`;
+        case 'success':
+          return 'Tunnel opened successfully';
+        default:
+          throw new Error(`Unknwon TOGGLE_TUNNEL_STATE status ${action.payload.status}`);
+      }
 
     default:
       return state;

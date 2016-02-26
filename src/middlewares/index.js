@@ -1,5 +1,7 @@
 import { applyMiddleware } from 'redux';
 import saveStore from './save-store';
-import promise from 'redux-simple-promise';
+import thunk from 'redux-thunk';
 
-export default applyMiddleware(saveStore, promise());
+export default applyMiddleware(
+  saveStore, thunk
+);

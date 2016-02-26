@@ -1,4 +1,10 @@
-function changeTunnelState(tunnels, status, id) {
+function changeTunnelState(tunnels, actionStatus, id) {
+  const status = {
+    running: 'opening',
+    error: 'open-failed',
+    success: 'open'
+  }[actionStatus];
+
   return tunnels.map(t => {
     if (t.id === id) {
       return { ...t, status };
@@ -29,13 +35,11 @@ export default function list(state = [], action) {
 
     case 'TOGGLE_TUNNEL_STATE':
 
-      return changeTunnelState(state, 'opening', action.payload.tunnelId);
-    case 'TOGGLE_TUNNEL_STATE_RESOLVED':
-
-      return changeTunnelState(state, 'open', action.meta.tunnelId);
-    case 'TOGGLE_TUNNEL_STATE_REJECTED':
-
-      return changeTunnelState(state, 'open-failed', action.meta.tunnelId);
+      return changeTunnelState(
+        state,
+        action.payload.status,
+        action.payload.tunnelId
+      );
 
     default:
       return state;
