@@ -13,7 +13,8 @@ export default function openTunnel(t) {
     readyTimeout: 5000,
     forwardTimeout: 2000,
     localPort: Number(t.localPort),
-    localAddr: '127.0.0.1'
+    localAddr: '127.0.0.1',
+    passphrase: t.passphrase
   };
 
   if (t.keyFile) {

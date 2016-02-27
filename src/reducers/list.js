@@ -7,7 +7,15 @@ function changeTunnelState(tunnels, {status, tunnelId, actually}) {
 
   return tunnels.map(t => {
     if (t.id === tunnelId) {
-      return { ...t, status: newStatus };
+      let open = t.open;
+      if (status === 'success') {
+        if (actually === 'open') {
+          open = true;
+        } else {
+          open = false;
+        }
+      }
+      return { ...t, open, status: newStatus };
     }
     return t;
   });

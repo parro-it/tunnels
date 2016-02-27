@@ -6,7 +6,7 @@ const actionsMenuTemplate = (props, tunnel) => [
     label: 'Edit',
     click: () => props.onEditTunnel(tunnel.id)
   }, {
-    label: tunnel.status === 'open' ? 'Close' : 'Open',
+    label: tunnel.open ? 'Close' : 'Open',
     click: () => props.onToggleTunnelState(tunnel)
   }, {
     label: 'Delete',

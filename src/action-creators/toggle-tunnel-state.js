@@ -1,4 +1,4 @@
-import openTunnel from '../ssh';
+import openSSHTunnel from '../ssh';
 
 function openSuccess(tunnelId) {
   return {
@@ -36,26 +36,15 @@ function openFailure(tunnelId, error) {
   };
 }
 
-const openTunnels = {};
+const connections = {};
 
-export const toggleTunnelState = tunnel => dispatch => {
-  if (openTunnels[tunnel.id]) {
-    dispatch(closeRunning(tunnel.id));
-
-    openTunnels[tunnel.id].close();
-    delete openTunnels[tunnel.id];
-
-    dispatch(closeSuccess(tunnel.id));
-
-    return Promise.resolve(false);
-  }
-
+export const openTunnel = tunnel => dispatch => {
   dispatch(openRunning(tunnel.id));
 
-  return openTunnel(tunnel)
+  return openSSHTunnel(tunnel)
 
     .then(server => {
-      openTunnels[tunnel.id] = server;
+      connections[tunnel.id] = server;
       dispatch(
         openSuccess(tunnel.id)
       );
@@ -65,5 +54,22 @@ export const toggleTunnelState = tunnel => dispatch => {
     .catch( error => dispatch(
       openFailure(tunnel.id, error)
     ));
+};
 
+export const closeTunnel = tunnel => dispatch => {
+  dispatch(closeRunning(tunnel.id));
+
+  connections[tunnel.id].close();
+  delete connections[tunnel.id];
+
+  dispatch(closeSuccess(tunnel.id));
+
+  return Promise.resolve(false);
+};
+
+export const toggleTunnelState = tunnel => dispatch => {
+  if (tunnel.open) {
+    closeTunnel(tunnel)(dispatch);
+  }
+  return openTunnel(tunnel)(dispatch);
 };

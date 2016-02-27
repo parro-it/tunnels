@@ -12,7 +12,8 @@ const fields = [
   'password',
   'keyFile',
   'id',
-  'authType'
+  'authType',
+  'passphrase'
 ];
 
 function mapStateToProps(state) {

@@ -70,42 +70,58 @@ export default class EditTunnel extends Component {
         </div>
 
         <div className="radio auth-methods">
-          <label>
+          <div>
+            <label>
+              <input
+                type="radio"
+                {...f.authType}
+                value="password"
+                onChange = { onChange(f.authType) }
+                checked={f.authType.value === 'password'}
+              />
+              Password
+            </label>
             <input
-              type="radio"
-              {...f.authType}
-              value="password"
-              onChange = { onChange(f.authType) }
-              checked={f.authType.value === 'password'}
+              type="password"
+              className="form-control"
+              disabled={f.authType.value !== 'password'}
+              { ...f.password }
+              onChange = { onChange(f.password) }
             />
-            Password
-          </label>
-          <input
-            type="password"
-            className="form-control"
-            disabled={f.authType.value !== 'password'}
-            { ...f.password }
-            onChange = { onChange(f.password) }
-          />
+          </div>
+          <div>
+            <label>Passphrase</label>
+          </div>
         </div>
 
         <div className="radio auth-methods">
-          <label>
+          <div>
+            <label>
+              <input
+                type="radio" { ...f.authType }
+                value="keyfile"
+                checked={f.authType.value === 'keyfile'}
+                onChange = { onChange(f.authType) }
+              />
+              Key file
+            </label>
             <input
-              type="radio" { ...f.authType }
-              value="keyfile"
-              checked={f.authType.value === 'keyfile'}
-              onChange = { onChange(f.authType) }
+              type="text"
+              disabled={f.authType.value !== 'keyfile'}
+              className="form-control"
+              { ...f.keyFile }
+              onChange = { onChange(f.keyFile) }
             />
-            Key file
-          </label>
-          <input
-            type="text"
-            disabled={f.authType.value !== 'keyfile'}
-            className="form-control"
-            { ...f.keyFile }
-            onChange = { onChange(f.keyFile) }
-          />
+          </div>
+          <div>
+            <input
+              type="text"
+              disabled={f.authType.value !== 'keyfile'}
+              className="form-control"
+              { ...f.passphrase }
+              onChange = { onChange(f.passphrase) }
+            />
+          </div>
 
         </div>
 
