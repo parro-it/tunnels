@@ -1,6 +1,7 @@
 .field-error {
   color:#fc605b !important;
   margin-left: 4px;
+  display: block;
 }
 
 span.tunnelName {
@@ -157,6 +158,11 @@ input.form-control {
 main.pane {
   overflow-y: hidden;
 }
+
+.form-group.user-name {
+  width: 260px;
+}
+
 
 /* PLATFORM */
 

@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import submitOnChange from 'redux-submitform-onchange';
 
+
+const FieldError = ({field}) =>
+  <span className="field-error">
+    {field.touched && field.error || '\u00a0'}
+  </span>
+;
+
 const Passphrase = ({field, authType, onChange}) =>
   <input
     type="text"
@@ -65,14 +72,10 @@ const UserName = ({field, onChange}) =>
       { ...field }
       onChange = { onChange(field) }
     />
+    <FieldError field = { field }/>
   </div>
 ;
 
-const FieldError = ({field}) =>
-  field.touched &&
-  field.error &&
-  <span className="field-error">{field.error}</span>
-;
 
 const Name = ({field, onChange}) =>
   <div className="form-group">
@@ -92,35 +95,49 @@ const OpenOnStart = ({field, onChange}) =>
     <input type="checkbox" className="form-control"
       { ...field }
       onChange = { onChange(field) }
-      />
+    />
   </div>
 ;
 
+const fieldWrapper = {
+  display: 'inline-block',
+  verticalAlign: 'top'
+};
+
 const HostAddress = ({field, onChange}) =>
-  <input
-    type="text"
-    className="form-control"
-    { ...field }
-    onChange = { onChange(field) }
-  />
+  <div style = {fieldWrapper}>
+    <input
+      type="text"
+      className="form-control"
+      { ...field }
+      onChange = { onChange(field) }
+    />
+    <FieldError field = { field }/>
+  </div>
 ;
 
 const RemotePort = ({field, onChange}) =>
-  <input
-    type="number"
-    className="form-control"
-    { ...field }
-    onChange = { onChange(field) }
-  />
+  <div style = {fieldWrapper}>
+    <input
+      type="number"
+      className="form-control"
+      { ...field }
+      onChange = { onChange(field) }
+    />
+    <FieldError field = { field }/>
+  </div>
 ;
 
 const LocalPort = ({field, onChange}) =>
-  <input
-    type="number"
-    className="form-control"
-    { ...field }
-    onChange = { onChange(field) }
-  />
+  <div style = {fieldWrapper}>
+    <input
+      type="number"
+      className="form-control"
+      { ...field }
+      onChange = { onChange(field) }
+    />
+    <FieldError field = { field }/>
+  </div>
 ;
 
 export default class EditTunnel extends Component {
@@ -158,6 +175,7 @@ export default class EditTunnel extends Component {
               authType={f.authType.value}
               onChange={onChange}
             />
+            <FieldError field = { f.password }/>
           </div>
           <div>
             <label className="passphrase-label">Passphrase</label>
@@ -172,7 +190,7 @@ export default class EditTunnel extends Component {
               authType={f.authType.value}
               onChange={onChange}
             />
-
+            <FieldError field = { f.keyFile }/>
           </div>
           <div>
             <Passphrase
@@ -180,6 +198,8 @@ export default class EditTunnel extends Component {
               authType={f.authType.value}
               onChange={onChange}
             />
+            <FieldError field = { f.passphrase }/>
+
           </div>
         </div>
       </form>

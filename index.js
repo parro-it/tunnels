@@ -1,6 +1,6 @@
 'use strict';
 const electron = require('electron');
-const electronDebug = require('electron-debug');
+// const electronDebug = require('electron-debug');
 const electronDetach = require('electron-detach');
 const window = require('electron-window');
 const debug = require('debug')('tunnels');
@@ -45,7 +45,7 @@ if (electronDetach({ requireCmdlineArg: false })) {
 
     listWindow = window.createWindow({
       width: 750,
-      height: 520,
+      height: 620,
       minimizable: false,
       maximizable: false,
       titleBarStyle: process.platform === 'darwin' ? 'hidden' : undefined,
@@ -111,23 +111,22 @@ if (electronDetach({ requireCmdlineArg: false })) {
   try {
     // electronDebug();
     makeSingleInstanceApp();
-  } catch (err) {
-    return handleError(err);
-  }
 
-  electron.app.on('activate', focusMainWindow);
-  electron.app.on('ready', () => {
-    try {
-      if (process.platform === 'darwin') {
-        electron.app.dock.hide();
+    electron.app.on('activate', focusMainWindow);
+    electron.app.on('ready', () => {
+      try {
+        if (process.platform === 'darwin') {
+          electron.app.dock.hide();
+        }
+
+        openMainWindow();
+        setupTray();
+      } catch (err) {
+        handleError(err);
       }
-
-      openMainWindow();
-      setupTray();
-    } catch (err) {
-      handleError(err);
-    }
-  });
-
+    });
+  } catch (err) {
+    handleError(err);
+  }
 }
 
