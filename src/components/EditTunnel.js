@@ -1,6 +1,122 @@
 import React, { Component } from 'react';
 import submitOnChange from 'redux-submitform-onchange';
 
+const Passphrase = ({field, authType, onChange}) =>
+  <input
+    type="text"
+    disabled={authType !== 'keyfile'}
+    className="form-control"
+    { ...field }
+    onChange = { onChange(field) }
+  />
+;
+
+const Keyfile = ({field, authType, onChange}) =>
+  <input
+    type="text"
+    disabled={authType !== 'keyfile'}
+    className="form-control"
+    { ...field }
+    onChange = { onChange(field) }
+  />
+;
+
+const Password = ({field, authType, onChange}) =>
+  <input
+    type="password"
+    className="form-control"
+    disabled={authType !== 'password'}
+    { ...field }
+    onChange = { onChange(field) }
+  />
+;
+
+const AuthTypeKeyfile = ({field, onChange}) =>
+  <label>
+    <input
+      type="radio" { ...field }
+      value="keyfile"
+      checked={field.value === 'keyfile'}
+      onChange = { onChange(field) }
+    />
+    Key file
+  </label>
+;
+
+const AuthTypePassword = ({field, onChange}) =>
+  <label>
+    <input
+      type="radio"
+      {...field}
+      value="password"
+      onChange = { onChange(field) }
+      checked={field.value === 'password'}
+    />
+    Password
+  </label>
+;
+
+const UserName = ({field, onChange}) =>
+  <div className="form-group user-name">
+    <label>User</label>
+    <input
+      type="text"
+      className="form-control"
+      { ...field }
+      onChange = { onChange(field) }
+    />
+  </div>
+;
+
+const Name = ({field, onChange}) =>
+  <div className="form-group">
+    <input
+      { ...field }
+      type="text"
+      className="form-control"
+      onChange = { onChange(field) }
+    />
+    {field.touched && field.error && <span>{field.error}</span>}
+  </div>
+;
+
+const OpenOnStart = ({field, onChange}) =>
+  <div className="form-group open-on-start">
+    <label>Open on startup</label>
+    <input type="checkbox" className="form-control"
+      { ...field }
+      onChange = { onChange(field) }
+      />
+  </div>
+;
+
+const HostAddress = ({field, onChange}) =>
+  <input
+    type="text"
+    className="form-control"
+    { ...field }
+    onChange = { onChange(field) }
+  />
+;
+
+const RemotePort = ({field, onChange}) =>
+  <input
+    type="number"
+    className="form-control"
+    { ...field }
+    onChange = { onChange(field) }
+  />
+;
+
+const LocalPort = ({field, onChange}) =>
+  <input
+    type="number"
+    className="form-control"
+    { ...field }
+    onChange = { onChange(field) }
+  />
+;
+
 export default class EditTunnel extends Component {
   render() {
     const f = this.props.fields;
@@ -13,80 +129,28 @@ export default class EditTunnel extends Component {
       <form className="padded">
         <h1>Name</h1>
 
-        <div className="form-group">
-          <input
-            { ...f.name }
-            type="text"
-            className="form-control"
-            onChange = { onChange(f.name) }
-          />
-          {f.name.touched && f.name.error && <span>{f.name.error}</span>}
-        </div>
-
-        <div className="form-group open-on-start">
-          <label>Open on startup</label>
-          <input type="checkbox" className="form-control"
-            { ...f.openOnStart }
-            onChange = { onChange(f.openOnStart) }
-            />
-        </div>
-
+        <Name field={f.name} onChange={onChange}/>
+        <OpenOnStart field={f.openOnStart} onChange={onChange}/>
 
         <h1>Connection</h1>
 
         <div className="form-group">
-          <input
-            type="text"
-            className="form-control"
-            { ...f.hostAddress }
-            onChange = { onChange(f.hostAddress) }
-            />
-          <input
-            type="number"
-            className="form-control"
-            { ...f.remotePort }
-            onChange = { onChange(f.remotePort) }
-          />
+          <HostAddress field={f.hostAddress} onChange={onChange}/>
+          <RemotePort field={f.remotePort} onChange={onChange}/>
           &#x2192;
-          <input
-            type="number"
-            className="form-control"
-            { ...f.localPort }
-            onChange = { onChange(f.localPort) }
-          />
+          <LocalPort field={f.localPort} onChange={onChange}/>
         </div>
-
 
         <h1>Authorization</h1>
-
-        <div className="form-group user-name">
-          <label>User</label>
-          <input
-            type="text"
-            className="form-control"
-            { ...f.userName }
-            onChange = { onChange(f.userName) }
-          />
-        </div>
+        <UserName field={f.userName} onChange={onChange}/>
 
         <div className="radio auth-methods">
           <div>
-            <label>
-              <input
-                type="radio"
-                {...f.authType}
-                value="password"
-                onChange = { onChange(f.authType) }
-                checked={f.authType.value === 'password'}
-              />
-              Password
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              disabled={f.authType.value !== 'password'}
-              { ...f.password }
-              onChange = { onChange(f.password) }
+            <AuthTypePassword field={f.authType} onChange={onChange}/>
+            <Password
+              field={f.password}
+              authType={f.authType.value}
+              onChange={onChange}
             />
           </div>
           <div>
@@ -96,37 +160,22 @@ export default class EditTunnel extends Component {
 
         <div className="radio auth-methods">
           <div>
-            <label>
-              <input
-                type="radio" { ...f.authType }
-                value="keyfile"
-                checked={f.authType.value === 'keyfile'}
-                onChange = { onChange(f.authType) }
-              />
-              Key file
-            </label>
-            <input
-              type="text"
-              disabled={f.authType.value !== 'keyfile'}
-              className="form-control"
-              { ...f.keyFile }
-              onChange = { onChange(f.keyFile) }
+            <AuthTypeKeyfile field={f.authType} onChange={onChange}/>
+            <Keyfile
+              field={f.keyFile}
+              authType={f.authType.value}
+              onChange={onChange}
             />
+
           </div>
           <div>
-            <input
-              type="text"
-              disabled={f.authType.value !== 'keyfile'}
-              className="form-control"
-              { ...f.passphrase }
-              onChange = { onChange(f.passphrase) }
+            <Passphrase
+              field={f.passphrase}
+              authType={f.authType.value}
+              onChange={onChange}
             />
           </div>
-
         </div>
-
-        <input { ...f.id }  type="hidden"/>
-
       </form>
     );
   }
