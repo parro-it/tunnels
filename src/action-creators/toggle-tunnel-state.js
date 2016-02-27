@@ -69,7 +69,7 @@ export const closeTunnel = tunnel => dispatch => {
 
 export const toggleTunnelState = tunnel => dispatch => {
   if (tunnel.open) {
-    closeTunnel(tunnel)(dispatch);
+    return closeTunnel(tunnel)(dispatch);
   }
   return openTunnel(tunnel)(dispatch);
 };

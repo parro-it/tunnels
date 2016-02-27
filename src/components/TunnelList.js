@@ -48,7 +48,7 @@ export default (props) => (
       >
 
         <StatusIcon status = {t.status} />
-        <span className="tunnelName"> { t.name + ' ' + t.id + ' ' + props.list.active } </span>
+        <span className="tunnelName"> { t.name } </span>
         <i className="tunnelMenu fa fa-bars"
           onClick = { () => {
             const menu = actionsMenuTemplate(props, t);

@@ -24,7 +24,7 @@ export default function statusBar(
           console.error(action.payload); // eslint-disable-line no-console
           return error(`Cannot open tunnel: ${action.payload.error.message}`);
         case 'success':
-          return ok('Tunnel opened successfully');
+          return ok(`Tunnel ${action.payload.actually} successfully`);
         default:
           throw new Error(`Unknwon TOGGLE_TUNNEL_STATE status ${action.payload.status}`);
       }
