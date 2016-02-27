@@ -1,26 +1,32 @@
-function changeTunnelStatus(tunnels, type, {result, tunnelId}) {
-  return tunnels.map(t => {
-    if (t.id === tunnelId) {
-      let status = result;
+function tunnel(state = {}, action) {
+  const result = action.payload.result;
+  switch (action.type) {
+    case 'OPEN_TUNNEL_STATE':
       if (result === 'success') {
-        if (type === 'OPEN_TUNNEL_STATE') {
-          status = 'open';
-        } else {
-          status = 'close';
-        }
+        return { ...state, status: 'open' };
       } else if (result === 'failure') {
-        if (type === 'OPEN_TUNNEL_STATE') {
-          status = 'close';
-        } else {
-          status = 'open';
-        }
+        return { ...state, status: 'close' };
       }
-      return { ...t, status };
-    }
-    return t;
-  });
-}
+      return { ...state, status: result };
 
+    case 'CLOSE_TUNNEL_STATE':
+      if (result === 'success') {
+        return { ...state, status: 'close' };
+      } else if (result === 'failure') {
+        return { ...state, status: 'open' };
+      }
+      return { ...state, status: result };
+
+    case 'SAVE_TUNNEL':
+      return {
+        ...action.tunnel,
+        status: state.status
+      };
+
+    default:
+      return state;
+  }
+}
 
 export default function list(state = [], action) {
   switch (action.type) {
@@ -37,11 +43,7 @@ export default function list(state = [], action) {
     case 'SAVE_TUNNEL':
       return state.map(t => {
         if (t.id === action.tunnel.id) {
-          return {
-            ...action.tunnel,
-            open: t.open,
-            status: t.status
-          };
+          return tunnel(t, action);
         }
         return t;
       });
@@ -57,11 +59,13 @@ export default function list(state = [], action) {
     case 'OPEN_TUNNEL_STATE':
     case 'CLOSE_TUNNEL_STATE':
 
-      return changeTunnelStatus(
-        state,
-        action.type,
-        action.payload
-      );
+      return state.map(t => {
+        if (t.id === action.payload.tunnelId) {
+          return tunnel(t, action);
+        }
+        return t;
+      });
+
 
     default:
       return state;
