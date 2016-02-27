@@ -73,3 +73,11 @@ export const toggleTunnelState = tunnel => dispatch => {
   }
   return openTunnel(tunnel)(dispatch);
 };
+
+
+export const openTunnelsAtStartup = tunnels => dispatch => {
+  tunnels
+    .filter(t => t.openOnStart)
+    .forEach(t => openTunnel(t)(dispatch));
+};
+

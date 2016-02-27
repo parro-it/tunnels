@@ -17,7 +17,7 @@ function loadAndConvertStore() {
   return store.get('tunnels');
 }
 
-export default function loadStore() {
+export function loadStore() {
   return {
     type: 'LOAD_STORE',
     tunnels: loadAndConvertStore()

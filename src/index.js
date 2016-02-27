@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import AppContainer from './containers/App';
 import app from './reducers/app';
 import debugMenu from 'debug-menu';
-import loadStore from './action-creators/load-store';
+import { openTunnelsAtStartup, loadStore } from './action-creators';
 import middlewares from './middlewares';
 
 function startApp() {
@@ -18,6 +18,7 @@ function startApp() {
   const store = createStore(app, middlewares);
   setImmediate(() => {
     store.dispatch(loadStore());
+    store.dispatch(openTunnelsAtStartup(store.getState().list));
   });
 
   const main = document.createElement('div');

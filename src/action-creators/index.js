@@ -1,5 +1,6 @@
 import uuid from 'node-uuid';
-export { toggleTunnelState } from './toggle-tunnel-state';
+export { toggleTunnelState, openTunnelsAtStartup } from './toggle-tunnel-state';
+export { loadStore } from './load-store';
 
 function newTunnel() {
   return {
