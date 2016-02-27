@@ -37,7 +37,11 @@ export default function list(state = [], action) {
     case 'SAVE_TUNNEL':
       return state.map(t => {
         if (t.id === action.tunnel.id) {
-          return action.tunnel;
+          return {
+            ...action.tunnel,
+            open: t.open,
+            status: t.status
+          };
         }
         return t;
       });
