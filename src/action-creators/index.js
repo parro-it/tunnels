@@ -1,20 +1,6 @@
-import uuid from 'node-uuid';
 export { toggleTunnelState, openTunnelsAtStartup } from './toggle-tunnel-state';
 export { loadStore } from './load-store';
-
-function newTunnel() {
-  return {
-    id: uuid.v4(),
-    name: '<no name>',
-    localPort: 80,
-    remotePort: 8080,
-    hostAddress: 'localhost',
-    userName: 'root',
-    password: '',
-    openOnStart: false,
-    keyFile: ''
-  };
-}
+import newTunnel from '../model/new-tunnel';
 
 export function addTunnel() {
   return {
