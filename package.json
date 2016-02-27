@@ -78,6 +78,7 @@
     "electron-window": "^0.6.0",
     "eslint": "^2.2.0",
     "eslint-config-js": "^5.0.0",
+    "font-awesome": "^4.5.0",
     "map-obj": "^1.0.1",
     "node-uuid": "^1.4.3",
     "object-values": "^1.0.0",

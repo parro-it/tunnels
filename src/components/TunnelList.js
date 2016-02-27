@@ -18,19 +18,19 @@ function StatusIcon({status}) {
   let iconName;
   switch (status) {
     case 'opening':
-      iconName = 'icon-arrows-ccw';
+      iconName = 'fa fa-lg fa-refresh fa-spin';
       break;
     case 'open':
-      iconName = 'icon-record status status-ok';
+      iconName = 'fa fa-lg fa-link status-ok';
       break;
     case 'open-failed':
-      iconName = 'icon-record status status-error';
+      iconName = 'fa fa-lg fa-unlink status-error';
       break;
     default:
-      iconName = 'icon-record status';
+      iconName = 'fa fa-lg fa-dot-circle-o status';
   }
 
-  return <span className={'icon ' + iconName} ></span>;
+  return <i className={ iconName } ></i>;
 }
 
 export default (props) => (
