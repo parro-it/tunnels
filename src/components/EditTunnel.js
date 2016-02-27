@@ -68,6 +68,12 @@ const UserName = ({field, onChange}) =>
   </div>
 ;
 
+const FieldError = ({field}) =>
+  field.touched &&
+  field.error &&
+  <span className="field-error">{field.error}</span>
+;
+
 const Name = ({field, onChange}) =>
   <div className="form-group">
     <input
@@ -76,7 +82,7 @@ const Name = ({field, onChange}) =>
       className="form-control"
       onChange = { onChange(field) }
     />
-    {field.touched && field.error && <span>{field.error}</span>}
+    <FieldError field = { field }/>
   </div>
 ;
 

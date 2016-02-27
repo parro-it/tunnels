@@ -1,15 +1,20 @@
+.field-error {
+  color:#fc605b !important;
+  margin-left: 4px;
+}
+
 span.tunnelName {
-    width: 140px;
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-    margin-left: 5px;
-    margin-right: 5px;
+  width: 140px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 i.fa:first-child {
-    margin-right: 7px;
+  margin-right: 7px;
 }
 
 .form-group label {
@@ -146,7 +151,7 @@ label.passphrase-label {
 }
 
 input.form-control {
-    margin: 4px;
+  margin: 4px;
 }
 
 main.pane {
