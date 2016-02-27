@@ -109,7 +109,7 @@ if (electronDetach({ requireCmdlineArg: false })) {
     );
 
   try {
-    electronDebug();
+    // electronDebug();
     makeSingleInstanceApp();
   } catch (err) {
     return handleError(err);
