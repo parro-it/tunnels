@@ -25,16 +25,12 @@ function StatusIcon({status}) {
       iconName = 'fa fa-lg fa-link status-ok';
       break;
 
-    case 'close':
-      iconName = 'fa fa-lg fa-dot-circle-o status';
-      break;
-
     case 'error':
       iconName = 'fa fa-lg fa-unlink status-error';
       break;
 
     default:
-      iconName = 'unkown status ' + status;
+      iconName = 'fa fa-lg fa-dot-circle-o status';
   }
 
   return <i className={ iconName } ></i>;
