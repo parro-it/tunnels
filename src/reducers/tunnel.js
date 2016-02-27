@@ -1,5 +1,5 @@
 export default function tunnel(state = {}, action) {
-  const result = action.payload.result;
+  const result = action.payload && action.payload.result;
   switch (action.type) {
     case 'OPEN_TUNNEL_STATE':
       if (result === 'success') {
