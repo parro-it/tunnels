@@ -17,20 +17,10 @@ const fields = [
 ];
 
 function mapStateToProps(state) {
-  const initialValues = state.list.reduce((editing, t) => {
-    if (editing) {
-      return editing;
-    }
-
-    if (t.id === state.list.active) {
-      return t;
-    }
-
-    return null;
-  }, null);
-
   return {
-    initialValues
+    initialValues: state.list.find(
+      t => t.id === state.list.active
+    )
   };
 }
 
