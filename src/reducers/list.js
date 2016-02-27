@@ -24,8 +24,15 @@ function changeTunnelState(tunnels, {status, tunnelId, actually}) {
 
 export default function list(state = [], action) {
   switch (action.type) {
+    case 'EDIT_TUNNEL':
+      const newList3 = state.slice(0);
+      newList3.active  = action.id;
+      return newList3;
+
     case 'ADD_TUNNEL':
-      return state.concat(action.tunnel);
+      const newList = state.concat(action.tunnel);
+      newList.active = action.tunnel.id;
+      return newList;
 
     case 'SAVE_TUNNEL':
       return state.map(t => {
@@ -39,7 +46,9 @@ export default function list(state = [], action) {
       return action.tunnels;
 
     case 'DELETE_TUNNEL':
-      return state.filter(t => t.id !== action.id);
+      const newList2 = state.filter(t => t.id !== action.id);
+      newList2.active = null;
+      return newList2;
 
     case 'TOGGLE_TUNNEL_STATE':
 

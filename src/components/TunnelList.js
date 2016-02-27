@@ -40,19 +40,21 @@ export default (props) => (
     { props.list.map( t => (
       <span
         key = { t.id }
-        className = "nav-group-item tunnel"
+        className = {
+          'nav-group-item tunnel ' +
+          (t.id === props.list.active ? 'active' : '')
+        }
         onClick = { props.onEditTunnel(t.id) }
       >
 
         <StatusIcon status = {t.status} />
-        <span className="tunnelName"> { t.name } </span>
-        <span
-          className="pull-right icon icon-dot-3"
+        <span className="tunnelName"> { t.name + ' ' + t.id + ' ' + props.list.active } </span>
+        <i className="tunnelMenu fa fa-bars"
           onClick = { () => {
             const menu = actionsMenuTemplate(props, t);
             electron.remote.Menu.buildFromTemplate(menu).popup();
           } }
-        ></span>
+        ></i>
       </span>
     ))}
 

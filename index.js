@@ -45,7 +45,7 @@ if (electronDetach({ requireCmdlineArg: false })) {
 
     listWindow = window.createWindow({
       width: 750,
-      height: 530,
+      height: 520,
       minimizable: false,
       maximizable: false,
       titleBarStyle: process.platform === 'darwin' ? 'hidden' : undefined,

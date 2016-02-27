@@ -90,7 +90,7 @@ export default class EditTunnel extends Component {
             />
           </div>
           <div>
-            <label>Passphrase</label>
+            <label className="passphrase-label">Passphrase</label>
           </div>
         </div>
 
