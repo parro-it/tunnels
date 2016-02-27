@@ -40,6 +40,11 @@ export default function list(state = [], action) {
       newList.active = action.tunnel.id;
       return newList;
 
+    case 'DELETE_TUNNEL':
+      const newList2 = state.filter(t => t.id !== action.id);
+      newList2.active = null;
+      return newList2;
+
     case 'SAVE_TUNNEL':
       return state.map(t => {
         if (t.id === action.tunnel.id) {
@@ -50,11 +55,6 @@ export default function list(state = [], action) {
 
     case 'LOAD_STORE':
       return action.tunnels;
-
-    case 'DELETE_TUNNEL':
-      const newList2 = state.filter(t => t.id !== action.id);
-      newList2.active = null;
-      return newList2;
 
     case 'OPEN_TUNNEL_STATE':
     case 'CLOSE_TUNNEL_STATE':
