@@ -22,7 +22,7 @@ function mapStateToProps(state) {
       return editing;
     }
 
-    if (t.id === state.list.active || !state.list.active) {
+    if (t.id === state.list.active) {
       return t;
     }
 

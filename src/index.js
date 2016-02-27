@@ -16,12 +16,8 @@ function startApp() {
   );
 
   const store = createStore(app, middlewares);
-  setImmediate(() => {
-    store.dispatch(loadStore());
-    store.dispatch(openTunnelsAtStartup(store.getState().list));
-  });
-
   const main = document.createElement('div');
+
   document.body.appendChild(main);
   render(
     <Provider store={store}>
@@ -29,6 +25,9 @@ function startApp() {
     </Provider>,
     main
   );
+
+  store.dispatch(loadStore());
+  store.dispatch(openTunnelsAtStartup(store.getState().list));
 }
 
 document.addEventListener('DOMContentLoaded', startApp);

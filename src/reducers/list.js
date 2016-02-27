@@ -41,8 +41,13 @@ export default function list(state = [], action) {
       return newList;
 
     case 'DELETE_TUNNEL':
-      const newList2 = state.filter(t => t.id !== action.id);
-      newList2.active = null;
+      const newList2 = state.filter(
+        t => t.id !== action.id
+      );
+      newList2.active =
+        newList2.length
+          ? newList2[0].id
+          : null;
       return newList2;
 
     case 'SAVE_TUNNEL':
@@ -54,7 +59,12 @@ export default function list(state = [], action) {
       });
 
     case 'LOAD_STORE':
-      return action.tunnels;
+      const newList4 =  action.tunnels;
+      newList4.active =
+        newList4.length
+          ? newList4[0].id
+          : null;
+      return newList4;
 
     case 'OPEN_TUNNEL_STATE':
     case 'CLOSE_TUNNEL_STATE':
