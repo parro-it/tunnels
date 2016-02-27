@@ -2,37 +2,37 @@ import openSSHTunnel from '../ssh';
 
 function openSuccess(tunnelId) {
   return {
-    type: 'TOGGLE_TUNNEL_STATE',
-    payload: { status: 'success', tunnelId, actually: 'open' }
+    type: 'OPEN_TUNNEL_STATE',
+    payload: { result: 'success', tunnelId }
   };
 }
 
 function closeSuccess(tunnelId) {
   return {
-    type: 'TOGGLE_TUNNEL_STATE',
-    payload: { status: 'success', tunnelId, actually: 'closed' }
+    type: 'CLOSE_TUNNEL_STATE',
+    payload: { result: 'success', tunnelId }
   };
 }
 
 function openRunning(tunnelId) {
   return {
-    type: 'TOGGLE_TUNNEL_STATE',
-    payload: { status: 'running', tunnelId }
+    type: 'OPEN_TUNNEL_STATE',
+    payload: { result: 'running', tunnelId }
   };
 }
 
 
 function closeRunning(tunnelId) {
   return {
-    type: 'TOGGLE_TUNNEL_STATE',
-    payload: { status: 'running', tunnelId, actually: 'closed' }
+    type: 'CLOSE_TUNNEL_STATE',
+    payload: { result: 'running', tunnelId}
   };
 }
 
 function openFailure(tunnelId, error) {
   return {
-    type: 'TOGGLE_TUNNEL_STATE',
-    payload: { status: 'error', tunnelId, error }
+    type: 'OPEN_TUNNEL_STATE',
+    payload: { result: 'error', tunnelId, error }
   };
 }
 
@@ -68,7 +68,7 @@ export const closeTunnel = tunnel => dispatch => {
 };
 
 export const toggleTunnelState = tunnel => dispatch => {
-  if (tunnel.open) {
+  if (tunnel.status === 'open') {
     return closeTunnel(tunnel)(dispatch);
   }
   return openTunnel(tunnel)(dispatch);

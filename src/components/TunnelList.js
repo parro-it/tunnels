@@ -6,7 +6,7 @@ const actionsMenuTemplate = (props, tunnel) => [
     label: 'Edit',
     click: () => props.onEditTunnel(tunnel.id)
   }, {
-    label: tunnel.open ? 'Close' : 'Open',
+    label: tunnel.status === 'open' ? 'Close' : 'Open',
     click: () => props.onToggleTunnelState(tunnel)
   }, {
     label: 'Delete',
@@ -17,17 +17,24 @@ const actionsMenuTemplate = (props, tunnel) => [
 function StatusIcon({status}) {
   let iconName;
   switch (status) {
-    case 'opening':
+    case 'running':
       iconName = 'fa fa-lg fa-refresh fa-spin';
       break;
+
     case 'open':
       iconName = 'fa fa-lg fa-link status-ok';
       break;
-    case 'open-failed':
+
+    case 'close':
+      iconName = 'fa fa-lg fa-dot-circle-o status';
+      break;
+
+    case 'error':
       iconName = 'fa fa-lg fa-unlink status-error';
       break;
+
     default:
-      iconName = 'fa fa-lg fa-dot-circle-o status';
+      iconName = 'unkown status ' + status;
   }
 
   return <i className={ iconName } ></i>;
@@ -46,13 +53,13 @@ export default (props) => (
         }
         onClick = { props.onEditTunnel(t.id) }
       >
-
-        <StatusIcon status = {t.status} />
+        <StatusIcon status = {t.status}/>
         <span className="tunnelName"> { t.name } </span>
         <i className="tunnelMenu fa fa-bars"
           onClick = { () => {
             const menu = actionsMenuTemplate(props, t);
-            electron.remote.Menu.buildFromTemplate(menu).popup();
+            const mnu = electron.remote.Menu.buildFromTemplate(menu);
+            mnu.popup();
           } }
         ></i>
       </span>

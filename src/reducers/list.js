@@ -1,21 +1,21 @@
-function changeTunnelState(tunnels, {status, tunnelId, actually}) {
-  const newStatus = {
-    running: 'opening',
-    error: 'open-failed',
-    success: actually
-  }[status];
-
+function changeTunnelStatus(tunnels, type, {result, tunnelId}) {
   return tunnels.map(t => {
     if (t.id === tunnelId) {
-      let open = t.open;
-      if (status === 'success') {
-        if (actually === 'open') {
-          open = true;
+      let status = result;
+      if (result === 'success') {
+        if (type === 'OPEN_TUNNEL_STATE') {
+          status = 'open';
         } else {
-          open = false;
+          status = 'close';
+        }
+      } else if (result === 'failure') {
+        if (type === 'OPEN_TUNNEL_STATE') {
+          status = 'close';
+        } else {
+          status = 'open';
         }
       }
-      return { ...t, open, status: newStatus };
+      return { ...t, status };
     }
     return t;
   });
@@ -54,10 +54,12 @@ export default function list(state = [], action) {
       newList2.active = null;
       return newList2;
 
-    case 'TOGGLE_TUNNEL_STATE':
+    case 'OPEN_TUNNEL_STATE':
+    case 'CLOSE_TUNNEL_STATE':
 
-      return changeTunnelState(
+      return changeTunnelStatus(
         state,
+        action.type,
         action.payload
       );
 
