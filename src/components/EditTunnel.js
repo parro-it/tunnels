@@ -104,7 +104,7 @@ const fieldWrapper = {
   verticalAlign: 'top'
 };
 
-const HostAddress = ({field, onChange}) =>
+const HostAddress = ({field, onChange, asyncValidating}) =>
   <div style = {fieldWrapper} className="hostAddress">
     <input
       type="text"
@@ -112,6 +112,10 @@ const HostAddress = ({field, onChange}) =>
       { ...field }
       onChange = { onChange(field) }
     />
+    {
+      asyncValidating === 'hostAddress' &&
+      <i className="fa fa-lg fa-refresh fa-spin"/>
+    }
     <FieldError field = { field }/>
   </div>
 ;
@@ -158,7 +162,11 @@ export default class EditTunnel extends Component {
         <h1>Connection</h1>
 
         <div className="form-group">
-          <HostAddress field={f.hostAddress} onChange={onChange}/>
+          <HostAddress
+            field={f.hostAddress}
+            onChange={onChange}
+            asyncValidating = {this.props.asyncValidating}
+          />
           <span className = "gliph">:</span>
           <RemotePort field={f.remotePort} onChange={onChange}/>
           <span className = "gliph">&#x2192;</span>
@@ -191,6 +199,10 @@ export default class EditTunnel extends Component {
               authType={f.authType.value}
               onChange={onChange}
             />
+            {
+              this.props.asyncValidating === 'keyFile' &&
+              <i className="fa fa-lg fa-refresh fa-spin"/>
+            }
             <FieldError field = { f.keyFile }/>
           </div>
           <div>

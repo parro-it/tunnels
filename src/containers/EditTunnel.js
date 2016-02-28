@@ -1,6 +1,6 @@
 import EditTunnel from '../components/EditTunnel';
 import {reduxForm} from 'redux-form';
-import validate from '../model/validate-tunnel';
+import {validate, asyncValidate} from '../model/validate-tunnel';
 import fields from '../model/tunnel-fields';
 
 function mapStateToProps(state) {
@@ -14,5 +14,7 @@ function mapStateToProps(state) {
 export default reduxForm({
   form: 'tunnel',
   fields,
+  asyncValidate,
+  asyncBlurFields: ['hostAddress', 'keyFile'],
   validate
 }, mapStateToProps )(EditTunnel);

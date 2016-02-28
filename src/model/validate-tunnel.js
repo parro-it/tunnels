@@ -1,6 +1,9 @@
 import validateIP from 'validate-ip-node';
 import isFQDN from '../modules/isFQDN';
 import username from 'username';
+import isReachable from '../modules/is-reachable-promise';
+import dns from '../modules/dns-promise';
+
 
 const FQDNOpts = {
   require_tld: false
@@ -9,7 +12,7 @@ const FQDNOpts = {
 const user = username.sync();
 
 
-export default function validate(tunnel) {
+export function validate(tunnel) {
   const errors = {};
   const requiredFields = [
     'name',
@@ -39,7 +42,7 @@ export default function validate(tunnel) {
 
   if (tunnel.localPort < 0 || tunnel.localPort > 65535) {
     errors.localPort = 'Should be in the range 0:65535';
-  } else if (tunnel.localPort < 1024) {
+  } else if (tunnel.localPort < 1024 && user !== 'root') {
     errors.localPort = 'You should be root to use port < 1024';
   }
 
@@ -48,4 +51,20 @@ export default function validate(tunnel) {
   }
 
   return errors;
+}
+
+
+export function asyncValidate({hostAddress, keyFile}) {
+  return dns(hostAddress)
+    .then(address => isReachable(address + ':22'))
+
+    .then(reachable => {
+      if (!reachable) {
+        return {hostAddress: 'Host address port 22 not reachable'};
+      }
+
+      return null;
+    })
+
+    .catch(err => ({hostAddress: err.message}));
 }
