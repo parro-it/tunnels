@@ -24,9 +24,6 @@ i.fa:first-child {
   vertical-align: bottom;
 }
 
-.form-control[type=number] {
-  width: 100px;
-}
 
 .status-ok {
   color:#34c84a !important;
@@ -60,13 +57,18 @@ i.fa:first-child {
 }
 
 
-.form-control[name=remotePort],
-.form-control[name=localPort] {
+.remotePort,
+.localPort {
   width: 90px;
 }
 
-.form-control[name=hostAddress] {
+.hostAddress {
   width: 250px;
+  margin-right: 10px;
+}
+
+.user-name {
+  width: 210px;
 }
 
 .pane h1 {
@@ -86,9 +88,7 @@ input[type=checkbox] {
 }
 
 
-.form-control[name=userName] {
-  width: 210px;
-}
+
 
 .user-name label {
   width: 35px;
@@ -160,9 +160,15 @@ main.pane {
 }
 
 .form-group.user-name {
-  width: 260px;
+  width: 250px;
 }
 
+span.gliph {
+    vertical-align: middle;
+    font-size: 20px;
+    display: inline-block;
+    margin: 0 5px;
+}
 
 /* PLATFORM */
 

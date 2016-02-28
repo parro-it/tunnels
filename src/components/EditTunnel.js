@@ -105,7 +105,7 @@ const fieldWrapper = {
 };
 
 const HostAddress = ({field, onChange}) =>
-  <div style = {fieldWrapper}>
+  <div style = {fieldWrapper} className="hostAddress">
     <input
       type="text"
       className="form-control"
@@ -117,7 +117,7 @@ const HostAddress = ({field, onChange}) =>
 ;
 
 const RemotePort = ({field, onChange}) =>
-  <div style = {fieldWrapper}>
+  <div style = {fieldWrapper} className="remotePort">
     <input
       type="number"
       className="form-control"
@@ -129,7 +129,7 @@ const RemotePort = ({field, onChange}) =>
 ;
 
 const LocalPort = ({field, onChange}) =>
-  <div style = {fieldWrapper}>
+  <div style = {fieldWrapper} className="localPort">
     <input
       type="number"
       className="form-control"
@@ -159,8 +159,9 @@ export default class EditTunnel extends Component {
 
         <div className="form-group">
           <HostAddress field={f.hostAddress} onChange={onChange}/>
+          <span className = "gliph">:</span>
           <RemotePort field={f.remotePort} onChange={onChange}/>
-          &#x2192;
+          <span className = "gliph">&#x2192;</span>
           <LocalPort field={f.localPort} onChange={onChange}/>
         </div>
 
