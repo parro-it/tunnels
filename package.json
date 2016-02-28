@@ -95,6 +95,7 @@
     "throttle-function": "^0.1.0",
     "throttle-override": "^1.0.1",
     "username": "^2.0.0",
+    "validate-ip-node": "^1.0.6",
     "zipmap": "^1.1.1"
   },
   "devDependencies": {
