@@ -1,4 +1,7 @@
 import uuid from 'node-uuid';
+import username from 'username';
+
+const user = username.sync();
 
 export default function newTunnel() {
   return {
@@ -7,7 +10,7 @@ export default function newTunnel() {
     localPort: 80,
     remotePort: 8080,
     hostAddress: 'localhost',
-    userName: 'root',
+    userName: user,
     password: '',
     openOnStart: false,
     keyFile: ''
