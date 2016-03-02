@@ -90,7 +90,7 @@
     "react-redux": "^4.2.1",
     "redux": "^3.2.1",
     "redux-form": "^4.2.0",
-    "redux-submitform-onchange": "0.1.0",
+    "redux-submitform-onchange": "0.2.0",
     "redux-thunk": "^1.0.3",
     "store": "^1.3.17",
     "throttle-function": "^0.1.0",
