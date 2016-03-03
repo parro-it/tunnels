@@ -83,7 +83,7 @@
     "map-obj": "^1.0.1",
     "node-uuid": "^1.4.3",
     "object-values": "^1.0.0",
-    "open-ssh-tunnel": "^0.2.0",
+    "open-ssh-tunnel": "^0.3.0",
     "photon": "github:connors/photon",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
