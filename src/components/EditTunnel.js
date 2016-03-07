@@ -20,6 +20,7 @@ const Passphrase = ({field, authType, onChange}) =>
 
 const Keyfile = ({field, authType, onChange}) =>
   <input
+    is="afile-input"
     type="text"
     disabled={authType !== 'keyfile'}
     className="form-control"
