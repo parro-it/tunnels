@@ -74,6 +74,7 @@
     "dom-delegate": "^2.0.3",
     "electron-debug": "^0.5.2",
     "electron-detach": "^0.3.0",
+    "electron-input-menu": "^0.1.0",
     "electron-localshortcut": "^0.6.0",
     "electron-window": "^0.6.0",
     "eslint": "^2.2.0",
