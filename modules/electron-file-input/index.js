@@ -1,15 +1,39 @@
-'use strict';
-const FileInput = Object.create(window.HTMLElement.prototype);
+import React from 'react';
+import { remote } from 'electron';
 
-FileInput.createdCallback = function() {
 
-  this.addEventListener('click', () => {
-    alert('clicked');
-  });
-};
+export default function FileInput(props) {
 
-module.exports = function fileInput() {
-  document.registerElement('file-input', {
-    prototype: FileInput
-  });
-};
+  function onContext(ev) {
+    const menu = remote.Menu.buildFromTemplate([{
+      label: 'Reset',
+      click: () => {
+        ev.target.setAttribute('value', '');
+      },
+    }]);
+    menu.popup(remote.getCurrentWindow());
+  }
+
+  function onClick(ev) {
+    const file = remote.dialog.showOpenDialog({
+      properties: [
+        'openFile'
+        // ,'openDirectory', 'multiSelections'
+      ]
+    });
+
+    if (file !== undefined) {
+      ev.target.setAttribute('value', file);
+    }
+
+  }
+
+  return <input
+    readOnly
+    type = "text"
+    style = {{textOverflow: 'ellipsis'}}
+    onContextMenu = { onContext }
+    onClick = { onClick }
+    {...props}
+  />;
+}

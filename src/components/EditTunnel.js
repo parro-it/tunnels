@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import submitOnChange from 'redux-submitform-onchange';
+import FileInput from '../../modules/electron-file-input';
 
 
 const FieldError = ({field}) =>
@@ -19,9 +20,7 @@ const Passphrase = ({field, authType, onChange}) =>
 ;
 
 const Keyfile = ({field, authType, onChange}) =>
-  <input
-    is="afile-input"
-    type="text"
+  <FileInput
     disabled={authType !== 'keyfile'}
     className="form-control"
     { ...field }

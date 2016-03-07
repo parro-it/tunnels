@@ -8,12 +8,10 @@ import debugMenu from 'debug-menu';
 import { openTunnelsAtStartup, loadStore } from './action-creators';
 import middlewares from './middlewares';
 import inputMenu from 'electron-input-menu';
-import fileInput from '../modules/electron-file-input';
 
 function startApp() {
   debugMenu.install();
-  inputMenu();
-  fileInput();
+  // inputMenu();
 
   document.body.classList.add(
     'platform-' + process.platform
