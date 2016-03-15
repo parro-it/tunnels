@@ -19,12 +19,15 @@ const Passphrase = ({field, authType, onChange}) =>
   />
 ;
 
-const Keyfile = ({field, authType, onChange}) =>
+const Keyfile = ({field, authType, onChange, dispatch}) =>
   <FileInput
     disabled={authType !== 'keyfile'}
     className="form-control"
     { ...field }
-    onChange = { onChange(field) }
+    onChangeFile = { value => {
+      onChange(field);
+      dispatch(field.onChange({value}));
+    }}
   />
 ;
 
@@ -198,6 +201,7 @@ export default class EditTunnel extends Component {
               field={f.keyFile}
               authType={f.authType.value}
               onChange={onChange}
+              dispatch = {this.props.dispatch}
             />
             {
               this.props.asyncValidating === 'keyFile' &&

@@ -1,6 +1,6 @@
 'use strict';
 const electron = require('electron');
-// const electronDebug = require('electron-debug');
+const electronDebug = require('electron-debug');
 const electronDetach = require('electron-detach');
 const window = require('electron-window');
 const debug = require('debug')('tunnels');
@@ -109,7 +109,7 @@ if (electronDetach({ requireCmdlineArg: false })) {
     );
 
   try {
-    // electronDebug();
+    electronDebug();
     makeSingleInstanceApp();
 
     electron.app.on('activate', focusMainWindow);

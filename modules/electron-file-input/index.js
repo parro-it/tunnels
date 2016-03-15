@@ -1,20 +1,19 @@
 import React from 'react';
 import { remote } from 'electron';
 
-
 export default function FileInput(props) {
 
-  function onContext(ev) {
+  const onContext = () => {
     const menu = remote.Menu.buildFromTemplate([{
       label: 'Reset',
       click: () => {
-        ev.target.setAttribute('value', '');
+        props.onChangeFile('');
       },
     }]);
     menu.popup(remote.getCurrentWindow());
-  }
+  };
 
-  function onClick(ev) {
+  const onClick = () => {
     const file = remote.dialog.showOpenDialog({
       properties: [
         'openFile'
@@ -23,10 +22,9 @@ export default function FileInput(props) {
     });
 
     if (file !== undefined) {
-      ev.target.setAttribute('value', file);
+      props.onChangeFile(file[0]);
     }
-
-  }
+  };
 
   return <input
     readOnly
@@ -34,6 +32,6 @@ export default function FileInput(props) {
     style = {{textOverflow: 'ellipsis'}}
     onContextMenu = { onContext }
     onClick = { onClick }
-    {...props}
+    { ...props }
   />;
 }
