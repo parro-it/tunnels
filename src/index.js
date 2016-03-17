@@ -8,10 +8,14 @@ import debugMenu from 'debug-menu';
 import { openTunnelsAtStartup, loadStore } from './action-creators';
 import middlewares from './middlewares';
 import inputMenu from 'electron-input-menu';
+import context from 'electron-contextmenu-middleware';
+
 
 function startApp() {
-  debugMenu.install();
-  // inputMenu();
+  context.use(inputMenu);
+  context.use(debugMenu.middleware);
+  context.activate();
+
 
   document.body.classList.add(
     'platform-' + process.platform
