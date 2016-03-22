@@ -5,7 +5,7 @@
   "repository": "parro-it/tunnels",
   "author": "andrea@parro.it",
   "scripts": {
-    "test": "eslint . && node test | faucet",
+    "test": "babel-node test | faucet && eslint .",
     "rebuild": "electron-rebuild",
     "lint": "eslint .",
     "start": "electron .",
@@ -107,12 +107,12 @@
   },
   "devDependencies": {
     "babel-eslint": "^5.0.0",
-    "eslint": "^2.2.0",
     "electron-packager": "^5.1.1",
     "electron-prebuilt": "^0.36.8",
-    "eslint-plugin-react": "^3.16.1",
+    "eslint": "^2.2.0",
     "eslint-config-js": "*",
+    "eslint-plugin-react": "^3.16.1",
     "faucet": "0.0.1",
-    "tape": "^4.2.2"
+    "tape-async": "^2.0.0"
   }
 }

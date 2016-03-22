@@ -1,13 +1,12 @@
 'use strict';
 
-const test = require('tape');
+const test = require('tape-async');
 const openTunnel = require('../src/ssh');
-const co = require('co');
 
-test('can open an ssh tunnel', co.wrap(function *(t) {
+test('can open an ssh tunnel', function *(t) {
   if (!process.env.UNIXSSH_USER) {
     t.ok(true);
-    return t.end();
+    return;
   }
 
   const tunnel = yield openTunnel({
@@ -22,30 +21,32 @@ test('can open an ssh tunnel', co.wrap(function *(t) {
   t.equal(tunnel.response, 'Tunnel test-tunnel opened successfully.');
   tunnel.close();
 
-  t.end();
-}));
+});
 
 
-test('fail on bad port', t => {
+test('fail on bad port', function *(t) {
   if (!process.env.UNIXSSH_USER) {
     t.ok(true);
-    return t.end();
+    return;
   }
 
-  openTunnel({
-    tunnelHostAddress: 'freebsd.unixssh.com',
-    tunnelPassword: process.env.UNIXSSH_PWD,
-    tunnelUserName: process.env.UNIXSSH_USER,
-    tunnelRemotePort: 1234,
-    tunnelLocalPort: 1234,
-    tunnelName: 'test-tunnel'
-  })
-    .then(tunnel => {
-      tunnel.close();
-      t.fail('exception expected');
-    })
-    .catch(err => {
-      t.equal(err.message, 'Timed out while waiting for forwardOut');
-      t.end();
+  try {
+    const tunnel = yield openTunnel({
+      tunnelHostAddress: 'freebsd.unixssh.com',
+      tunnelPassword: process.env.UNIXSSH_PWD,
+      tunnelUserName: process.env.UNIXSSH_USER,
+      tunnelRemotePort: 1234,
+      tunnelLocalPort: 1234,
+      tunnelName: 'test-tunnel'
     });
+
+    tunnel.close();
+    t.fail('exception expected');
+
+  } catch (err) {
+    t.equal(
+      err.message,
+      'Timed out while waiting for forwardOut'
+    );
+  }
 });

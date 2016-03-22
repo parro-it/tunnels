@@ -4,13 +4,11 @@ import username from 'username';
 import isReachable from '../modules/is-reachable-promise';
 import dns from '../modules/dns-promise';
 
-
 const FQDNOpts = {
   require_tld: false
 };
 
 const user = username.sync();
-
 
 export function validate(tunnel) {
   const errors = {};
@@ -54,7 +52,7 @@ export function validate(tunnel) {
 }
 
 
-export function asyncValidate({hostAddress, keyFile}) {
+export function asyncValidate({hostAddress}) {
   return dns(hostAddress)
     .then(address => isReachable(address + ':22'))
 
