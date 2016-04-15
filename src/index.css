@@ -126,7 +126,7 @@ input[type=checkbox] {
 .open-on-start {
   position: fixed;
   right: 7px;
-  top: 95px;
+  top: 75px;
 }
 
 body.platform-window .open-on-start {
