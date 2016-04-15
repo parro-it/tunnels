@@ -73,6 +73,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.5.2",
     "co": "^4.6.0",
+    "comws": "^2.0.3",
     "debug": "^2.2.0",
     "debug-menu": "^0.4.0",
     "dom-delegate": "^2.0.3",
