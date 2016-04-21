@@ -79,7 +79,6 @@
     "dom-delegate": "^2.0.3",
     "electron-contextmenu-middleware": "^1.0.1",
     "electron-debug": "^0.5.2",
-    "electron-detach": "^0.3.0",
     "electron-input-menu": "^1.3.0",
     "electron-localshortcut": "^0.6.0",
     "electron-prebuilt": "^0.37.6",
