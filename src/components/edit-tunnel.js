@@ -8,6 +8,10 @@ const FieldError = ({field}) =>
 	</span>
 ;
 
+FieldError.propTypes = {
+	field: React.PropTypes.object
+};
+
 const Passphrase = ({field, authType, onChange}) =>
 	<input
 		type="text"
@@ -18,17 +22,32 @@ const Passphrase = ({field, authType, onChange}) =>
 		/>
 ;
 
-const Keyfile = ({field, authType, onChange, dispatch}) =>
-	<FileInput
+Passphrase.propTypes = {
+	field: React.PropTypes.object,
+	authType: React.PropTypes.oneOf(['keyfile', 'password']),
+	onChange: React.PropTypes.func
+};
+
+const Keyfile = ({field, authType, onChange, dispatch}) => {
+	const onChangeFile = value => {
+		onChange(field);
+		dispatch(field.onChange({value}));
+	};
+
+	return (<FileInput
 		disabled={authType !== 'keyfile'}
 		className="form-control"
 		{...field}
-		onChangeFile={value => {
-			onChange(field);
-			dispatch(field.onChange({value}));
-		}}
-		/>
-;
+		onChangeFile={onChangeFile}
+		/>);
+};
+
+Keyfile.propTypes = {
+	field: React.PropTypes.object,
+	authType: React.PropTypes.oneOf(['keyfile', 'password']),
+	onChange: React.PropTypes.func,
+	dispatch: React.PropTypes.func
+};
 
 const Password = ({field, authType, onChange}) =>
 	<input
@@ -39,6 +58,12 @@ const Password = ({field, authType, onChange}) =>
 		onChange={onChange(field)}
 		/>
 ;
+
+Password.propTypes = {
+	field: React.PropTypes.object,
+	authType: React.PropTypes.oneOf(['keyfile', 'password']),
+	onChange: React.PropTypes.func
+};
 
 const AuthTypeKeyfile = ({field, onChange}) =>
 	<label>
@@ -51,6 +76,11 @@ const AuthTypeKeyfile = ({field, onChange}) =>
 		Key file
 	</label>
 ;
+
+AuthTypeKeyfile.propTypes = {
+	field: React.PropTypes.object,
+	onChange: React.PropTypes.func
+};
 
 const AuthTypePassword = ({field, onChange}) =>
 	<label>
@@ -65,6 +95,11 @@ const AuthTypePassword = ({field, onChange}) =>
 	</label>
 ;
 
+AuthTypePassword.propTypes = {
+	field: React.PropTypes.object,
+	onChange: React.PropTypes.func
+};
+
 const UserName = ({field, onChange}) =>
 	<div className="form-group user-name">
 		<label>User</label>
@@ -78,6 +113,10 @@ const UserName = ({field, onChange}) =>
 	</div>
 ;
 
+UserName.propTypes = {
+	field: React.PropTypes.object,
+	onChange: React.PropTypes.func
+};
 
 const Name = ({field, onChange}) =>
 	<div className="form-group">
@@ -91,17 +130,29 @@ const Name = ({field, onChange}) =>
 	</div>
 ;
 
+Name.propTypes = {
+	field: React.PropTypes.object,
+	onChange: React.PropTypes.func
+};
+
 const OpenOnStart = ({field, onChange}) =>
 	<div className="form-group open-on-start">
 		<label>Open on startup</label>
-		<input type="checkbox" className="form-control"
+		<input
+			type="checkbox"
+			className="form-control"
 			{...field}
 			onChange={onChange(field)}
 			/>
 	</div>
 ;
 
-const fieldWrapper={
+OpenOnStart.propTypes = {
+	field: React.PropTypes.object,
+	onChange: React.PropTypes.func
+};
+
+const fieldWrapper = {
 	display: 'inline-block',
 	verticalAlign: 'top'
 };
@@ -116,11 +167,17 @@ const HostAddress = ({field, onChange, asyncValidating}) =>
 			/>
 		{
 			asyncValidating === 'hostAddress' &&
-			<i className="fa fa-lg fa-refresh fa-spin"/>
+				<i className="fa fa-lg fa-refresh fa-spin"/>
 		}
 		<FieldError field={field}/>
 	</div>
 ;
+
+HostAddress.propTypes = {
+	field: React.PropTypes.object,
+	onChange: React.PropTypes.func,
+	asyncValidating: React.PropTypes.string
+};
 
 const RemotePort = ({field, onChange}) =>
 	<div style={fieldWrapper} className="remotePort">
@@ -134,6 +191,11 @@ const RemotePort = ({field, onChange}) =>
 	</div>
 ;
 
+RemotePort.propTypes = {
+	field: React.PropTypes.object,
+	onChange: React.PropTypes.func
+};
+
 const LocalPort = ({field, onChange}) =>
 	<div style={fieldWrapper} className="localPort">
 		<input
@@ -145,6 +207,11 @@ const LocalPort = ({field, onChange}) =>
 		<FieldError field={field}/>
 	</div>
 ;
+
+LocalPort.propTypes = {
+	field: React.PropTypes.object,
+	onChange: React.PropTypes.func
+};
 
 export default class EditTunnel extends Component {
 	render() {
@@ -169,9 +236,9 @@ export default class EditTunnel extends Component {
 						onChange={onChange}
 						asyncValidating={this.props.asyncValidating}
 						/>
-					<span className = "gliph">:</span>
+					<span className="gliph">:</span>
 					<RemotePort field={f.remotePort} onChange={onChange}/>
-					<span className = "gliph">&#x2192;</span>
+					<span className="gliph">&#x2192;</span>
 					<LocalPort field={f.localPort} onChange={onChange}/>
 				</div>
 
@@ -201,10 +268,10 @@ export default class EditTunnel extends Component {
 							authType={f.authType.value}
 							onChange={onChange}
 							dispatch={this.props.dispatch}
-						/>
+							/>
 						{
 							this.props.asyncValidating === 'keyFile' &&
-							<i className="fa fa-lg fa-refresh fa-spin"/>
+								<i className="fa fa-lg fa-refresh fa-spin"/>
 						}
 						<FieldError field={f.keyFile}/>
 					</div>
@@ -213,7 +280,7 @@ export default class EditTunnel extends Component {
 							field={f.passphrase}
 							authType={f.authType.value}
 							onChange={onChange}
-						/>
+							/>
 						<FieldError field={f.passphrase}/>
 
 					</div>
@@ -222,3 +289,11 @@ export default class EditTunnel extends Component {
 		);
 	}
 }
+
+EditTunnel.propTypes = {
+	fields: React.PropTypes.object,
+	onChange: React.PropTypes.func,
+	dispatch: React.PropTypes.func,
+	onSaveTunnel: React.PropTypes.func,
+	asyncValidating: React.PropTypes.string
+};

@@ -1,9 +1,8 @@
-import { connect } from 'react-redux';
-import App from '../components/App';
+import {connect} from 'react-redux';
+import App from '../components/app';
 import {
 	addTunnel, editTunnel, saveTunnel, deleteTunnel, toggleTunnelState
 } from '../action-creators';
-
 
 const mapStateToProps = state => {
 	return {

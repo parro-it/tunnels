@@ -1,7 +1,10 @@
+
+/* eslint-disable camelcase */
+
 const defaultOptions = {
 	require_tld: true,
 	allow_underscores: false,
-	allow_trailing_dot: false,
+	allow_trailing_dot: false
 };
 
 export default function isFDQN(_str, options = defaultOptions) {

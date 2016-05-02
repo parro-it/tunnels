@@ -1,9 +1,9 @@
 import React from 'react';
-import EditTunnel from '../containers/EditTunnel';
-import TunnelList from './TunnelList';
-import StatusBar from './StatusBar';
+import EditTunnel from '../containers/edit-tunnel';
+import TunnelList from './tunnel-list';
+import StatusBar from './status-bar';
 
-export default ({
+const App = ({
 		list,
 		statusBar,
 		onEditTunnel,
@@ -52,3 +52,14 @@ export default ({
 	</main>
 );
 
+App.propTypes = {
+	list: React.PropTypes.arrayOf(React.PropTypes.object),
+	statusBar: React.PropTypes.object.isRequired,
+	onEditTunnel: React.PropTypes.func.isRequired,
+	onSaveTunnel: React.PropTypes.func.isRequired,
+	onAddTunnel: React.PropTypes.func.isRequired,
+	onDeleteTunnel: React.PropTypes.func.isRequired,
+	onToggleTunnelState: React.PropTypes.func.isRequired
+};
+
+export default App;

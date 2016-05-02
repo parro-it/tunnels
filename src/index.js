@@ -1,21 +1,20 @@
 import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import AppContainer from './containers/App';
-import app from './reducers/app';
 import debugMenu from 'debug-menu';
-import { openTunnelsAtStartup, loadStore } from './action-creators';
-import middlewares from './middlewares';
+import {render} from 'react-dom';
+import {Provider} from 'react-redux';
 import inputMenu from 'electron-input-menu';
 import context from 'electron-contextmenu-middleware';
+import {createStore} from 'redux';
 
+import AppContainer from './containers/app';
+import app from './reducers/app';
+import {openTunnelsAtStartup, loadStore} from './action-creators';
+import middlewares from './middlewares';
 
 function startApp() {
 	context.use(inputMenu);
 	context.use(debugMenu.middleware);
 	context.activate();
-
 
 	document.body.classList.add(
 		'platform-' + process.platform
@@ -27,7 +26,7 @@ function startApp() {
 	document.body.appendChild(main);
 	render(
 		<Provider store={store}>
-			<AppContainer />
+			<AppContainer/>
 		</Provider>,
 		main
 	);

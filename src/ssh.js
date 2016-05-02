@@ -1,6 +1,5 @@
-'use strict';
+import {readFileSync}	from 'fs';
 import openSSHTunnel	from 'open-ssh-tunnel';
-import { readFileSync }	from 'fs';
 
 export default function openTunnel(t) {
 	const opts = {

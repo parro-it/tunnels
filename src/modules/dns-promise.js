@@ -1,4 +1,4 @@
-import { lookup } from 'dns';
+import {lookup} from 'dns';
 
 export default function lookupPromise(hostname) {
 	return new Promise((resolve, reject) => {

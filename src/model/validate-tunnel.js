@@ -1,8 +1,10 @@
-import validateIP from 'validate-ip-node';
-import isFQDN from '../modules/isFQDN';
 import username from 'username';
+import validateIP from 'validate-ip-node';
+import isFQDN from '../modules/is-fqdn';
 import isReachable from '../modules/is-reachable-promise';
 import dns from '../modules/dns-promise';
+
+/* eslint-disable camelcase */
 
 const FQDNOpts = {
 	require_tld: false
@@ -19,9 +21,9 @@ export function validate(tunnel) {
 		'localPort',
 		'userName'
 	].concat(
-		tunnel.authType === 'keyfile'
-		? ['keyFile', 'passphrase']
-		: ['password']
+		tunnel.authType === 'keyfile' ?
+			['keyFile', 'passphrase'] :
+			['password']
 	);
 	requiredFields
 		.filter(f => !tunnel[f])
@@ -34,7 +36,6 @@ export function validate(tunnel) {
 		!isFQDN(tunnel.hostAddress, FQDNOpts) &&
 		!validateIP(tunnel.hostAddress)
 		) {
-
 		errors.hostAddress = 'Should be a valid IP address or hostname';
 	}
 
@@ -50,7 +51,6 @@ export function validate(tunnel) {
 
 	return errors;
 }
-
 
 export function asyncValidate({hostAddress}) {
 	return dns(hostAddress)

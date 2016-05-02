@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { reducer as form } from 'redux-form';
+import {combineReducers} from 'redux';
+import {reducer as form} from 'redux-form';
 
 import list from './list';
 import statusBar from './status-bar';
