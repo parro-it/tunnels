@@ -150,7 +150,6 @@ const LocalPort = ({field, onChange}) =>
 export default class EditTunnel extends Component {
   render() {
     const f = this.props.fields;
-    console.log(f)
     const onChange = submitOnChange(this.props, {
       throttlig: 100,
       onSubmitted: this.props.onSaveTunnel
