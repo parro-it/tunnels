@@ -4,53 +4,51 @@ import TunnelList from './TunnelList';
 import StatusBar from './StatusBar';
 
 export default ({
-    list,
-    statusBar,
-    onEditTunnel,
-    onSaveTunnel,
-    onAddTunnel,
-    onDeleteTunnel,
-    onToggleTunnelState
-  }) => (
-  <main className="window">
+		list,
+		statusBar,
+		onEditTunnel,
+		onSaveTunnel,
+		onAddTunnel,
+		onDeleteTunnel,
+		onToggleTunnelState
+	}) => (
+	<main className="window">
 
-    <header className="toolbar toolbar-header draggable">
-      <h1 className="title visible-darwin">Tunnels</h1>
-      <div className="toolbar-actions not-draggable">
-        <button
-          type="button"
-          className="btn btn-default btn-large"
-          onClick = { onAddTunnel }
-          >
+		<header className="toolbar toolbar-header draggable">
+			<h1 className="title visible-darwin">Tunnels</h1>
+			<div className="toolbar-actions not-draggable">
+				<button
+					type="button"
+					className="btn btn-default btn-large"
+					onClick={onAddTunnel}
+					>
 
-          <span className="icon icon-plus"></span>
-        </button>
+					<span className="icon icon-plus"></span>
+				</button>
 
-      </div>
-    </header>
+			</div>
+		</header>
 
-    <div className="window-content">
-      <div className="pane-group">
-        <div className="pane pane-sm sidebar">
-          <TunnelList
-            list = { list }
-            onEditTunnel = { onEditTunnel }
-            onDeleteTunnel = { onDeleteTunnel }
-            onToggleTunnelState = { onToggleTunnelState }
-          />
-        </div>
-        <main className="pane">
-          <EditTunnel onSaveTunnel = { onSaveTunnel } />
+		<div className="window-content">
+			<div className="pane-group">
+				<div className="pane pane-sm sidebar">
+					<TunnelList
+						list={list}
+						onEditTunnel={onEditTunnel}
+						onDeleteTunnel={onDeleteTunnel}
+						onToggleTunnelState={onToggleTunnelState}
+						/>
+				</div>
+				<main className="pane">
+					<EditTunnel onSaveTunnel={onSaveTunnel}/>
+				</main>
+			</div>
+		</div>
 
-        </main>
-      </div>
-    </div>
+		<footer className="toolbar toolbar-footer draggable">
+			<StatusBar statusBar={statusBar}/>
+		</footer>
 
-
-    <footer className="toolbar toolbar-footer draggable">
-      <StatusBar statusBar={statusBar}/>
-    </footer>
-
-  </main>
+	</main>
 );
 

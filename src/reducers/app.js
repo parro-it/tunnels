@@ -5,8 +5,8 @@ import list from './list';
 import statusBar from './status-bar';
 
 const reducers = {
-  form,
-  list,
-  statusBar
+	form,
+	list,
+	statusBar
 };
 export default combineReducers(reducers);

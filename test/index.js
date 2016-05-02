@@ -1,6 +1,6 @@
 'use strict';
-
-const test = require('tape-async');
+import 'babel-register';
+const test = require('ava');
 const openTunnel = require('../src/ssh');
 
 test('can open an ssh tunnel', function *(t) {
@@ -18,7 +18,7 @@ test('can open an ssh tunnel', function *(t) {
     tunnelName: 'test-tunnel'
   });
 
-  t.equal(tunnel.response, 'Tunnel test-tunnel opened successfully.');
+  t.is(tunnel.response, 'Tunnel test-tunnel opened successfully.');
   tunnel.close();
 
 });
@@ -44,7 +44,7 @@ test('fail on bad port', function *(t) {
     t.fail('exception expected');
 
   } catch (err) {
-    t.equal(
+    t.is(
       err.message,
       'Timed out while waiting for forwardOut'
     );
