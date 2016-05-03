@@ -1,4 +1,5 @@
 import openSSHTunnel from '../ssh';
+import keytar from 'keytar';
 
 function openSuccess(tunnelId) {
 	return {
@@ -38,20 +39,23 @@ function openFailure(tunnelId, error) {
 const connections = {};
 
 export const openTunnel = tunnel => dispatch => {
-	dispatch(openRunning(tunnel.id));
+	const password = keytar.getPassword('tunnels', tunnel.password);
+	const _tunnel = Object.assign({}, tunnel, {password});
 
-	return openSSHTunnel(tunnel)
+	dispatch(openRunning(_tunnel.id));
+
+	return openSSHTunnel(_tunnel)
 
 		.then(server => {
-			connections[tunnel.id] = server;
+			connections[_tunnel.id] = server;
 			dispatch(
-				openSuccess(tunnel.id)
+				openSuccess(_tunnel.id)
 			);
 			return true;
 		})
 
 		.catch(error => dispatch(
-			openFailure(tunnel.id, error)
+			openFailure(_tunnel.id, error)
 		));
 };
 
