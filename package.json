@@ -76,11 +76,11 @@
     "validate-ip-node": "^1.0.6"
   },
   "devDependencies": {
-    "babel-preset-node5": "^10.6.0",
+    "ava": "^0.14.0",
+    "babel-preset-node5": "^11.0.2",
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.5.2",
-    "ava": "^0.14.0",
-    "electron-packager": "^5.1.1",
+    "electron-packager": "^7.0.1",
     "electron-prebuilt": "0.37.8",
     "eslint-config-xo-react": "^0.7.0",
     "eslint-plugin-react": "^5.0.1",
