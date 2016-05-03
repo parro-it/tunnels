@@ -6,8 +6,6 @@
 	"author": "andrea@parro.it",
 	"scripts": {
 		"test": "xo",
-		"rebuild": "electron-rebuild",
-		"lint": "eslint .",
 		"start": "electron .",
 		"pkg:clean-zip": "rm -f setup/${npm_package_productName}-${platform}-${arch}-${npm_package_version}.zip",
 		"pkg:clean-tmp-folder": "rm -rf ${npm_package_productName}-${platform}-${arch}",
@@ -53,9 +51,7 @@
 		"forwarding"
 	],
 	"dependencies": {
-		"babel-preset-node5": "^10.6.0",
-		"babel-preset-react": "^6.5.0",
-		"babel-register": "^6.5.2",
+
 		"co": "^4.6.0",
 		"comws": "^2.0.3",
 		"debug": "^2.2.0",
@@ -65,7 +61,6 @@
 		"electron-debug": "^0.5.2",
 		"electron-input-menu": "^1.3.0",
 		"electron-localshortcut": "^0.6.0",
-		"electron-prebuilt": "^0.37.6",
 		"electron-window": "^0.6.0",
 		"font-awesome": "^4.5.0",
 		"is-reachable": "^1.3.0",
@@ -87,9 +82,12 @@
 		"zipmap": "^1.1.1"
 	},
 	"devDependencies": {
+		"babel-preset-node5": "^10.6.0",
+		"babel-preset-react": "^6.5.0",
+		"babel-register": "^6.5.2",
 		"ava": "^0.14.0",
 		"electron-packager": "^5.1.1",
-		"electron-prebuilt": "0.37.6",
+		"electron-prebuilt": "0.37.8",
 		"eslint-config-xo-react": "^0.7.0",
 		"eslint-plugin-react": "^5.0.1",
 		"xo": "^0.15.0"
