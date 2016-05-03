@@ -1,95 +1,93 @@
 {
-	"name": "electron-tunnels",
-	"version": "1.2.0",
-	"description": "Electron app to manage your ssh tunnels",
-	"repository": "parro-it/tunnels",
-	"author": "andrea@parro.it",
-	"scripts": {
-		"test": "xo",
-		"start": "electron .",
-		"pkg:clean-zip": "rm -f setup/${npm_package_productName}-${platform}-${arch}-${npm_package_version}.zip",
-		"pkg:clean-tmp-folder": "rm -rf ${npm_package_productName}-${platform}-${arch}",
-		"pkg:build": "electron-packager .  ${npm_package_productName} --platform=${platform} --arch=${arch} --version=${npm_package_electronVersion} --ignore='(setup|media|test|private|node_modules/electron-packager|node_modules/electron-prebuilt)' --overwrite --out=setup ",
-		"pkg:zip": "cd setup/${npm_package_productName}-${platform}-${arch} && zip -ryXq9 ../${npm_package_productName}-${platform}-${arch}-${npm_package_version}.zip . && cd .. ",
-		"package": "npm run pkg:clean-zip && npm run pkg:build && npm run pkg:zip && npm run pkg:clean-tmp-folder",
-		"package:darwin": "platform=darwin arch=x64 npm run package",
-		"package:linux:x64": "platform=linux arch=x64 npm run package",
-		"package:linux:ia32": "platform=linux arch=ia32 npm run package",
-		"package:win32:x64": "platform=win32 arch=x64 npm run package",
-		"package:win32:ia32": "platform=win32 arch=ia32 npm run package",
-		"package:all": "npm run package:darwin && npm run package:linux:x64 && npm run package:linux:ia32 && npm run package:win32:x64 && npm run package:win32:ia32"
-	},
-	"files": [
-		"index.js",
-		"src",
-		"cli.js"
-	],
-	"bin": {
-		"tunnels": "cli.js"
-	},
-	"electronVersion": "0.36.8",
-	"productName": "Tunnels",
-	"license": "MIT",
-	"babel": {
-		"presets": [
-			"node5",
-			"react"
-		]
-	},
-	"xo": {
-		"extends": "xo-react",
-		"envs": [
-			"browser",
-			"node"
-		]
-	},
-	"keywords": [
-		"electron",
-		"ssh",
-		"tunnel",
-		"port",
-		"forwarding"
-	],
-	"dependencies": {
+  "name": "electron-tunnels",
+  "version": "1.2.0",
+  "description": "Electron app to manage your ssh tunnels",
+  "repository": "parro-it/tunnels",
+  "author": "andrea@parro.it",
+  "scripts": {
+    "test": "xo",
+    "start": "electron .",
+    "pkg:clean-zip": "rm -f setup/${npm_package_productName}-${platform}-${arch}-${npm_package_version}.zip",
+    "pkg:clean-tmp-folder": "rm -rf ${npm_package_productName}-${platform}-${arch}",
+    "pkg:build": "electron-packager .  ${npm_package_productName} --platform=${platform} --arch=${arch} --version=${npm_package_electronVersion} --ignore='(setup|media|test|private|node_modules/electron-packager|node_modules/electron-prebuilt)' --overwrite --out=setup ",
+    "pkg:zip": "cd setup/${npm_package_productName}-${platform}-${arch} && zip -ryXq9 ../${npm_package_productName}-${platform}-${arch}-${npm_package_version}.zip . && cd .. ",
+    "package": "npm run pkg:clean-zip && npm run pkg:build && npm run pkg:zip && npm run pkg:clean-tmp-folder",
+    "package:darwin": "platform=darwin arch=x64 npm run package",
+    "package:linux:x64": "platform=linux arch=x64 npm run package",
+    "package:linux:ia32": "platform=linux arch=ia32 npm run package",
+    "package:win32:x64": "platform=win32 arch=x64 npm run package",
+    "package:win32:ia32": "platform=win32 arch=ia32 npm run package",
+    "package:all": "npm run package:darwin && npm run package:linux:x64 && npm run package:linux:ia32 && npm run package:win32:x64 && npm run package:win32:ia32"
+  },
+  "files": [
+    "index.js",
+    "src",
+    "cli.js"
+  ],
+  "bin": {
+    "tunnels": "cli.js"
+  },
+  "electronVersion": "0.36.8",
+  "productName": "Tunnels",
+  "license": "MIT",
+  "babel": {
+    "presets": [
+      "node5",
+      "react"
+    ]
+  },
+  "xo": {
+    "extends": "xo-react",
+    "envs": [
+      "browser",
+      "node"
+    ]
+  },
+  "keywords": [
+    "electron",
+    "ssh",
+    "tunnel",
+    "port",
+    "forwarding"
+  ],
+  "dependencies": {
+    "debug": "^2.2.0",
+    "debug-menu": "^0.4.0",
+    "dom-delegate": "^2.0.3",
+    "electron-contextmenu-middleware": "^1.0.1",
+    "electron-debug": "^0.5.2",
+    "electron-input-menu": "^1.3.0",
+    "electron-localshortcut": "^0.6.0",
+    "electron-window": "^0.6.0",
+    "font-awesome": "^4.5.0",
+    "is-reachable": "^1.3.0",
+    "map-obj": "^1.0.1",
+    "node-uuid": "^1.4.3",
+    "object-values": "^1.0.0",
+    "open-ssh-tunnel": "^0.3.0",
+    "photon": "github:connors/photon",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-redux": "^4.4.5",
+    "redux": "^3.4.0",
+    "redux-form": "^5.2.3",
+    "redux-submitform-onchange": "^0.2.0",
+    "redux-thunk": "^2.0.1",
+    "store": "^1.3.17",
+    "username": "^2.0.0",
+    "validate-ip-node": "^1.0.6",
+    "zipmap": "^1.1.1"
+  },
 
-		"co": "^4.6.0",
-		"comws": "^2.0.3",
-		"debug": "^2.2.0",
-		"debug-menu": "^0.4.0",
-		"dom-delegate": "^2.0.3",
-		"electron-contextmenu-middleware": "^1.0.1",
-		"electron-debug": "^0.5.2",
-		"electron-input-menu": "^1.3.0",
-		"electron-localshortcut": "^0.6.0",
-		"electron-window": "^0.6.0",
-		"font-awesome": "^4.5.0",
-		"is-reachable": "^1.3.0",
-		"map-obj": "^1.0.1",
-		"node-uuid": "^1.4.3",
-		"object-values": "^1.0.0",
-		"open-ssh-tunnel": "^0.3.0",
-		"photon": "github:connors/photon",
-		"react": "^15.0.1",
-		"react-dom": "^15.0.1",
-		"react-redux": "^4.4.5",
-		"redux": "^3.4.0",
-		"redux-form": "^5.2.3",
-		"redux-submitform-onchange": "^0.2.0",
-		"redux-thunk": "^2.0.1",
-		"store": "^1.3.17",
-		"username": "^2.0.0",
-		"validate-ip-node": "^1.0.6",
-		"zipmap": "^1.1.1"
-	},
-	"devDependencies": {
-		"babel-preset-node5": "^10.6.0",
-		"babel-preset-react": "^6.5.0",
-		"babel-register": "^6.5.2",
-		"ava": "^0.14.0",
-		"electron-packager": "^5.1.1",
-		"electron-prebuilt": "0.37.8",
-		"eslint-config-xo-react": "^0.7.0",
-		"eslint-plugin-react": "^5.0.1",
-		"xo": "^0.15.0"
-	}
+  "devDependencies": {
+    "babel-preset-node5": "^10.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-register": "^6.5.2",
+    "ava": "^0.14.0",
+    "electron-packager": "^5.1.1",
+    "electron-prebuilt": "0.37.8",
+    "eslint-config-xo-react": "^0.7.0",
+    "eslint-plugin-react": "^5.0.1",
+    "xo": "^0.15.0"
+  }
 }
