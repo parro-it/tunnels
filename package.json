@@ -27,7 +27,7 @@
   "bin": {
     "tunnels": "cli.js"
   },
-  "electronVersion": "0.36.8",
+  "electronVersion": "0.37.8",
   "productName": "Tunnels",
   "license": "MIT",
   "babel": {
