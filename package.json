@@ -5,20 +5,20 @@
   "repository": "parro-it/tunnels",
   "author": "andrea@parro.it",
   "scripts": {
-  	"rebuild": "electron-rebuild",
+    "rebuild": "electron-rebuild",
     "test": "xo",
     "start": "electron .",
-    "pkg:clean-zip": "rm -f setup/${npm_package_productName}-${platform}-${arch}-${npm_package_version}.zip",
-    "pkg:clean-tmp-folder": "rm -rf ${npm_package_productName}-${platform}-${arch}",
-    "pkg:build": "electron-packager .  ${npm_package_productName} --platform=${platform} --arch=${arch} --version=${npm_package_electronVersion} --ignore='(setup|media|test|private|node_modules/electron-packager|node_modules/electron-prebuilt)' --overwrite --out=setup ",
-    "pkg:zip": "cd setup/${npm_package_productName}-${platform}-${arch} && zip -ryXq9 ../${npm_package_productName}-${platform}-${arch}-${npm_package_version}.zip . && cd .. ",
-    "package": "npm run pkg:clean-zip && npm run pkg:build && npm run pkg:zip && npm run pkg:clean-tmp-folder",
-    "package:darwin": "platform=darwin arch=x64 npm run package",
-    "package:linux:x64": "platform=linux arch=x64 npm run package",
-    "package:linux:ia32": "platform=linux arch=ia32 npm run package",
-    "package:win32:x64": "platform=win32 arch=x64 npm run package",
-    "package:win32:ia32": "platform=win32 arch=ia32 npm run package",
-    "package:all": "npm run package:darwin && npm run package:linux:x64 && npm run package:linux:ia32 && npm run package:win32:x64 && npm run package:win32:ia32"
+    "pkg:clean-zip": "scripty",
+    "pkg:clean-tmp-folder": "scripty",
+    "pkg:build": "scripty",
+    "pkg:zip": "scripty",
+    "package:build": "scripty",
+    "package:darwin": "platform=darwin arch=x64 npm run package:build",
+    "package:linux:x64": "platform=linux arch=x64 npm run package:build",
+    "package:linux:ia32": "platform=linux arch=ia32 npm run package:build",
+    "package:win32:x64": "platform=win32 arch=x64 npm run package:build",
+    "package:win32:ia32": "platform=win32 arch=ia32 npm run package:build",
+    "package": "scripty"
   },
   "files": [
     "index.js",
@@ -87,6 +87,7 @@
     "electron-rebuild": "^1.1.3",
     "eslint-config-xo-react": "^0.7.0",
     "eslint-plugin-react": "^5.0.1",
+    "scripty": "^1.5.0",
     "xo": "^0.15.0"
   }
 }

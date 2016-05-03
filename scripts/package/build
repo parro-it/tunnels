@@ -1,0 +1,4 @@
+npm run pkg:clean-zip &&
+npm run pkg:build &&
+npm run pkg:zip &&
+npm run pkg:clean-tmp-folder
