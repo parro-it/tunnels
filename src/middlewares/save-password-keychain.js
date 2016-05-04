@@ -6,9 +6,11 @@ export default () => next => action => {
 			const password = action.tunnel.password;
 			action.tunnel.password = '\0encrypted';
 			const saved = keytar.replacePassword('tunnels2', action.tunnel.id, password);
+			if (!saved) {
+				console.error('Cannot save password to keytar.');
+			}
 		}
 	}
 
-	const result = next(action);
-	return result;
+	return next(action);
 };
