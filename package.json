@@ -8,10 +8,6 @@
     "rebuild": "electron-rebuild",
     "test": "xo",
     "start": "electron .",
-    "pkg:clean-zip": "scripty",
-    "pkg:clean-tmp-folder": "scripty",
-    "pkg:build": "scripty",
-    "pkg:zip": "scripty",
     "package:build": "scripty",
     "package:darwin": "platform=darwin arch=x64 npm run package:build",
     "package:linux:x64": "platform=linux arch=x64 npm run package:build",
@@ -20,13 +16,12 @@
     "package:win32:ia32": "platform=win32 arch=ia32 npm run package:build",
     "package": "scripty"
   },
+  "main": "dist/index.js",
   "files": [
-    "index.js",
-    "src",
-    "cli.js"
+    "dist"
   ],
   "bin": {
-    "tunnels": "cli.js"
+    "tunnels": "dist/cli.js"
   },
   "electronVersion": "0.37.8",
   "productName": "Tunnels",
@@ -79,6 +74,7 @@
   },
   "devDependencies": {
     "ava": "^0.14.0",
+    "babel-cli": "^6.8.0",
     "babel-preset-node5": "^11.0.2",
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.5.2",

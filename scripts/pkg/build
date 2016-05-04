@@ -1,7 +1,0 @@
-electron-packager .  ${npm_package_productName} \
-	--platform=${platform} \
-	--arch=${arch} \
-	--version=${npm_package_electronVersion} \
-	--ignore='(setup|media|test|private|node_modules/electron-packager|node_modules/electron-prebuilt)' \
-	--overwrite \
-	--out=setup
