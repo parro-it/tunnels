@@ -1,5 +1,5 @@
-import openSSHTunnel from '../ssh';
 import keytar from 'keytar';
+import openSSHTunnel from '../ssh';
 
 function openSuccess(tunnelId) {
 	return {
