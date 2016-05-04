@@ -41,7 +41,6 @@ const connections = {};
 export const openTunnel = tunnel => dispatch => {
 	const password = keytar.getPassword('tunnels2', tunnel.id);
 	const _tunnel = Object.assign({}, tunnel, {password});
-	console.log(_tunnel)
 
 	dispatch(openRunning(_tunnel.id));
 
