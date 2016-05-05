@@ -16,12 +16,14 @@
     "package:win32:ia32": "platform=win32 arch=ia32 npm run package:build",
     "package": "scripty"
   },
-  "main": "dist/index.js",
+  "main": "index.js",
   "files": [
-    "dist"
+    "src",
+    "index.js",
+    "cli.js"
   ],
   "bin": {
-    "tunnels": "dist/cli.js"
+    "tunnels": "cli.js"
   },
   "electronVersion": "0.37.8",
   "productName": "Tunnels",
