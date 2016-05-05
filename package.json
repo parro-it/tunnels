@@ -7,7 +7,7 @@
   "scripts": {
     "rebuild": "electron-rebuild",
     "test": "xo",
-    "start": "electron .",
+    "start": "ELECTRON_ENV=development electron .",
     "package:build": "scripty",
     "package:darwin": "platform=darwin arch=x64 npm run package:build",
     "package:linux:x64": "platform=linux arch=x64 npm run package:build",
