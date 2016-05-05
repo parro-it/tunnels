@@ -47,10 +47,8 @@ const openMainWindow = () => {
 		minimizable: false,
 		maximizable: false,
 		titleBarStyle: process.platform === 'darwin' ? 'hidden' : undefined,
-		resizable: true,
+		resizable: false,
 		fullscreenable: false,
-		skipTaskbar: true,
-		type: process.platform === 'linux' ? 'toolbar' : undefined,
 		icon: `${__dirname}/src/IconTemplate.png`
 	});
 
@@ -66,7 +64,7 @@ const openMainWindow = () => {
 	}
 
 	const indexPath = `${__dirname}/src/index.html`;
-	listWindow.showUrl(indexPath);
+	listWindow._loadUrlWithArgs(indexPath, () => {});
 	debug('showUrl ' + indexPath);
 };
 
