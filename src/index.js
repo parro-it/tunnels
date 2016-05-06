@@ -6,6 +6,8 @@ import inputMenu from 'electron-input-menu';
 import context from 'electron-contextmenu-middleware';
 import {createStore} from 'redux';
 
+import {receiveActions} from './modules/electron-xproc-redux';
+
 import AppContainer from './containers/app';
 import app from './reducers/app';
 import {openTunnelsAtStartup, loadStore} from './action-creators';
@@ -31,6 +33,7 @@ function startApp() {
 		main
 	);
 
+	store.dispatch(receiveActions);
 	store.dispatch(loadStore());
 	store.dispatch(openTunnelsAtStartup(store.getState().list));
 }

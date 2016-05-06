@@ -4,6 +4,9 @@ const electronDebug = require('electron-debug');
 const window = require('electron-window');
 const debug = require('debug')('tunnels');
 const debugMenu = require('debug-menu');
+
+const reduxMain = require('./redux-main');
+
 const Menu = electron.Menu;
 const Tray = electron.Tray;
 
@@ -64,7 +67,8 @@ const openMainWindow = () => {
 	}
 
 	const indexPath = `${__dirname}/src/index.html`;
-	listWindow._loadUrlWithArgs(indexPath, () => {});
+	// listWindow._loadUrlWithArgs(indexPath, () => {});
+	listWindow.showUrl(indexPath, () => {});
 	debug('showUrl ' + indexPath);
 };
 
@@ -96,13 +100,19 @@ const setupTray = () => {
 		}]
 	);
 	appIcon.setContextMenu(contextMenu);
+
+	reduxMain(listWindow, appIcon);
+	debug('redux started in main process.');
 };
 
-const handleError = err =>
+const handleError = err => {
+	console.error(err);
 	electron.dialog.showErrorBox(
 		'Unexpected error during ui setup',
 		err.stack
 	);
+	electron.app.exit(-1);
+};
 
 try {
 	electronDebug();
