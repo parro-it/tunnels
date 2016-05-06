@@ -3,10 +3,11 @@ import {lookup} from 'dns';
 import username from 'username';
 import validateIP from 'validate-ip-node';
 import pify from 'pify';
+import _isReachable from 'is-reachable';
 
 import isFQDN from '../modules/is-fqdn';
-import isReachable from '../modules/is-reachable-promise';
 
+const isReachable = pify(_isReachable);
 const dns = pify(lookup);
 
 /* eslint-disable camelcase */
