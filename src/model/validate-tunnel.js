@@ -1,8 +1,13 @@
+import {lookup} from 'dns';
+
 import username from 'username';
 import validateIP from 'validate-ip-node';
+import pify from 'pify';
+
 import isFQDN from '../modules/is-fqdn';
 import isReachable from '../modules/is-reachable-promise';
-import dns from '../modules/dns-promise';
+
+const dns = pify(lookup);
 
 /* eslint-disable camelcase */
 

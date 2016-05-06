@@ -64,6 +64,7 @@
     "object-values": "^1.0.0",
     "open-ssh-tunnel": "^0.3.0",
     "photon": "github:connors/photon",
+    "pify": "^2.3.0",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^4.4.5",
