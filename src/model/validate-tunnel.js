@@ -5,7 +5,7 @@ import validateIP from 'validate-ip-node';
 import pify from 'pify';
 import _isReachable from 'is-reachable';
 
-import isFQDN from '../modules/is-fqdn';
+import isFQDN from 'is-fqdn';
 
 const isReachable = pify(_isReachable);
 const dns = pify(lookup);
@@ -13,7 +13,7 @@ const dns = pify(lookup);
 /* eslint-disable camelcase */
 
 const FQDNOpts = {
-	require_tld: false
+	requireTld: false
 };
 
 const user = username.sync();
