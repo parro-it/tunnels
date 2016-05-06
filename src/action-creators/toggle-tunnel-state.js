@@ -79,6 +79,10 @@ export const toggleTunnelState = tunnel => dispatch => {
 
 export const openTunnelsAtStartup = tunnels => dispatch => {
 	tunnels
+		.map(t => {
+			t.status = 'closed';
+			return t;
+		})
 		.filter(t => t.openOnStart)
 		.forEach(t => openTunnel(t)(dispatch));
 };
