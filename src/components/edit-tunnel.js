@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import submitOnChange from 'redux-submitform-onchange';
-import FileInput from '../modules/electron-file-input';
+import FileInput from 'electron-file-input';
 
 const FieldError = ({field}) =>
 	<span className="field-error">
