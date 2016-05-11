@@ -30,8 +30,15 @@
   "license": "MIT",
   "babel": {
     "presets": [
-      "node6",
       "react"
+    ],
+    "plugins": [
+      "syntax-async-functions",
+      "syntax-object-rest-spread",
+      "transform-es2015-modules-commonjs",
+      "transform-strict-mode",
+      "transform-object-rest-spread",
+      "transform-async-to-generator"
     ]
   },
   "xo": {
@@ -84,7 +91,12 @@
   "devDependencies": {
     "ava": "^0.14.0",
     "babel-cli": "^6.8.0",
-    "babel-preset-node6": "^11.0.0",
+    "babel-plugin-syntax-async-functions": "^6.8.0",
+    "babel-plugin-syntax-object-rest-spread": "^6.8.0",
+    "babel-plugin-transform-async-to-generator": "^6.8.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
+    "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-plugin-transform-strict-mode": "^6.8.0",
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.5.2",
     "electron-packager": "^7.0.1",
