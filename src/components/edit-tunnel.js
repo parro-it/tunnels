@@ -24,7 +24,7 @@ const Passphrase = ({field, authType, onChange}) =>
 
 Passphrase.propTypes = {
 	field: React.PropTypes.object,
-	authType: React.PropTypes.oneOf(['keyfile', 'password']),
+	authType: React.PropTypes.oneOf(['keyfile', 'password', '']),
 	onChange: React.PropTypes.func
 };
 
@@ -44,7 +44,7 @@ const Keyfile = ({field, authType, onChange, dispatch}) => {
 
 Keyfile.propTypes = {
 	field: React.PropTypes.object,
-	authType: React.PropTypes.oneOf(['keyfile', 'password']),
+	authType: React.PropTypes.oneOf(['keyfile', 'password', '']),
 	onChange: React.PropTypes.func,
 	dispatch: React.PropTypes.func
 };
@@ -61,7 +61,7 @@ const Password = ({field, authType, onChange}) =>
 
 Password.propTypes = {
 	field: React.PropTypes.object,
-	authType: React.PropTypes.oneOf(['keyfile', 'password']),
+	authType: React.PropTypes.oneOf(['keyfile', 'password', '']),
 	onChange: React.PropTypes.func
 };
 
@@ -184,7 +184,7 @@ const HostAddress = ({field, onChange, asyncValidating}) =>
 HostAddress.propTypes = {
 	field: React.PropTypes.object,
 	onChange: React.PropTypes.func,
-	asyncValidating: React.PropTypes.string
+	asyncValidating: React.PropTypes.any
 };
 
 const RemotePort = ({field, onChange}) =>
@@ -311,5 +311,5 @@ EditTunnel.propTypes = {
 	onChange: React.PropTypes.func,
 	dispatch: React.PropTypes.func,
 	onSaveTunnel: React.PropTypes.func,
-	asyncValidating: React.PropTypes.string
+	asyncValidating: React.PropTypes.any
 };

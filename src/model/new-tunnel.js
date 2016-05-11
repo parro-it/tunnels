@@ -13,6 +13,7 @@ export default function newTunnel() {
 		userName: user,
 		password: '',
 		openOnStart: false,
-		keyFile: ''
+		keyFile: '',
+		authType: 'password'
 	};
 }
