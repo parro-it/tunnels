@@ -167,7 +167,15 @@ const HostAddress = ({field, onChange, asyncValidating}) =>
 			/>
 		{
 			asyncValidating === 'hostAddress' &&
-				<i className="fa fa-lg fa-refresh fa-spin"/>
+				<i
+					className="fa fa-lg fa-refresh fa-spin"
+					style={{
+						float: 'right',
+						position: 'relative',
+						right: '2px',
+						top: '-27px'
+					}}
+					/>
 		}
 		<FieldError field={field}/>
 	</div>
@@ -271,7 +279,15 @@ export default class EditTunnel extends Component {
 							/>
 						{
 							this.props.asyncValidating === 'keyFile' &&
-								<i className="fa fa-lg fa-refresh fa-spin"/>
+								<i
+									className="fa fa-lg fa-refresh fa-spin"
+									style={{
+										float: 'right',
+										position: 'relative',
+										right: '2px',
+										top: '-27px'
+									}}
+									/>
 						}
 						<FieldError field={f.keyFile}/>
 					</div>
