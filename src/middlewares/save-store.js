@@ -3,7 +3,7 @@ import localStore from 'store';
 export default store => next => action => {
 	const result = next(action);
 
-	if (action.type === 'SAVE_TUNNEL') {
+	if (action.type === 'SAVE_TUNNEL' || action.type === 'DELETE_TUNNEL') {
 		const tunnels = store.getState().list;
 		localStore.set('tunnels', tunnels);
 		localStore.set('version', 1);
