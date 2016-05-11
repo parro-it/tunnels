@@ -8,13 +8,10 @@
 [![NPM module](https://img.shields.io/npm/v/electron-tunnels.svg)](https://npmjs.org/package/electron-tunnels)
 [![NPM downloads](https://img.shields.io/npm/dt/electron-tunnels.svg)](https://npmjs.org/package/electron-tunnels)
 
-### Tunnel edit window
+### App window
 
-![image](media/edit-window.png)
+![image](https://cloud.githubusercontent.com/assets/11197111/11577599/2e80475a-9a1f-11e5-9254-33b71ff00e12.png)
 
-### Tunnels list window
-
-![image](media/list.png)
 
 # Installation
 
@@ -35,7 +32,7 @@ Type=Application
 Icon=/full/path/to/folder/Tunnels/resources/app/media/IconTemplate.png
 ```
 
-## OS X [_package not tested_](https://github.com/parro-it/tunnels/issues/4)
+## OS X
 
 [**Download**](https://github.com/parro-it/tunnels/releases/latest), unzip, and move `Tunnels.app` to the `/Applications` directory.
 
@@ -59,8 +56,6 @@ start the app from your terminal:
 ```bash
 tunnels
 ```
-
-
 
 
 # Development
@@ -97,9 +92,9 @@ npm test
 
 * [*] Package the app for Linux, OSX, Windows
 * [ ] Make the app autolunch at startup
-* [ ] Provide visual feedback when tunnels are opening
-* [ ] Save tunnel passwords in system keychain
-* [ ] Improve UI
+* [*] Provide visual feedback when tunnels are opening
+* [*] Save tunnel passwords in system keychain
+* [*] Improve UI
 
 
 # Related modules
@@ -116,7 +111,7 @@ npm test
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Andrea Parodi
+Copyright (c) 2016 Andrea Parodi
 
 
 
