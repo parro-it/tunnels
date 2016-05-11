@@ -117,6 +117,7 @@ const handleError = err => {
 try {
 	electronDebug();
 	makeSingleInstanceApp();
+	// electron.BrowserWindow.addDevToolsExtension(`${__dirname}/node_modules/devtron`);
 
 	electron.app.on('activate', focusMainWindow);
 	electron.app.on('ready', () => {

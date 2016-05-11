@@ -51,6 +51,7 @@
   "dependencies": {
     "debug": "^2.2.0",
     "debug-menu": "^0.4.0",
+    "devtron": "^1.0.1",
     "electron-contextmenu-middleware": "^1.0.1",
     "electron-debug": "^0.7.0",
     "electron-file-input": "^0.1.0",
