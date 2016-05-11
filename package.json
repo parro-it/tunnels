@@ -25,12 +25,12 @@
   "bin": {
     "tunnels": "cli.js"
   },
-  "electronVersion": "0.37.8",
+  "electronVersion": "1.0.1",
   "productName": "Tunnels",
   "license": "MIT",
   "babel": {
     "presets": [
-      "node5",
+      "node6",
       "react"
     ]
   },
@@ -84,7 +84,7 @@
   "devDependencies": {
     "ava": "^0.14.0",
     "babel-cli": "^6.8.0",
-    "babel-preset-node5": "^11.0.2",
+    "babel-preset-node6": "^11.0.0",
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.5.2",
     "electron-packager": "^7.0.1",
