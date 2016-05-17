@@ -67,8 +67,7 @@ const openMainWindow = () => {
 	}
 
 	const indexPath = `${__dirname}/src/index.html`;
-	// listWindow._loadUrlWithArgs(indexPath, () => {});
-	listWindow.showUrl(indexPath, () => {});
+	listWindow._loadURLWithArgs(indexPath, () => {});
 	debug('showUrl ' + indexPath);
 };
 
