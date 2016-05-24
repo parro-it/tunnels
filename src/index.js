@@ -1,4 +1,3 @@
-import {install as installDevtron} from 'devtron';
 import React from 'react';
 import debugMenu from 'debug-menu';
 import {render} from 'react-dom';
@@ -18,7 +17,7 @@ function startApp() {
 	context.use(inputMenu);
 	context.use(debugMenu.middleware);
 	context.activate();
-	// installDevtron();
+	inputMenu.registerShortcuts();
 
 	document.body.classList.add(
 		'platform-' + process.platform
